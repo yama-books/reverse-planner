@@ -169,6 +169,9 @@ try {
   const textCtx=await browser.newContext({viewport:{width:390,height:844},reducedMotion:"reduce"});
   const textPage=await textCtx.newPage();
   await textPage.goto(host+"/");
+  // Text-only zoom checks measure stable layout; transition behavior is
+  // covered elsewhere, so remove transform animations in this context.
+  await textPage.addStyleTag({content:".screen { animation:none !important; transform:none !important; }"});
   const enlargeText=async()=>{
     await textPage.evaluate(()=>{
       const selector="h1,h2,h3,p,small,strong,label,button,input,a,summary,.eyebrow,.mini-label,.version-pill,.brand-text";
