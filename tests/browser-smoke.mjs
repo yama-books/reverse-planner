@@ -98,6 +98,7 @@ try {
   await assertNarrow("timer");
   await page.locator('[data-run="done"]').click();
   checks((await page.locator("#focus-task").textContent()).includes("全部できた"),"Task marked done by explicit click");
+  await page.screenshot({path:"test-screenshots/done-mobile.png",fullPage:true});
   await page.reload();
   checks((await page.locator("#focus-task").textContent()).includes("全部できた"),"Done state survives reload");
   const afterClock=await page.evaluate(()=>JSON.parse(localStorage.getItem("reverse-planner:prototype:v1")));
