@@ -9,7 +9,7 @@ on:
       - 'tests/**'
       - '.github/workflows/deploy-pages.yml'
   pull_request:
-    branches: [main]
+    branches: [main, feature/soft-pixel-v02-20261017]
     paths:
       - 'index.html'
       - 'assets/**'
@@ -80,9 +80,11 @@ jobs:
           mkdir -p _site/assets
           cp index.html _site/
           cp assets/app.css assets/app.js assets/core.mjs assets/state.mjs _site/assets/
+          cp -R assets/brand _site/assets/
           touch _site/.nojekyll
           test -s _site/index.html
           test -s _site/assets/state.mjs
+          test -s _site/assets/brand/brand.mjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload static site
