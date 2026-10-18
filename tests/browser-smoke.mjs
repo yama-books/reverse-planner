@@ -172,8 +172,13 @@ try {
     await textPage.evaluate(()=>{
       const selector="h1,h2,h3,p,small,strong,label,button,input,a,summary,.eyebrow,.mini-label,.version-pill,.brand-text";
       const elements=[...document.querySelectorAll(selector)];
-      const sizes=elements.map(el=>parseFloat(getComputedStyle(el).fontSize));
-      elements.forEach((el,i)=>{if(Number.isFinite(sizes[i]))el.style.fontSize=(sizes[i]*2)+"px";});
+      for (const el of elements) {
+        const first=el.dataset.text200Original;
+        const base=first==null?parseFloat(getComputedStyle(el).fontSize):Number(first);
+        if(!Number.isFinite(base))continue;
+        if(first==null)el.dataset.text200Original=String(base);
+        el.style.fontSize=(base*2)+"px";
+      }
     });
   };
   const noOverflow=async(label)=>{
