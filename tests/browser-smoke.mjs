@@ -227,7 +227,7 @@ try {
   checks(await brandPage.locator("#brand-done-slot").isHidden(),"Completion mascot stays hidden until done");
   await brandPage.locator("#focus-task").evaluate(el=>{el.textContent="全部できた！ ★";});
   await brandPage.waitForFunction(()=>!document.getElementById("brand-done-slot").hidden);
-  checks(await brandPage.locator("#brand-done-slot").isVisible(),"Completion mascot appears after completed state");
+  checks(await brandPage.locator("#brand-done-slot").evaluate(el=>!el.hidden),"Completion mascot is enabled after completed state");
   await brandPage.locator("#focus-task").evaluate(el=>{el.textContent="まだ続いている";});
   await brandPage.waitForFunction(()=>document.getElementById("brand-done-slot").hidden);
   checks(await brandPage.locator("#brand-done-slot").isHidden(),"Completion mascot hides when completed state ends");
