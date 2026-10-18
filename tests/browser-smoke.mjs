@@ -183,6 +183,7 @@ try {
     });
   };
   const noOverflow=async(label)=>{
+    await textPage.locator(".screen:not([hidden])").evaluate(el=>Promise.all(el.getAnimations().map(a=>a.finished.catch(()=>{}))));
     const dims=await textPage.evaluate(()=>{
       const doc=document.documentElement.scrollWidth,view=innerWidth;
       const offenders=[...document.querySelectorAll("body *")].filter(el=>{
