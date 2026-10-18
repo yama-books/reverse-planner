@@ -44,4 +44,4 @@ The previously approved cat logo has not been added: the actual approved origina
 All images are reproducible synthetic-test artifacts. Chrome viewport checks do not replace native iPhone Safari, VoiceOver or zoom verification.
 
 
-Source PR code commit: 8fc2ea4bf17f46c7ea9b76111bf28b57cef92082
+Source PR code commit: f08131d930715a2f4b8b4c475c286085c594e68f
