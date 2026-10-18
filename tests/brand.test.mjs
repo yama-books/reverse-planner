@@ -14,23 +14,25 @@ test("missing approved image never triggers a load or a DOM change", async () =>
 
 test("brand slots are unique across header, four screens and completion", () => {
   for (const name of ["header", "home", "setup", "plan", "run", "done"]) {
-    const id = `id="brand-${name}-slot"`;
-    assert.equal(html.split(id).length - 1, 1, `expected exactly one ${id}`);
+    const id = 'id="brand-' + name + '-slot"';
+    assert.equal(html.split(id).length - 1, 1, "expected exactly one " + id);
   }
 });
 
 test("old home link branding remains as a readable fallback", () => {
-  assert.match(html, /id="brand-header-fallback"/);
-  assert.match(html, /aria-label="Reverse Planner ホームへ"/);
-  assert.match(html, /REVERSE<span>★<\\/span>PLANNER/);
-  assert.match(html, /assets\\/brand\\/brand\\.mjs/);
-  assert.match(css, /\\.brand-slot-header/);
+  assert.ok(html.includes('id="brand-header-fallback"'));
+  assert.ok(html.includes('aria-label="Reverse Planner ホームへ"'));
+  assert.ok(html.includes('REVERSE<span>★</span>PLANNER'));
+  assert.ok(html.includes('assets/brand/brand.mjs'));
+  assert.ok(css.includes('.brand-slot-header'));
 });
 
 test("logo, cat and responsive motion cannot modify storage or planning code", () => {
   const source = readFileSync(new URL("../assets/brand/brand.mjs", import.meta.url), "utf8");
-  assert.doesNotMatch(source, /localStorage|sessionStorage|STORE_KEY|persist\\(/);
-  assert.match(css, /\\.brand-slot-home/);
-  assert.match(css, /@media\\(max-width:350px\\)/);
-  assert.match(css, /prefers-reduced-motion:reduce/);
+  for (const banned of ["localStorage", "sessionStorage", "STORE_KEY", "persist("]) {
+    assert.ok(!source.includes(banned), "unexpected state mutation reference: " + banned);
+  }
+  assert.ok(css.includes(".brand-slot-home"));
+  assert.ok(css.includes("@media(max-width:350px)"));
+  assert.ok(css.includes("prefers-reduced-motion:reduce"));
 });
