@@ -13,4 +13,4 @@ The original adopted logo artwork is not included until the user-supplied source
 - *-text200-*.png: automated text enlargement preview, not native Safari zoom
 
 
-Source PR code commit: 01548384393c5b1ffaec897c0b15177f9c263f6f
+Source PR code commit: 255a3ceaf85f46b334db508e37472c31298c404e
