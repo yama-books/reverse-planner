@@ -313,3 +313,11 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible {
   .brand-slot-header {width:min(210px,64vw);}
   .brand-slot-section {width:min(155px,48vw);}
 }
+
+/* At 200% text size the decorative version label competes with the logo
+   for horizontal space. Hide it on compact screens, not app controls. */
+@media(max-width:650px) {
+  .site-header .version-pill {display:none;}
+  .brand, .brand-fallback-group {min-width:0;}
+  .brand-text {overflow-wrap:anywhere;}
+}
