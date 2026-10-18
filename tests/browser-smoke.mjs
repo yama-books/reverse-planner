@@ -166,7 +166,7 @@ try {
 
   // Accessibility regression: enlarged text is an approximation of
   // browser text-only zoom, not proof of iOS Safari's native zoom.
-  const textCtx=await browser.newContext({viewport:{width:390,height:844}});
+  const textCtx=await browser.newContext({viewport:{width:390,height:844},reducedMotion:"reduce"});
   const textPage=await textCtx.newPage();
   await textPage.goto(host+"/");
   const enlargeText=async()=>{
