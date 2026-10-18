@@ -98,6 +98,7 @@ try {
   await assertNarrow("timer");
   await page.locator('[data-run="done"]').click();
   checks((await page.locator("#focus-task").textContent()).includes("全部できた"),"Task marked done by explicit click");
+  await page.screenshot({path:"test-screenshots/done-mobile.png",fullPage:true});
   await page.reload();
   checks((await page.locator("#focus-task").textContent()).includes("全部できた"),"Done state survives reload");
   const afterClock=await page.evaluate(()=>JSON.parse(localStorage.getItem("reverse-planner:prototype:v1")));
@@ -161,6 +162,108 @@ try {
     "Previously saved study plan opens without overwriting it");
   checks((await legacyPage.evaluate(()=>JSON.parse(localStorage.getItem("reverse-planner:prototype:v1")).extraFutureField.keep))==="yes","Unknown legacy fields preserved");
   await legacyCtx.close();
+
+
+  // Accessibility regression: enlarged text is an approximation of
+  // browser text-only zoom, not proof of iOS Safari's native zoom.
+  const textCtx=await browser.newContext({viewport:{width:390,height:844},reducedMotion:"reduce"});
+  const textPage=await textCtx.newPage();
+  await textPage.goto(host+"/");
+  // Text-only zoom checks measure stable layout; transition behavior is
+  // covered elsewhere, so remove transform animations in this context.
+  await textPage.addStyleTag({content:".screen { animation:none !important; transform:none !important; }"});
+  const enlargeText=async()=>{
+    await textPage.evaluate(()=>{
+      const selector="h1,h2,h3,p,small,strong,label,button,input,a,summary,.eyebrow,.mini-label,.version-pill,.brand-text";
+      const elements=[...document.querySelectorAll(selector)];
+      for (const el of elements) {
+        const first=el.dataset.text200Original;
+        const base=first==null?parseFloat(getComputedStyle(el).fontSize):Number(first);
+        if(!Number.isFinite(base))continue;
+        if(first==null)el.dataset.text200Original=String(base);
+        el.style.fontSize=(base*2)+"px";
+      }
+    });
+  };
+  const noOverflow=async(label)=>{
+    await textPage.locator(".screen:not([hidden])").evaluate(el=>Promise.all(el.getAnimations().map(a=>a.finished.catch(()=>{}))));
+    const dims=await textPage.evaluate(()=>{
+      const doc=document.documentElement.scrollWidth,view=innerWidth;
+      const offenders=[...document.querySelectorAll("body *")].filter(el=>{
+        const r=el.getBoundingClientRect(),style=getComputedStyle(el);
+        return style.display!=="none" && r.width>0 && r.right>view+2;
+      }).slice(0,14).map(el=>({tag:el.tagName,id:el.id,cls:String(el.className).slice(0,90),
+        right:Math.round(el.getBoundingClientRect().right),width:Math.round(el.getBoundingClientRect().width)}));
+      return {doc,view,offenders};
+    });
+    checks(dims.doc<=dims.view+2,label+" at 200% text: "+JSON.stringify(dims));
+  };
+  await enlargeText();
+  await noOverflow("Home at 390px");
+  await textPage.screenshot({path:"test-screenshots/home-text200-390.png",fullPage:true});
+  await textPage.setViewportSize({width:320,height:860});
+  await noOverflow("Home at 320px");
+  await textPage.locator('[data-choose-scale="clock"]').click();
+  await textPage.waitForURL("**/#setup");
+  await enlargeText();
+  await noOverflow("Setup at 320px");
+  await textPage.screenshot({path:"test-screenshots/setup-text200-320.png",fullPage:true});
+  await textPage.locator("#clock-deadline").fill(yyyyTime(new Date(Date.now()+8*3600000)));
+  await textPage.locator("#new-task-name").fill("文字拡大試験");
+  await textPage.locator(".add-submit").click();
+  await textPage.locator("#make-plan").click();
+  await textPage.waitForURL("**/#plan");
+  await enlargeText();
+  await noOverflow("Plan at 320px");
+  await textPage.screenshot({path:"test-screenshots/plan-text200-320.png",fullPage:true});
+  await textPage.locator("#start-plan").click();
+  await textPage.waitForURL("**/#run");
+  await enlargeText();
+  await noOverflow("Run at 320px");
+  await textPage.screenshot({path:"test-screenshots/run-text200-320.png",fullPage:true});
+  await textCtx.close();
+
+  // Simulated brand assets, never the approved design: exercise the actual
+  // loader without committing a stand-in logo or changing its approval gate.
+  const brandSource=await readFile(resolve(base,"assets/brand/brand.mjs"),"utf8");
+  assert.ok(brandSource.includes("approved: false"),"production brand gate must remain OFF");
+  const testSource=brandSource.replace("approved: false","approved: true");
+  const brandCtx=await browser.newContext({viewport:{width:320,height:860}});
+  const brandPage=await brandCtx.newPage();
+  const mockSvg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 90"><rect width="320" height="90" fill="#214B4A"/></svg>';
+  const mockPng=Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=","base64");
+  await brandPage.route("**/assets/brand/brand.mjs",route=>route.fulfill({contentType:"text/javascript",body:testSource}));
+  await brandPage.route("**/assets/brand/*.svg",route=>route.fulfill({contentType:"image/svg+xml",body:mockSvg}));
+  await brandPage.route("**/assets/brand/cat-done.png",route=>route.fulfill({contentType:"image/png",body:mockPng}));
+  const brandErrors=[];
+  brandPage.on("pageerror",e=>brandErrors.push(e.message));
+  await brandPage.goto(host+"/");
+  await brandPage.locator("#brand-header-slot img").waitFor();
+  checks(await brandPage.locator("#brand-header-slot img").isVisible(),"Simulated assets mount header logo");
+  checks(await brandPage.locator("#brand-header-fallback").isHidden(),"Simulated header hides original only after image loads");
+  checks(await brandPage.locator("#brand-home-slot img").isVisible(),"Simulated HOME mounts an image");
+  checks(await brandPage.locator("#brand-done-slot").isHidden(),"Completion mascot stays hidden until done");
+  await brandPage.locator("#focus-task").evaluate(el=>{el.textContent="全部できた！ ★";});
+  await brandPage.waitForFunction(()=>!document.getElementById("brand-done-slot").hidden);
+  checks(await brandPage.locator("#brand-done-slot").evaluate(el=>!el.hidden),"Completion mascot is enabled after completed state");
+  await brandPage.locator("#focus-task").evaluate(el=>{el.textContent="まだ続いている";});
+  await brandPage.waitForFunction(()=>document.getElementById("brand-done-slot").hidden);
+  checks(await brandPage.locator("#brand-done-slot").isHidden(),"Completion mascot hides when completed state ends");
+  checks(await brandPage.evaluate(()=>localStorage.getItem("reverse-planner:prototype:v1")===null),"Brand display alone leaves localStorage untouched");
+  const brandWidth=await brandPage.evaluate(()=>({doc:document.documentElement.scrollWidth,view:innerWidth}));
+  checks(brandWidth.doc<=brandWidth.view+2,"Simulated logo at 320px does not overflow: "+JSON.stringify(brandWidth));
+  checks(brandErrors.length===0,"Simulated logo causes no JS errors: "+brandErrors.join(" / "));
+  await brandCtx.close();
+
+  const missingCtx=await browser.newContext({viewport:{width:390,height:844}});
+  const missingPage=await missingCtx.newPage();
+  await missingPage.route("**/assets/brand/brand.mjs",route=>route.fulfill({contentType:"text/javascript",body:testSource}));
+  await missingPage.goto(host+"/");
+  checks(await missingPage.locator("#brand-header-fallback").isVisible(),
+    "Missing approved logo preserves existing fallback");
+  checks(await missingPage.locator("#brand-header-slot").isHidden(),
+    "Missing approved logo never exposes broken-image element");
+  await missingCtx.close();
 
   const reduceCtx=await browser.newContext({viewport:{width:390,height:844},reducedMotion:"reduce"});
   const reducePage=await reduceCtx.newPage();

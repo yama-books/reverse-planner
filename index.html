@@ -8,14 +8,16 @@
   <title>Reverse Planner | はじめの一歩を、見つけよう</title>
   <link rel="stylesheet" href="./assets/app.css">
   <script type="module" src="./assets/app.js"></script>
+  <script type="module" src="./assets/brand/brand.mjs"></script>
 </head>
 <body>
   <a class="skip-link" href="#screen-title">メイン画面へ</a>
   <div class="app-shell">
     <header class="site-header">
       <a class="brand" href="#home" aria-label="Reverse Planner ホームへ">
-        <span class="brand-pixel" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-        <span class="brand-text">REVERSE<span>★</span>PLANNER<small>おわりから考える、小さな冒険。</small></span>
+        <span id="brand-header-fallback" class="brand-fallback-group"><span class="brand-pixel" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="brand-text">REVERSE<span>★</span>PLANNER<small>おわりから考える、小さな冒険。</small></span></span>
+        <span id="brand-header-slot" class="brand-slot brand-slot-header" hidden></span>
       </a>
       <span class="version-pill">SOFT PIXEL <b>v0.2 preview</b></span>
     </header>
@@ -40,6 +42,7 @@
         <div class="home-hero">
           <span class="eyebrow"><span class="spark">✳</span> YOUR LITTLE ADVENTURE</span>
           <span class="pixel-sun" aria-hidden="true">✳</span>
+          <span id="brand-home-slot" class="brand-slot brand-slot-home" hidden></span>
           <h1 id="home-title" tabindex="-1">いつまでに<br><span>終わらせたい？</span></h1>
           <p class="intro">ゴールを決めたら、始める時間が見えてくる。<br>まずは、どっちの計画をつくる？</p>
         </div>
@@ -66,6 +69,7 @@
       <section id="screen-setup" class="screen" aria-labelledby="setup-title" hidden>
         <div class="screen-header">
           <span class="eyebrow">01 / BUILD YOUR QUEST</span>
+          <span id="brand-setup-slot" class="brand-slot brand-slot-section" aria-hidden="true" hidden></span>
           <h1 id="setup-title" tabindex="-1">やることを<br><span>ならべてみよう。</span></h1>
           <p>時間の見積もりは、おおよそで大丈夫。あとから直せます。</p>
         </div>
@@ -137,6 +141,7 @@
       <section id="screen-plan" class="screen" aria-labelledby="plan-title" hidden>
         <div class="screen-header">
           <span class="eyebrow">02 / YOUR PLAN</span>
+          <span id="brand-plan-slot" class="brand-slot brand-slot-section" aria-hidden="true" hidden></span>
           <h1 id="plan-title" tabindex="-1">こんな予定で<br><span>どうかな？</span></h1>
           <p>無理があるときは、何度でも調整できます。</p>
         </div>
@@ -160,12 +165,14 @@
       <section id="screen-run" class="screen" aria-labelledby="run-title" hidden>
         <div class="screen-header">
           <span class="eyebrow">03 / TIME TO PLAY</span>
+          <span id="brand-run-slot" class="brand-slot brand-slot-section" aria-hidden="true" hidden></span>
           <h1 id="run-title" tabindex="-1">いまは、<br><span>これに集中。</span></h1>
         </div>
         <div class="focus-card panel">
           <span class="mini-label">NOW PLAYING ✳</span>
           <h2 id="focus-task">次の作業</h2>
           <p id="focus-sub">準備ができたらはじめよう</p>
+          <span id="brand-done-slot" class="brand-slot brand-slot-done" aria-hidden="true" hidden></span>
           <div id="timer-area" class="timer-area" hidden></div>
           <div id="focus-controls" class="focus-controls"></div>
         </div>

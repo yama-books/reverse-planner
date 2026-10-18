@@ -9,7 +9,7 @@ on:
       - 'tests/**'
       - '.github/workflows/deploy-pages.yml'
   pull_request:
-    branches: [main]
+    branches: [main, feature/soft-pixel-v02-20261017]
     paths:
       - 'index.html'
       - 'assets/**'
@@ -58,6 +58,105 @@ jobs:
           test -s assets/core.mjs
           test -s assets/state.mjs
 
+
+  mobile-review:
+    name: Publish smartphone-viewable review images
+    needs: [test]
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.head_ref == 'feature/approved-brand-integration-20261018'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: app004-mobile-screenshots
+      cancel-in-progress: false
+    steps:
+      - name: Check out safe reference for independent preview branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Download synthetic CI screenshots
+        uses: actions/download-artifact@v4
+        with:
+          name: v02-ui-screenshots
+          path: /tmp/app004-mobile-ci-screens
+      - name: Update isolated public review image branch
+        env:
+          SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git show-ref --verify --quiet refs/remotes/origin/preview/app004-mobile; then
+            git switch -C preview/app004-mobile origin/preview/app004-mobile
+          else
+            git switch -c preview/app004-mobile
+          fi
+          mkdir -p docs/review/screenshots
+          for file in home-390.png setup-mobile.png clock-plan-mobile.png timer-mobile.png done-mobile.png home-text200-390.png setup-text200-320.png plan-text200-320.png run-text200-320.png; do
+            test -s "/tmp/app004-mobile-ci-screens/$file"
+            cp "/tmp/app004-mobile-ci-screens/$file" "docs/review/screenshots/$file"
+          done
+          cat > docs/review/screenshots/README.md <<'REVIEW'
+          # APP-004 | モバイル画面プレビュー
+
+          These images show **Chromium with fictional demo data**, not iPhone Safari.
+          This gallery is updated on passing CI for APP-004 PR #3 and does not publish or modify the production site.
+          The previously approved cat logo has not been added: the actual approved original is not yet available.
+
+          ## 1. HOME
+
+          [画像を単独で開く](./home-390.png)
+
+          ![HOME 390px](./home-390.png)
+
+          ## 2. SETUP
+
+          [画像を単独で開く](./setup-mobile.png)
+
+          ![SETUP 390px](./setup-mobile.png)
+
+          ## 3. PLAN
+
+          [画像を単独で開く](./clock-plan-mobile.png)
+
+          ![PLAN 390px](./clock-plan-mobile.png)
+
+          ## 4. RUN
+
+          [画像を単独で開く](./timer-mobile.png)
+
+          ![RUN 390px](./timer-mobile.png)
+
+          ## 5. DONE
+
+          [画像を単独で開く](./done-mobile.png)
+
+          ![DONE 390px](./done-mobile.png)
+
+          ## 文字約200%の検証
+
+          - [HOME・390px](./home-text200-390.png)
+          - [SETUP・320px](./setup-text200-320.png)
+          - [PLAN・320px](./plan-text200-320.png)
+          - [RUN・320px](./run-text200-320.png)
+
+          All images are reproducible synthetic-test artifacts. Chrome viewport checks do not replace native iPhone Safari, VoiceOver or zoom verification.
+
+          REVIEW
+          printf '\nSource PR code commit: %s\n' "$SOURCE_SHA" >> docs/review/screenshots/README.md
+          git add docs/review/screenshots
+          if git diff --cached --quiet; then
+            echo 'No changes to published screenshots.'
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -m "docs(review): refresh APP-004 smartphone screenshots"
+          git push origin HEAD:refs/heads/preview/app004-mobile
+
+
   deploy:
     name: Publish GitHub Pages
     needs: [test]
@@ -80,9 +179,11 @@ jobs:
           mkdir -p _site/assets
           cp index.html _site/
           cp assets/app.css assets/app.js assets/core.mjs assets/state.mjs _site/assets/
+          cp -R assets/brand _site/assets/
           touch _site/.nojekyll
           test -s _site/index.html
           test -s _site/assets/state.mjs
+          test -s _site/assets/brand/brand.mjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload static site
