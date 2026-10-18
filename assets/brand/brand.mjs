@@ -36,7 +36,7 @@ async function mountImage(slotId, src, alt = "") {
     return true;
   } catch (error) {
     // A missing optional asset must never hide the existing branding or
-    // interrupt task creation, planning, timers, or localStorage.
+    // interrupt task creation, planning, timers, or browser-stored plans.
     console.warn(error.message);
     return false;
   }
