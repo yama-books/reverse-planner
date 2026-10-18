@@ -182,7 +182,15 @@ try {
     });
   };
   const noOverflow=async(label)=>{
-    const dims=await textPage.evaluate(()=>({doc:document.documentElement.scrollWidth,view:innerWidth}));
+    const dims=await textPage.evaluate(()=>{
+      const doc=document.documentElement.scrollWidth,view=innerWidth;
+      const offenders=[...document.querySelectorAll("body *")].filter(el=>{
+        const r=el.getBoundingClientRect(),style=getComputedStyle(el);
+        return style.display!=="none" && r.width>0 && r.right>view+2;
+      }).slice(0,14).map(el=>({tag:el.tagName,id:el.id,cls:String(el.className).slice(0,90),
+        right:Math.round(el.getBoundingClientRect().right),width:Math.round(el.getBoundingClientRect().width)}));
+      return {doc,view,offenders};
+    });
     checks(dims.doc<=dims.view+2,label+" at 200% text: "+JSON.stringify(dims));
   };
   await enlargeText();
