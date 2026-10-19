@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>APP-004 ネコアイコン 回収プレビュー</title>
+<style>:root{font-family:system-ui,"Hiragino Kaku Gothic ProN",sans-serif;color:#264c45;background:#f5f2e9}*{box-sizing:border-box}body{margin:0;padding:16px}main{max-width:860px;margin:auto}h1{font-size:clamp(21px,5vw,28px);line-height:1.4}p{line-height:1.7;color:#48635b} .notice{padding:12px 14px;background:#e9f3e7;border-radius:10px;font-size:13px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:16px 0}.item{background:#fffefa;border:2px solid #d5dfd3;border-radius:14px;padding:14px;min-width:0}.item h2{font-size:16px;margin:5px 0 7px}.tag{font-size:11px;color:#39745d;font-weight:700}.art{height:165px;border-radius:9px;background:#eff2e9;display:grid;place-items:center;margin:10px 0;overflow:hidden}.art img{width:154px;height:154px;object-fit:contain;image-rendering:pixelated}.art span{color:#748981;font-size:12px;text-align:center}button,.save{border:0;border-radius:10px;padding:12px 15px;font-weight:700;font-size:14px;background:#32785f;color:white;cursor:pointer;min-height:44px;text-decoration:none;display:inline-block}.save{background:#e8c886;color:#264c45}.save[hidden]{display:none}button:disabled{opacity:.6}button:focus-visible,.save:focus-visible{outline:3px solid #2657bb;outline-offset:3px}.status{font-size:12px;min-height:19px;color:#516c63;margin-top:10px;overflow-wrap:anywhere}.id{font-size:10px;color:#687b74;overflow-wrap:anywhere}@media(max-width:320px){body{padding:10px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}</style></head><body>
+<main><h1>ネコチャン素材 回収プレビュー</h1><p>GitHubに残っている既存の画像データを、読み取り専用で表示します。プレビュー用11点、うち5点が画面への第一候補です。画像は描き直していません。</p>
+<p class="notice">画像はGitHubの公開Git Blob APIから、その都度読み込みます。読み込み失敗時は画像を表示せず、エラーを知らせます。PNGを表示できた場合は「PNGを保存」を押すか、iPhoneでは画像を長押しして保存できます。<strong>ここからアプリの本番公開やGitHubへの書き込みは行いません。</strong> ねむいネコ（S11-I47）は保存制限により対象外です。</p>
+<div class="grid" id="items"></div><p style="font-size:12px">出所：v6ネコ配置確認プレビュー内のPNG。元の制作ZIPとのバイト一致と実機Safari動作は未検証です。GitHubの未参照オブジェクトは後日取得不能になる可能性があるため、必要な画像は早めに保存してください。</p></main>
+<script type="module">
+const icons=[["RP-CATWORK-S09-I01","PC計画ネコ","HOME","471d989881a6107fb2a0e8af3dfdb2ec1dd79624",51640],["RP-CATWORK-S09-I03","メモするネコ","SETUP","1c98059081c1374c69841ab980e95988714a1525",59446],["RP-CATEMO-S10-I07","旗もちネコ","PLAN","04c9771c57ea921ca2317646a281b056cbc6aef1",66761],["RP-CATVAR-S11-I28","タイマーネコ","RUN","74412f8b04a0c872d27eca51da7f727e823ed769",59818],["RP-CATEMO-S10-I01","よろこぶネコ","DONE","a192683c0f4578fd25c095bf0300450fb91054b9",57987],["RP-CATWORK-S09-I02","本読みネコ","候補","6e67c1afdbe4af496850f36f5344930f75a0b6ea",58231],["RP-CATWORK-S09-I10","休憩ネコ","候補","1291e58bdda89ec4b06b1be048c50ee674111442",45605],["RP-CATVAR-S11-I20","完了ネコ","候補","4cdab45a9ccb84a04a70f50222306c71d23d627e",61744],["RP-PATCAT-S12-I02","黒ネコ","候補","2b5e7e58142755d3fa565b18390f0a5096c84ebc",45494],["RP-PATCAT-S12-I20","ハチワレネコ","候補","4a83bc1f21621c17df3b00806561e03a05237aa3",58949],["RP-PATCAT-S12-I28","シャムネコ","候補","f099c3018541a4c9cdf866d38cf91fccbbba37e6",59497]];
+const list=document.querySelector("#items");
+for(const [id,label,screen,sha,bytes] of icons){
+  const card=document.createElement("section");card.className="item";
+  const type=document.createElement("div");type.className="tag";type.textContent=screen;
+  const title=document.createElement("h2");title.textContent=label;
+  const ident=document.createElement("div");ident.className="id";ident.textContent=id;
+  const art=document.createElement("div");art.className="art";
+  const placeholder=document.createElement("span");placeholder.textContent="タップして画像を読み込み";art.append(placeholder);
+  const button=document.createElement("button");button.textContent="画像を表示";button.type="button";
+  const link=document.createElement("a");link.className="save";link.textContent="PNGを保存";link.hidden=true;link.download=id+".png";
+  const status=document.createElement("div");status.className="status";status.setAttribute("role","status");
+  button.addEventListener("click",async()=>{
+    button.disabled=true;status.textContent="GitHubから取得中…";
+    try{
+      const resp=await fetch("https://api.github.com/repos/yama-books/reverse-planner/git/blobs/"+sha,{headers:{Accept:"application/vnd.github+json"}});
+      if(!resp.ok)throw Error("GitHub API: HTTP "+resp.status);
+      const data=await resp.json();
+      if(data.sha!==sha||data.encoding!=="base64")throw Error("BlobのIDまたは形式が一致しません");
+      const binary=atob(data.content.replace(/\s/g,""));
+      const octets=new Uint8Array(binary.length);
+      for(let i=0;i<binary.length;i++)octets[i]=binary.charCodeAt(i);
+      if(octets.length!==bytes||octets[0]!==137||octets[1]!==80||octets[2]!==78||octets[3]!==71)throw Error("PNGデータの長さまたは形式が不正です");
+      const blob=new Blob([octets],{type:"image/png"}),url=URL.createObjectURL(blob);
+      const img=new Image();img.alt=label;img.src=url;img.width=154;img.height=154;
+      await img.decode();
+      art.replaceChildren(img);link.href=url;link.hidden=false;button.textContent="表示済み";status.textContent="256×256pxの元PNGから表示しました。";
+    }catch(error){status.textContent="読み込めません: "+String(error.message||error);button.textContent="再試行";button.disabled=false;}
+  });
+  card.append(type,title,ident,art,button,link,status);list.append(card);
+}
+</script></body></html>
