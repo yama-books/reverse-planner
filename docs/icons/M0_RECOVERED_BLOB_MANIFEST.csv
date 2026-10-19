@@ -1,0 +1,13 @@
+icon_id,japanese_name,width,height,png_bytes,git_blob_sha,planned_screen,asset_status
+RP-CATWORK-S09-I01,PC計画ネコ,256,256,51640,471d989881a6107fb2a0e8af3dfdb2ec1dd79624,HOME,orphan_blob_not_committed
+RP-CATWORK-S09-I02,本読みネコ,256,256,58231,6e67c1afdbe4af496850f36f5344930f75a0b6ea,reserve,orphan_blob_not_committed
+RP-CATWORK-S09-I03,メモするネコ,256,256,59446,1c98059081c1374c69841ab980e95988714a1525,SETUP,orphan_blob_not_committed
+RP-CATWORK-S09-I10,休憩ネコ,256,256,45605,1291e58bdda89ec4b06b1be048c50ee674111442,reserve,orphan_blob_not_committed
+RP-CATEMO-S10-I01,よろこぶネコ,256,256,57987,a192683c0f4578fd25c095bf0300450fb91054b9,DONE,orphan_blob_not_committed
+RP-CATEMO-S10-I07,旗もちネコ,256,256,66761,04c9771c57ea921ca2317646a281b056cbc6aef1,PLAN,orphan_blob_not_committed
+RP-CATVAR-S11-I20,完了ネコ,256,256,61744,4cdab45a9ccb84a04a70f50222306c71d23d627e,reserve,orphan_blob_not_committed
+RP-CATVAR-S11-I28,タイマーネコ,256,256,59818,74412f8b04a0c872d27eca51da7f727e823ed769,RUN,orphan_blob_not_committed
+RP-CATVAR-S11-I47,ねむいネコ,256,256,53360,,deferred,upload_blocked
+RP-PATCAT-S12-I02,もどるネコ（黒）,256,256,45494,2b5e7e58142755d3fa565b18390f0a5096c84ebc,reserve,orphan_blob_not_committed
+RP-PATCAT-S12-I20,完了ネコ（ハチワレ）,256,256,58949,4a83bc1f21621c17df3b00806561e03a05237aa3,reserve,orphan_blob_not_committed
+RP-PATCAT-S12-I28,タイマーネコ（シャム）,256,256,59497,f099c3018541a4c9cdf866d38cf91fccbbba37e6,reserve,orphan_blob_not_committed
