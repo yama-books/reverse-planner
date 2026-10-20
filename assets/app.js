@@ -178,7 +178,7 @@ function renderPlan(){
     }).join("");
   if(!plan.items?.length&&!plan.days?.length)$("timeline").innerHTML='<div class="empty-state">予定はありません。</div>';
   $("study-disclaimer").hidden=data.mode!=="study";
-  $("start-plan").textContent=clock?"▶ この計画ではじめる":"▶ 今日の分を見る";
+  $("start-plan-label").textContent=clock?"この計画ではじめる":"今日の分を見る";
   $("start-plan").disabled=Boolean(!clock&&plan.missing>0&&!done);
 }
 function errorSetupOnPlan(message) {
