@@ -2,7 +2,13 @@ name: APP-004 Cat M1 draft visual review
 'on':
   push:
     branches: ['feature/cat-m1-five-screens-20261020']
-    paths: ['.github/workflows/cat-m1-review.yml']
+    paths:
+      - '.github/workflows/cat-m1-review.yml'
+      - 'assets/app.js'
+      - 'assets/app.css'
+      - 'assets/icons/cats/**'
+      - 'index.html'
+      - 'tests/**'
   workflow_dispatch:
 permissions:
   contents: write
@@ -86,10 +92,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git fetch --no-tags origin preview/app004-mobile
+          git fetch --no-tags origin preview/app004-mobile-cat-m1
           git switch -C preview/app004-mobile-cat-m1 FETCH_HEAD
           mkdir -p docs/review/screenshots/m1
-          for name in home-390 setup-mobile clock-plan-mobile timer-mobile done-mobile; do
+          for name in home-390 setup-mobile clock-plan-mobile timer-mobile done-mobile done-320 plan-warning-mobile home-text200-390 setup-text200-320 plan-text200-320 run-text200-320; do
             test -s "test-screenshots/$name.png"
             cp "test-screenshots/$name.png" "docs/review/screenshots/m1/$name.png"
           done
@@ -104,9 +110,17 @@ jobs:
           - [PLAN](./clock-plan-mobile.png)
           - [RUN](./timer-mobile.png)
           - [全タスク完了（RUN内）](./done-mobile.png)
+          - [DONE 320px](./done-320.png)
+          - [時間不足の警告（旗もちネコを表示しない）](./plan-warning-mobile.png)
+          - [HOME・文字約200%](./home-text200-390.png)
+          - [SETUP・文字約200%](./setup-text200-320.png)
+          - [PLAN・文字約200%](./plan-text200-320.png)
+          - [RUN・文字約200%](./run-text200-320.png)
 
           全体ZIPや196アイコンはUIに同梱していません。正式ロゴも未採用です。
           REVIEW
           git add docs/review/screenshots/m1
-          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'docs(app004): five mobile PNGs with restored cats'
-          git push origin HEAD:refs/heads/preview/app004-mobile-cat-m1
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'docs(app004): refresh mobile PNG review after M1 state gating'
+            git push origin HEAD:refs/heads/preview/app004-mobile-cat-m1
+          fi
