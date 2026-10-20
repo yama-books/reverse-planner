@@ -108,6 +108,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # Preserve Draft-branch icons in the untracked screenshots area
+          # before changing branches (the preview branch has no app icons).
+          mkdir -p test-screenshots/m2-ui
+          cp assets/icons/ui/RP-*.png test-screenshots/m2-ui/
           git fetch --no-tags origin preview/app004-mobile-icons-m2
           git switch -C preview/app004-mobile-icons-m2 FETCH_HEAD
           mkdir -p docs/review/screenshots/m2/originals docs/review/screenshots/m2/ui
@@ -116,7 +120,7 @@ jobs:
             cp "test-screenshots/$name.png" "docs/review/screenshots/m2/$name.png"
           done
           cp test-screenshots/m2-originals/*.png docs/review/screenshots/m2/originals/
-          cp assets/icons/ui/RP-*.png docs/review/screenshots/m2/ui/
+          cp test-screenshots/m2-ui/*.png docs/review/screenshots/m2/ui/
           cat > docs/review/screenshots/m2/README.md <<'REVIEW'
           # APP-004 M2｜候補5点レビュー画像
           
