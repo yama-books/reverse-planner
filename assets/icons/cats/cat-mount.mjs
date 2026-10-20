@@ -1,16 +1,21 @@
 /**
- * APP-004 M1. Presentation-only loader for selected HQ-v5 cats.
- * Missing images leave existing headings, actions and storage untouched.
- * DONE is controlled by the app's explicit render state, not text matching.
+ * APP-004 M1. Display-only HQ-v5 cat loader.
+ * A broken/unavailable image leaves the existing UI intact.
+ * Each screen state shows at most one cat; readiness is based on explicit
+ * render-state attributes, never headline text.
  */
 function mountDecorativeCats() {
   const run = document.getElementById("screen-run");
+  const plan = document.getElementById("screen-plan");
   const slots = [...document.querySelectorAll("[data-cat-slot]")];
   const sync = slot => {
     const img = slot.querySelector("img");
-    const loaded = Boolean(img && img.complete && img.naturalWidth > 0);
-    const doneOnly = slot.dataset.catSlot === "done";
-    slot.hidden = !loaded || (doneOnly && run?.dataset.catComplete !== "true");
+    const loaded = Boolean(img?.complete && img.naturalWidth > 0);
+    const which = slot.dataset.catSlot;
+    const eligible = which === "done" ? run?.dataset.catComplete === "true" :
+      which === "run" ? run?.dataset.catComplete !== "true" :
+      which === "plan" ? plan?.dataset.catPlanReady === "true" : true;
+    slot.hidden = !loaded || !eligible;
     slot.dataset.catLoaded = String(loaded);
   };
   for (const slot of slots) {
@@ -20,13 +25,12 @@ function mountDecorativeCats() {
     img.addEventListener("error", () => sync(slot));
     sync(slot);
   }
-  if (run) {
-    const completedSlot = slots.find(slot => slot.dataset.catSlot === "done");
-    if (completedSlot) {
-      new MutationObserver(() => sync(completedSlot))
-        .observe(run, {attributes: true, attributeFilter: ["data-cat-complete"]});
-    }
-  }
+  const resyncRun = () => slots.filter(slot => ["run", "done"].includes(slot.dataset.catSlot)).forEach(sync);
+  const resyncPlan = () => slots.filter(slot => slot.dataset.catSlot === "plan").forEach(sync);
+  if (run) new MutationObserver(resyncRun)
+    .observe(run, {attributes: true, attributeFilter: ["data-cat-complete"]});
+  if (plan) new MutationObserver(resyncPlan)
+    .observe(plan, {attributes: true, attributeFilter: ["data-cat-plan-ready"]});
 }
 if (typeof document !== "undefined") {
   if (document.readyState === "loading")
