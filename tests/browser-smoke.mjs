@@ -90,6 +90,7 @@ try {
   checks(await page.locator("#screen-plan").isVisible(),"Clock plan appears");
   await page.locator('[data-cat-slot="plan"] img').evaluate(img=>img.decode());
   checks(await page.locator('[data-cat-slot="plan"]').isVisible(),"Restored plan cat is visible");
+  checks(await page.locator('#screen-plan').getAttribute('data-cat-plan-ready')==='true',"Feasible plan explicitly permits flag cat");
   await page.screenshot({path:"test-screenshots/clock-plan-mobile.png",fullPage:true});
   checks(await page.locator(".timeline-time.is-clock strong").count()>0,"Clock times use compact vertical labels");
   await assertNarrow("clock-plan");
@@ -100,6 +101,7 @@ try {
   checks(await page.locator("#focus-task").textContent()==="ためしに勉強","Run focuses on current task");
   await page.locator('[data-cat-slot="run"] img').evaluate(img=>img.decode());
   checks(await page.locator('[data-cat-slot="run"]').isVisible(),"Restored timer cat is visible");
+  checks(await page.locator('#screen-run .decorative-cat:visible').count()===1,"Working RUN shows exactly one cat");
   checks(await page.locator('[data-cat-slot="done"]').isHidden(),"Celebration cat remains hidden during work");
   await page.locator('[data-run="start"]').click();
   checks(await page.locator("#timer-clock").isVisible(),"Timer starts");
@@ -109,6 +111,9 @@ try {
   checks((await page.locator("#focus-task").textContent()).includes("全部できた"),"Task marked done by explicit click");
   await page.locator('[data-cat-slot="done"] img').evaluate(img=>img.decode());
   checks(await page.locator('[data-cat-slot="done"]').isVisible(),"Restored celebration cat appears only after all tasks completed");
+  checks(await page.locator('[data-cat-slot="run"]').isHidden(),"Timer cat disappears in DONE state");
+  checks(await page.locator('#screen-run .decorative-cat:visible').count()===1,"Completed RUN shows exactly one cat");
+  await assertNarrow('done');
   await page.screenshot({path:"test-screenshots/done-mobile.png",fullPage:true});
   await page.reload();
   checks((await page.locator("#focus-task").textContent()).includes("全部できた"),"Done state survives reload");
@@ -137,6 +142,42 @@ try {
   checks(stored.sheets.life.clock.tasks[0].done,"Clock data survives switching to study");
   checks(errors.length===0,"Browser JavaScript errors: "+errors.join(" / "));
   await ctx.close();
+
+  // A flag-bearing cat must not imply an impossible deadline is achievable.
+  const warningCtx=await browser.newContext({viewport:{width:390,height:844}});
+  const warningPage=await warningCtx.newPage();
+  await warningPage.goto(host+"/");
+  await warningPage.locator('[data-choose-scale="clock"]').click();
+  await warningPage.waitForURL("**/#setup");
+  await warningPage.locator("#clock-deadline").fill(yyyyTime(new Date(Date.now()+25*60000)));
+  await warningPage.locator("#new-task-name").fill("締切に間に合わない作業");
+  await warningPage.locator("#new-task-minutes").fill("90");
+  await warningPage.locator(".add-submit").click();
+  await warningPage.locator("#make-plan").click();
+  await warningPage.waitForURL("**/#plan");
+  checks(await warningPage.locator("#notice").isVisible(),"An infeasible deadline shows a deficit warning");
+  checks(await warningPage.locator('[data-cat-slot="plan"]').isHidden(),"Flag cat stays hidden for an infeasible plan");
+  checks(await warningPage.locator('#screen-plan').getAttribute('data-cat-plan-ready')==='false',"Infeasible plan has false mascot readiness");
+  await warningPage.screenshot({path:"test-screenshots/plan-warning-mobile.png",fullPage:true});
+  await warningPage.locator("#extend-deadline").click();
+  checks(await warningPage.locator("#notice").isHidden(),"Extending the deadline resolves the warning");
+  await warningPage.locator('[data-cat-slot="plan"]').waitFor({state:"visible"});
+  checks(await warningPage.locator('[data-cat-slot="plan"]').isVisible(),"Feasible repaired plan shows flag cat again");
+  await warningCtx.close();
+
+  // Optional art cannot be allowed to break navigation or save private data.
+  const missingCatCtx=await browser.newContext({viewport:{width:390,height:844}});
+  const missingCatPage=await missingCatCtx.newPage();
+  await missingCatPage.route("**/assets/icons/cats/*.png",route=>route.abort());
+  await missingCatPage.goto(host+"/");
+  await missingCatPage.locator('[data-cat-slot="home"]').evaluate(slot=>new Promise(resolve=>{
+    const img=slot.querySelector("img");
+    if(img.complete)resolve(); else img.addEventListener("error",resolve,{once:true});
+  }));
+  checks(await missingCatPage.locator('[data-cat-slot="home"]').isHidden(),"Failed cat image is safely hidden");
+  checks(await missingCatPage.locator('[data-choose-scale="clock"]').isVisible(),"Missing mascot leaves controls intact");
+  checks(await missingCatPage.evaluate(()=>localStorage.getItem("reverse-planner:prototype:v1")===null),"Missing mascot never writes localStorage");
+  await missingCatCtx.close();
 
   const legacyCtx=await browser.newContext({viewport:{width:375,height:812}});
   const legacyPage=await legacyCtx.newPage();
