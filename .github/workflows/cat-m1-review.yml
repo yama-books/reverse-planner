@@ -1,0 +1,112 @@
+name: APP-004 Cat M1 draft visual review
+'on':
+  push:
+    branches: ['feature/cat-m1-five-screens-20261020']
+    paths: ['.github/workflows/cat-m1-review.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: app004-cat-m1-review
+  cancel-in-progress: false
+jobs:
+  restore-test-and-capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - name: Restore five HQ-v5 cats from verified archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin feature/asset-archive-20261019
+          test "$(git rev-parse FETCH_HEAD)" = "2aa23d2dc24005002bd2b441073bfff9a03ed9b3"
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from io import BytesIO
+          import hashlib, subprocess, struct
+          prefix="assets/source-archive/cats/hq-v5/cats-hq-v5.zip.part"
+          blob=b"".join(subprocess.check_output(["git","show",f"FETCH_HEAD:{prefix}{n:03d}"]) for n in range(1,5))
+          digest=hashlib.sha256(blob).hexdigest()
+          expected="8360b3598a2fef2d491ed1e6c7778b1d3e3de91b8dd14ffd5c4e78c3553d1a45"
+          assert len(blob)==3584000 and digest==expected,(len(blob),digest)
+          ids=["RP-CATWORK-S09-I01","RP-CATWORK-S09-I03","RP-CATEMO-S10-I07","RP-CATVAR-S11-I28","RP-CATEMO-S10-I01"]
+          dest=Path("assets/icons/cats")
+          dest.mkdir(parents=True,exist_ok=True)
+          with ZipFile(BytesIO(blob)) as archive:
+            assert archive.testzip() is None
+            for icon_id in ids:
+              src=f"reverse_planner_hq_shortlist_v5/png_transparent_256/{icon_id}.png"
+              content=archive.read(src)
+              assert content.startswith(b"\x89PNG\r\n\x1a\n"),icon_id
+              assert struct.unpack(">II",content[16:24])==(256,256),icon_id
+              assert content[25]==6,("expected RGBA PNG",icon_id,content[25])
+              target=dest/f"{icon_id}.png"
+              assert not target.exists() or target.read_bytes()==content,("existing asset mismatch",target)
+              if not target.exists():
+                target.write_bytes(content)
+              print(icon_id,len(content),hashlib.sha256(content).hexdigest())
+          print("CAT_M1_SOURCE_VERIFIED",len(blob),digest,"5 restored PNGs; HQ ZIP not included in this branch")
+          PY
+      - name: Commit only five reviewed PNG candidates to Draft branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add assets/icons/cats/*.png
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'assets(app004): restore five verified HQ-v5 cats for M1 review'
+            git push origin HEAD:refs/heads/feature/cat-m1-five-screens-20261020
+          fi
+      - name: Check scripts and run Node regression tests
+        run: |
+          node --check assets/app.js
+          node --check assets/icons/cats/cat-mount.mjs
+          node --test tests/*.test.mjs
+      - name: Install Playwright
+        run: npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+      - name: Install Japanese fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends fonts-noto-cjk
+      - name: Capture five states with actual cats in Chromium
+        run: node tests/browser-smoke.mjs
+      - name: Retain screenshots as CI artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: app004-cat-m1-mobile-screenshots
+          path: test-screenshots/
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Save five PNG files to isolated preview branch, not Pages/main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin preview/app004-mobile
+          git switch -C preview/app004-mobile-cat-m1 FETCH_HEAD
+          mkdir -p docs/review/screenshots/m1
+          for name in home-390 setup-mobile clock-plan-mobile timer-mobile done-mobile; do
+            test -s "test-screenshots/$name.png"
+            cp "test-screenshots/$name.png" "docs/review/screenshots/m1/$name.png"
+          done
+          cat > docs/review/screenshots/m1/README.md <<'REVIEW'
+          # APP-004 | M1ネコ配置レビュー画像
+
+          以下は元のHQ-v5から復元した5匹を表示した、390px幅Chromiumの架空データによる画像です。
+          本番アプリではなく独立した画像確認専用ブランチです。iPhone Safari実機の検証ではありません。
+
+          - [HOME](./home-390.png)
+          - [SETUP](./setup-mobile.png)
+          - [PLAN](./clock-plan-mobile.png)
+          - [RUN](./timer-mobile.png)
+          - [全タスク完了（RUN内）](./done-mobile.png)
+
+          全体ZIPや196アイコンはUIに同梱していません。正式ロゴも未採用です。
+          REVIEW
+          git add docs/review/screenshots/m1
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'docs(app004): five mobile PNGs with restored cats'
+          git push origin HEAD:refs/heads/preview/app004-mobile-cat-m1
