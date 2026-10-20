@@ -46,6 +46,16 @@ try {
   };
 
   await page.goto(host+"/");
+  const assertM2Icon=async(id,label)=>{
+    const img=page.locator('img[data-m2-icon][src$="'+id+'.png"]');
+    await img.evaluate(el=>el.decode());
+    checks(await img.isVisible(),label+" 64px source icon displayed");
+    checks(await img.evaluate(el=>el.naturalWidth===64&&el.naturalHeight===64),label+" source dimensions 64px");
+    const fallback=img.locator("xpath=../*[@data-m2-fallback]");
+    checks(await fallback.isHidden(),label+" original glyph hidden only after loaded");
+  };
+  await assertM2Icon("RP-PLAN-S02-I04","HOME clock");
+  await assertM2Icon("RP-PLAN-S02-I01","HOME calendar");
   await page.locator('[data-cat-slot="home"] img').evaluate(img=>img.decode());
   checks(await page.locator('[data-cat-slot="home"]').isVisible(),"Restored home cat is visible");
   checks(await page.locator("#screen-home").isVisible(),"Initial home visible");
@@ -74,6 +84,9 @@ try {
   checks(await page.locator("#screen-setup").isVisible(),"Clock setup appears");
   await page.locator('[data-cat-slot="setup"] img').evaluate(img=>img.decode());
   checks(await page.locator('[data-cat-slot="setup"]').isVisible(),"Restored setup cat is visible");
+  await assertM2Icon("RP-TASK-S03-I01","SETUP add");
+  await assertM2Icon("RP-UI-S01-I05","SETUP advanced settings");
+  checks(await page.locator(".add-submit").innerText()==="追加","SETUP add label remains understandable");
   await page.screenshot({path:"test-screenshots/setup-mobile.png",fullPage:true});
   const deadline=new Date(Date.now()+5*3600000);
   await page.locator("#clock-deadline").fill(yyyyTime(deadline));
@@ -90,6 +103,8 @@ try {
   checks(await page.locator("#screen-plan").isVisible(),"Clock plan appears");
   await page.locator('[data-cat-slot="plan"] img').evaluate(img=>img.decode());
   checks(await page.locator('[data-cat-slot="plan"]').isVisible(),"Restored plan cat is visible");
+  await assertM2Icon("RP-TIMER-S04-I01","PLAN start");
+  checks((await page.locator("#start-plan").innerText()).includes("この計画ではじめる"),"PLAN keeps meaningful button text");
   checks(await page.locator('#screen-plan').getAttribute('data-cat-plan-ready')==='true',"Feasible plan explicitly permits flag cat");
   await page.screenshot({path:"test-screenshots/clock-plan-mobile.png",fullPage:true});
   checks(await page.locator(".timeline-time.is-clock strong").count()>0,"Clock times use compact vertical labels");
@@ -133,6 +148,7 @@ try {
   checks(await page.locator("#timeline .timeline-item").count()>0,"Daily plan renders calendar items");
   await page.screenshot({path:"test-screenshots/days-plan-mobile.png",fullPage:true});
   await assertNarrow("days-plan");
+  checks((await page.locator("#start-plan").innerText()).includes("今日の分を見る"),"Daily PLAN label survives icon integration");
   checks(await page.locator("#start-plan").isEnabled(),"Feasible daily plan can start");
   await page.locator("#start-plan").click();
   await page.waitForURL("**/#run");
@@ -180,6 +196,30 @@ try {
   checks(await missingCatPage.locator('[data-choose-scale="clock"]').isVisible(),"Missing mascot leaves controls intact");
   checks(await missingCatPage.evaluate(()=>localStorage.getItem("reverse-planner:prototype:v1")===null),"Missing mascot never writes localStorage");
   await missingCatCtx.close();
+
+  // Missing M2 assets preserve the original glyphs and the full button routes.
+  const missingIconCtx=await browser.newContext({viewport:{width:390,height:844}});
+  const missingIconPage=await missingIconCtx.newPage();
+  const m2Errors=[];
+  missingIconPage.on("pageerror",e=>m2Errors.push(e.message));
+  await missingIconPage.route("**/assets/icons/ui/*.png",route=>route.abort());
+  await missingIconPage.goto(host+"/");
+  await missingIconPage.locator('img[data-m2-icon][src$="RP-PLAN-S02-I04.png"]').evaluate(img=>
+    new Promise(resolve=>img.complete?resolve():img.addEventListener("error",resolve,{once:true})));
+  checks(await missingIconPage.locator(".pixel-clock").isVisible(),"Missing HOME clock falls back to original CSS graphic");
+  checks(await missingIconPage.locator(".pixel-calendar").isVisible(),"Missing HOME calendar falls back to original CSS graphic");
+  await missingIconPage.locator('[data-choose-scale="clock"]').click();
+  await missingIconPage.waitForURL("**/#setup");
+  checks(await missingIconPage.locator(".add-submit [data-m2-fallback]").isVisible(),"Missing add icon keeps plus glyph");
+  checks(await missingIconPage.locator("#advanced-settings summary [data-m2-fallback]").isVisible(),"Missing gear icon keeps glyph");
+  await missingIconPage.locator("#new-task-name").fill("画像なしでも登録");
+  await missingIconPage.locator(".add-submit").click();
+  checks(await missingIconPage.locator(".task-row").count()===1,"Task still saves with absent icons");
+  await missingIconPage.locator("#make-plan").click();
+  await missingIconPage.waitForURL("**/#plan");
+  checks(await missingIconPage.locator("#start-plan [data-m2-fallback]").isVisible(),"Missing play icon keeps original triangle");
+  checks(m2Errors.length===0,"No JS exceptions when all small icons fail: "+m2Errors.join("/"));
+  await missingIconCtx.close();
 
   const legacyCtx=await browser.newContext({viewport:{width:375,height:812}});
   const legacyPage=await legacyCtx.newPage();
