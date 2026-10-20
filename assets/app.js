@@ -138,11 +138,14 @@ function errorSetup(message){
 }
 function getPlan(){return data.scale==="clock"?clockPlan(sheet(data)):daysPlan(sheet(data));}
 function renderPlan(){
+  // Keep decorative success art hidden until the plan is valid and feasible.
+  $("screen-plan").dataset.catPlanReady="false";
   const valid=validateSetup(data);
   if(valid){errorSetupOnPlan(valid);return;}
   const plan=getPlan();
   if(plan.error){errorSetupOnPlan(plan.error);return;}
   const clock=data.scale==="clock",done=plan.remainingCount===0;
+  $("screen-plan").dataset.catPlanReady=String(done||(clock?plan.deficit<=0:plan.missing<=0));
   $("result-label").textContent=done?"ALL CLEAR ✳":clock?"START TIME":"TODAY'S MISSION";
   $("result-main").textContent=done?"おつかれさま！":clock?hm(plan.start):plan.target?fmtMinutes(plan.target):"おやすみ";
   $("result-sub").textContent=done?"すべてのタスクが完了しました！":clock?
@@ -192,6 +195,7 @@ function timerHtml(t){
     (t.running?"Ⅱ 一時停止":remain?"▶ 再開":"＋5分")+'</button></div>';
 }
 function renderRun() {
+  $("screen-run").dataset.catComplete="false";
   const s=sheet(data),plan=getPlan();
   if(plan.error){$("focus-task").textContent=plan.error;$("focus-controls").innerHTML='<button type="button" class="button button-secondary" data-run="edit">入力に戻る</button>';return;}
   if(data.scale==="clock") {
@@ -221,6 +225,7 @@ function renderRun() {
   }
 }
 function renderAllDone(){
+  $("screen-run").dataset.catComplete="true";
   $("focus-task").textContent="全部できた！ ★";
   $("focus-sub").textContent="おつかれさま。また次の計画でね。";
   $("focus-controls").innerHTML='<button type="button" class="button button-primary pixel-press button-large" data-run="home">別の計画をつくる</button>';
