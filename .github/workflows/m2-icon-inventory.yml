@@ -1,0 +1,45 @@
+name: APP-004 M2 source icon inventory
+'on':
+  push:
+    branches: ['feature/m2-action-icons-20261021']
+    paths: ['.github/workflows/m2-icon-inventory.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-and-inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify original QC-v4 ZIP and list five selected entries
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin feature/asset-archive-20261019
+          test "$(git rev-parse FETCH_HEAD)" = "2aa23d2dc24005002bd2b441073bfff9a03ed9b3"
+          python - <<'PY'
+          from io import BytesIO
+          from zipfile import ZipFile
+          import hashlib,subprocess,struct
+          prefix='assets/source-archive/icons/qc-v4/icons-qc-v4-196.zip.part'
+          blob=b''.join(subprocess.check_output(['git','show',f'FETCH_HEAD:{prefix}{n:03d}']) for n in range(1,18))
+          digest=hashlib.sha256(blob).hexdigest()
+          expect='f1b6c92264914de53b5755a0b356b1a4840b4c7492cd41869e3cb15cc37b24a2'
+          assert len(blob)==35306466 and digest==expect, (len(blob),digest)
+          ids=['RP-PLAN-S02-I04','RP-PLAN-S02-I01','RP-TASK-S03-I01','RP-UI-S01-I05','RP-TIMER-S04-I01']
+          with ZipFile(BytesIO(blob)) as archive:
+            assert archive.testzip() is None
+            names=archive.namelist()
+            print('SOURCE_VALIDATED bytes='+str(len(blob))+' sha256='+digest+' entries='+str(len(names)))
+            print('ZIP_TOP_FOLDERS',sorted(set(n.split('/')[0] for n in names))[:100])
+            for identifier in ids:
+              matches=[n for n in names if identifier in n and n.lower().endswith('.png')]
+              print('CANDIDATE',identifier,'count',len(matches))
+              for path in matches:
+                payload=archive.read(path)
+                header=(struct.unpack('>II',payload[16:24]) if payload.startswith(b'\x89PNG\r\n\x1a\n') else None)
+                mode=(payload[25] if header else None)
+                print('  ITEM',repr(path),'bytes',len(payload),'WH',header,'PNG_COLOR_TYPE',mode,'SHA256',hashlib.sha256(payload).hexdigest())
+            print('QUALIFIED_INVENTORY_DONE')
+          PY
