@@ -155,6 +155,8 @@ try {
   await warningPage.locator(".add-submit").click();
   await warningPage.locator("#make-plan").click();
   await warningPage.waitForURL("**/#plan");
+  await warningPage.locator("#screen-plan").waitFor({state:"visible"});
+  await warningPage.locator("#notice").waitFor({state:"visible"});
   checks(await warningPage.locator("#notice").isVisible(),"An infeasible deadline shows a deficit warning");
   checks(await warningPage.locator('[data-cat-slot="plan"]').isHidden(),"Flag cat stays hidden for an infeasible plan");
   checks(await warningPage.locator('#screen-plan').getAttribute('data-cat-plan-ready')==='false',"Infeasible plan has false mascot readiness");
