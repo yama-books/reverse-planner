@@ -339,3 +339,17 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible {
   .decorative-cat-section {width:72px;}
   .decorative-cat-done {width:104px;}
 }
+
+/* APP-004 M2 draft: background-retaining 64px RGB icon candidates.
+   Visible labels and original CSS/glyph fallbacks remain mandatory.
+   Icons are decoration only and never intercept pointer or focus. */
+.m2-icon {object-fit:contain;display:block;flex:0 0 auto;pointer-events:none;user-select:none;
+  background:#FFFDF7;border:1px solid #E4E3D8;border-radius:6px;}
+.m2-icon-choice {width:64px;height:64px;border-radius:9px;box-shadow:2px 2px 0 #91B4A4;}
+.m2-icon-button {width:30px;height:30px;padding:0;border-radius:5px;}
+#advanced-settings summary .m2-icon-button {width:28px;height:28px;}
+#start-plan .m2-icon-button {width:34px;height:34px;}
+@media(max-width:380px) {
+  .add-submit {gap:2px;padding-inline:7px;flex-basis:100px;}
+  #advanced-settings summary {gap:8px;padding-inline:14px;}
+}
