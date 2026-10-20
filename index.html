@@ -10,6 +10,7 @@
   <script type="module" src="./assets/app.js"></script>
   <script type="module" src="./assets/brand/brand.mjs"></script>
   <script type="module" src="./assets/icons/cats/cat-mount.mjs"></script>
+  <script type="module" src="./assets/icons/ui/icon-mount.mjs"></script>
 </head>
 <body>
   <a class="skip-link" href="#screen-title">メイン画面へ</a>
@@ -50,12 +51,12 @@
         </div>
         <div class="choice-grid" role="group" aria-label="計画の種類">
           <button type="button" class="choice-card mint pixel-press" data-choose-scale="clock">
-            <span class="choice-art" aria-hidden="true"><span class="pixel-clock"><i></i></span></span>
+            <span class="choice-art" aria-hidden="true"><span class="pixel-clock" data-m2-fallback><i></i></span><img data-m2-icon class="m2-icon m2-icon-choice" src="./assets/icons/ui/RP-PLAN-S02-I04.png" alt="" width="64" height="64" decoding="async" hidden></span>
             <span class="choice-copy"><small>TIME QUEST</small><strong>何時まで？</strong><span>今日の準備や、短い作業に</span></span>
             <span class="choice-arrow" aria-hidden="true">↗</span>
           </button>
           <button type="button" class="choice-card peach pixel-press" data-choose-scale="days">
-            <span class="choice-art" aria-hidden="true"><span class="pixel-calendar"><i></i></span></span>
+            <span class="choice-art" aria-hidden="true"><span class="pixel-calendar" data-m2-fallback><i></i></span><img data-m2-icon class="m2-icon m2-icon-choice" src="./assets/icons/ui/RP-PLAN-S02-I01.png" alt="" width="64" height="64" decoding="async" hidden></span>
             <span class="choice-copy"><small>DAY QUEST</small><strong>何日まで？</strong><span>宿題や、テストまでの予定に</span></span>
             <span class="choice-arrow" aria-hidden="true">↗</span>
           </button>
@@ -103,7 +104,7 @@
               <label class="field-label" for="new-task-minutes">時間（分）</label>
               <input id="new-task-minutes" type="number" class="field-control" min="1" max="1440" inputmode="numeric" value="15" required>
             </div>
-            <button type="submit" class="button button-primary pixel-press add-submit">＋ 追加</button>
+            <button type="submit" class="button button-primary pixel-press add-submit"><span data-m2-fallback aria-hidden="true">＋</span><img data-m2-icon class="m2-icon m2-icon-button" src="./assets/icons/ui/RP-TASK-S03-I01.png" alt="" width="64" height="64" decoding="async" hidden><span>追加</span></button>
           </form>
           <div class="duration-chips" role="group" aria-label="追加するタスクの所要時間">
             <span class="chip-caption">かんたん入力</span>
@@ -111,7 +112,7 @@
           </div>
         </div>
         <details class="panel detail-panel" id="advanced-settings">
-          <summary><span aria-hidden="true">⚙</span> くわしく設定 <span class="accordion-arrow" aria-hidden="true">⌄</span></summary>
+          <summary><span data-m2-fallback aria-hidden="true">⚙</span><img data-m2-icon class="m2-icon m2-icon-button" src="./assets/icons/ui/RP-UI-S01-I05.png" alt="" width="64" height="64" decoding="async" hidden> くわしく設定 <span class="accordion-arrow" aria-hidden="true">⌄</span></summary>
           <div class="advanced-content">
             <div id="clock-settings">
               <label for="clock-buffer" class="field-label">余裕時間（分）</label>
@@ -160,7 +161,7 @@
         <div id="timeline" class="timeline"></div>
         <p id="study-disclaimer" class="study-note" hidden>※まなびモードの試作は時間配分のみです。理解度の判定や復習の自動配置はまだありません。</p>
         <div class="page-cta plan-actions">
-          <button type="button" id="start-plan" class="button button-primary pixel-press button-large">▶ この計画ではじめる</button>
+          <button type="button" id="start-plan" class="button button-primary pixel-press button-large"><span data-m2-fallback aria-hidden="true">▶</span><img data-m2-icon class="m2-icon m2-icon-button" src="./assets/icons/ui/RP-TIMER-S04-I01.png" alt="" width="64" height="64" decoding="async" hidden><span id="start-plan-label">この計画ではじめる</span></button>
           <button type="button" id="edit-plan" class="button button-secondary">↶ やることを直す</button>
           <button type="button" id="export-button" class="button button-link">↓ JSONで保存</button>
         </div>
