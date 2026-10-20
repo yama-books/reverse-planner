@@ -138,11 +138,14 @@ function errorSetup(message){
 }
 function getPlan(){return data.scale==="clock"?clockPlan(sheet(data)):daysPlan(sheet(data));}
 function renderPlan(){
+  // Keep decorative success art hidden until the plan is valid and feasible.
+  $("screen-plan").dataset.catPlanReady="false";
   const valid=validateSetup(data);
   if(valid){errorSetupOnPlan(valid);return;}
   const plan=getPlan();
   if(plan.error){errorSetupOnPlan(plan.error);return;}
   const clock=data.scale==="clock",done=plan.remainingCount===0;
+  $("screen-plan").dataset.catPlanReady=String(done||(clock?plan.deficit<=0:plan.missing<=0));
   $("result-label").textContent=done?"ALL CLEAR ✳":clock?"START TIME":"TODAY'S MISSION";
   $("result-main").textContent=done?"おつかれさま！":clock?hm(plan.start):plan.target?fmtMinutes(plan.target):"おやすみ";
   $("result-sub").textContent=done?"すべてのタスクが完了しました！":clock?
