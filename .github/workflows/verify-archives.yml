@@ -1,0 +1,39 @@
+name: APP-004 archive SHA-256 verification
+on:
+  push:
+    branches: ['feature/asset-archive-20261019']
+    paths:
+      - '.github/workflows/verify-archives.yml'
+      - 'assets/source-archive/**'
+      - 'assets/recover_source_archives.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-saved-sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate saved cat ZIP SHA-256 and restore ZIP
+        run: python assets/recover_source_archives.py --archive cats --output /tmp/app004-cats.zip
+      - name: Validate saved 196-icon ZIP SHA-256 and restore ZIP
+        run: python assets/recover_source_archives.py --archive icons --output /tmp/app004-icons.zip
+      - name: Inspect ZIP members and CRC without deploying
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          for name, expected in [('cats', 80), ('icons', 435)]:
+              path=Path(f'/tmp/app004-{name}.zip')
+              with ZipFile(path) as archive:
+                  entries=[f for f in archive.namelist() if not f.endswith('/')]
+                  bad=archive.testzip()
+                  assert bad is None, (name, bad)
+                  assert len(entries)==expected, (name, len(entries), expected)
+                  print(f'{name}: ZIP CRC valid; file count={len(entries)}')
+                  print(f'{name}: sample member paths:', *entries[:30], sep='\n  ')
+          PY
+      - name: Confirm deployed assets unchanged
+        run: |
+          echo 'Archive-only verification: no Pages deployment, no PR merge and no binary upload'
