@@ -321,3 +321,21 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible {
   .brand, .brand-fallback-group {min-width:0;}
   .brand-text {overflow-wrap:anywhere;}
 }
+
+/* APP-004 M1 | Decorative cats use the restored HQ-v5 PNGs.
+   Hidden until the PNG loads; no controls, text or brand artwork are replaced. */
+.decorative-cat {display:block;pointer-events:none;user-select:none;max-width:100%;line-height:0;}
+.decorative-cat img {display:block;width:100%;height:auto;aspect-ratio:1 / 1;object-fit:contain;image-rendering:pixelated;}
+.decorative-cat-home {width:118px;margin:0 auto 8px;}
+.decorative-cat-section {width:96px;margin:10px 0 2px;}
+.decorative-cat-done {width:132px;margin:14px auto 10px;}
+@media(max-width:650px) {
+  .decorative-cat-home {width:100px;margin-bottom:6px;}
+  .decorative-cat-section {width:82px;margin:8px 0 0;}
+  .decorative-cat-done {width:116px;}
+}
+@media(max-width:350px) {
+  .decorative-cat-home {width:90px;}
+  .decorative-cat-section {width:72px;}
+  .decorative-cat-done {width:104px;}
+}
