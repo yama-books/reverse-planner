@@ -46,6 +46,8 @@ try {
   };
 
   await page.goto(host+"/");
+  await page.locator('[data-cat-slot="home"] img').evaluate(img=>img.decode());
+  checks(await page.locator('[data-cat-slot="home"]').isVisible(),"Restored home cat is visible");
   checks(await page.locator("#screen-home").isVisible(),"Initial home visible");
   checks(await page.locator(".choice-card").count()===2,"Home presents two choices");
   await page.screenshot({path:"test-screenshots/home-390.png",fullPage:true});
@@ -70,6 +72,8 @@ try {
   await page.waitForURL("**/#setup");
   await page.locator("#screen-setup").waitFor({state:"visible"});
   checks(await page.locator("#screen-setup").isVisible(),"Clock setup appears");
+  await page.locator('[data-cat-slot="setup"] img').evaluate(img=>img.decode());
+  checks(await page.locator('[data-cat-slot="setup"]').isVisible(),"Restored setup cat is visible");
   await page.screenshot({path:"test-screenshots/setup-mobile.png",fullPage:true});
   const deadline=new Date(Date.now()+5*3600000);
   await page.locator("#clock-deadline").fill(yyyyTime(deadline));
@@ -84,6 +88,8 @@ try {
   await page.waitForURL("**/#plan");
   await page.locator("#screen-plan").waitFor({state:"visible"});
   checks(await page.locator("#screen-plan").isVisible(),"Clock plan appears");
+  await page.locator('[data-cat-slot="plan"] img').evaluate(img=>img.decode());
+  checks(await page.locator('[data-cat-slot="plan"]').isVisible(),"Restored plan cat is visible");
   await page.screenshot({path:"test-screenshots/clock-plan-mobile.png",fullPage:true});
   checks(await page.locator(".timeline-time.is-clock strong").count()>0,"Clock times use compact vertical labels");
   await assertNarrow("clock-plan");
@@ -92,12 +98,17 @@ try {
   await page.waitForURL("**/#run");
   await page.locator("#screen-run").waitFor({state:"visible"});
   checks(await page.locator("#focus-task").textContent()==="ためしに勉強","Run focuses on current task");
+  await page.locator('[data-cat-slot="run"] img').evaluate(img=>img.decode());
+  checks(await page.locator('[data-cat-slot="run"]').isVisible(),"Restored timer cat is visible");
+  checks(await page.locator('[data-cat-slot="done"]').isHidden(),"Celebration cat remains hidden during work");
   await page.locator('[data-run="start"]').click();
   checks(await page.locator("#timer-clock").isVisible(),"Timer starts");
   await page.screenshot({path:"test-screenshots/timer-mobile.png",fullPage:true});
   await assertNarrow("timer");
   await page.locator('[data-run="done"]').click();
   checks((await page.locator("#focus-task").textContent()).includes("全部できた"),"Task marked done by explicit click");
+  await page.locator('[data-cat-slot="done"] img').evaluate(img=>img.decode());
+  checks(await page.locator('[data-cat-slot="done"]').isVisible(),"Restored celebration cat appears only after all tasks completed");
   await page.screenshot({path:"test-screenshots/done-mobile.png",fullPage:true});
   await page.reload();
   checks((await page.locator("#focus-task").textContent()).includes("全部できた"),"Done state survives reload");
