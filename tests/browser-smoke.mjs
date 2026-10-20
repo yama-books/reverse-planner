@@ -210,6 +210,9 @@ try {
   checks(await missingIconPage.locator(".pixel-calendar").isVisible(),"Missing HOME calendar falls back to original CSS graphic");
   await missingIconPage.locator('[data-choose-scale="clock"]').click();
   await missingIconPage.waitForURL("**/#setup");
+  await missingIconPage.locator("#screen-setup").waitFor({state:"visible"});
+  await missingIconPage.locator(".add-submit img[data-m2-icon]").evaluate(img=>
+    new Promise(resolve=>img.complete?resolve():img.addEventListener("error",resolve,{once:true})));
   checks(await missingIconPage.locator(".add-submit [data-m2-fallback]").isVisible(),"Missing add icon keeps plus glyph");
   checks(await missingIconPage.locator("#advanced-settings summary [data-m2-fallback]").isVisible(),"Missing gear icon keeps glyph");
   await missingIconPage.locator("#new-task-name").fill("画像なしでも登録");
@@ -217,6 +220,9 @@ try {
   checks(await missingIconPage.locator(".task-row").count()===1,"Task still saves with absent icons");
   await missingIconPage.locator("#make-plan").click();
   await missingIconPage.waitForURL("**/#plan");
+  await missingIconPage.locator("#screen-plan").waitFor({state:"visible"});
+  await missingIconPage.locator("#start-plan img[data-m2-icon]").evaluate(img=>
+    new Promise(resolve=>img.complete?resolve():img.addEventListener("error",resolve,{once:true})));
   checks(await missingIconPage.locator("#start-plan [data-m2-fallback]").isVisible(),"Missing play icon keeps original triangle");
   checks(m2Errors.length===0,"No JS exceptions when all small icons fail: "+m2Errors.join("/"));
   await missingIconCtx.close();
