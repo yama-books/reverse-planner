@@ -365,3 +365,17 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible {
 #advanced-settings summary .m2-icon-button {width:26px;height:26px;}
 #start-plan .m2-icon-button {width:32px;height:32px;}
 @media (prefers-reduced-motion:reduce) {.m2-icon{transition:none;}}
+
+/* APP-004 M4: a three-action task row must not squeeze text fields at 320px.
+   Keep touch targets comfortably large and let the task row reflow. */
+@media (max-width:650px) {
+  .preset-list button,.duration-chips button {min-height:44px;}
+  .task-row {flex-wrap:wrap;row-gap:6px;}
+  .task-row .checkbox {flex:0 0 40px;width:40px;min-height:44px;display:grid;place-items:center;}
+  .task-row .checkbox input {width:22px;height:22px;}
+  .task-row .task-name {flex:1 1 calc(100% - 50px);}
+  .task-row .task-name input,.task-row .task-minutes input {font-size:16px;}
+  .task-row .task-minutes {flex:1 1 75px;}
+  .task-row .row-buttons {margin-left:auto;gap:4px;}
+  .task-row .row-buttons button {min-width:44px;min-height:44px;height:44px;}
+}
