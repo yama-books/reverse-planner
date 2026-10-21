@@ -49,8 +49,8 @@ try {
   const assertM2Icon=async(id,label)=>{
     const img=page.locator('img[data-m2-icon][src$="'+id+'.png"]');
     await img.evaluate(el=>el.decode());
-    checks(await img.isVisible(),label+" 64px source icon displayed");
-    checks(await img.evaluate(el=>el.naturalWidth===64&&el.naturalHeight===64),label+" source dimensions 64px");
+    checks(await img.isVisible(),label+" transparent source icon displayed");
+    checks(await img.evaluate(el=>el.naturalWidth===128&&el.naturalHeight===128),label+" source dimensions 128px");
     const fallback=img.locator("xpath=../*[@data-m2-fallback]");
     checks(await fallback.isHidden(),label+" original glyph hidden only after loaded");
   };
@@ -186,7 +186,7 @@ try {
   // Optional art cannot be allowed to break navigation or save private data.
   const missingCatCtx=await browser.newContext({viewport:{width:390,height:844}});
   const missingCatPage=await missingCatCtx.newPage();
-  await missingCatPage.route("**/assets/icons/cats/*.png",route=>route.abort());
+  await missingCatPage.route("**/assets/icons/cats/**/*.png",route=>route.abort());
   await missingCatPage.goto(host+"/");
   await missingCatPage.locator('[data-cat-slot="home"]').evaluate(slot=>new Promise(resolve=>{
     const img=slot.querySelector("img");
@@ -202,7 +202,7 @@ try {
   const missingIconPage=await missingIconCtx.newPage();
   const m2Errors=[];
   missingIconPage.on("pageerror",e=>m2Errors.push(e.message));
-  await missingIconPage.route("**/assets/icons/ui/*.png",route=>route.abort());
+  await missingIconPage.route("**/assets/icons/ui/**/*.png",route=>route.abort());
   await missingIconPage.goto(host+"/");
   await missingIconPage.locator('img[data-m2-icon][src$="RP-PLAN-S02-I04.png"]').evaluate(img=>
     new Promise(resolve=>img.complete?resolve():img.addEventListener("error",resolve,{once:true})));
