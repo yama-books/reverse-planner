@@ -1,0 +1,79 @@
+name: APP-004 M4 WebKit touch and layout QA
+'on':
+  push:
+    branches: ['feature/m4-webkit-mobile-qa-20261022']
+    paths:
+      - '.github/workflows/m4-webkit-review.yml'
+      - 'tests/m4-webkit-mobile.mjs'
+      - 'assets/app.css'
+      - 'assets/app.js'
+      - 'index.html'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: app004-webkit-m4-review
+  cancel-in-progress: false
+jobs:
+  webkit-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Verify preserved application logic
+        run: node --test tests/*.test.mjs
+      - name: Install Playwright WebKit
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps webkit
+      - name: Install Japanese glyph fonts for screenshots
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends fonts-noto-cjk
+      - name: Mobile WebKit input, navigation, image and geometry tests
+        run: node tests/m4-webkit-mobile.mjs
+      - name: Upload WebKit screenshot evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: app004-m4-webkit-review
+          path: test-screenshots/m4/
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Save PNG/JST test results only to isolated preview branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s test-screenshots/m4/webkit-report.json
+          test -s test-screenshots/m4/home-390.png
+          test -s test-screenshots/m4/done-390.png
+          git fetch --no-tags origin preview/app004-mobile-webkit-m4
+          git switch -C preview/app004-mobile-webkit-m4 FETCH_HEAD
+          mkdir -p docs/review/screenshots/m4-webkit
+          cp test-screenshots/m4/*.png docs/review/screenshots/m4-webkit/
+          cp test-screenshots/m4/webkit-report.json docs/review/screenshots/m4-webkit/
+          cat > docs/review/screenshots/m4-webkit/README.md <<'README'
+          # APP-004 M4｜WebKit擬似iPhone表示のレビュー
+          
+          画面はGitHub Actions上のLinux版Playwright WebKitによる撮影です。
+          iPhone13相当viewport/touch設定を使いますが、**Apple iPhoneの実機Safariで検証したものではありません**。
+          元データはテスト用の仮予定のみ。アプリ本番公開、mainマージ、採用決定は未実施です。
+          
+          - HOME: home-320.png, home-390.png, home-428.png
+          - SETUP: setup-320.png, setup-390.png, setup-added-390.png
+          - PLAN: plan-320.png, plan-390.png
+          - RUN: run-320.png, run-390.png
+          - DONE: done-320.png, done-390.png
+          - TEXT: home-large-text-320.png (CSS font-size拡大による近似、iOS Dynamic Typeではない)
+          - 画像欠損: missing-icon-fallback-390.png
+          - ウィンドウ幅・cat/icon表示・画像のボタン内収まり・対象buttonの高さ: webkit-report.json
+          
+          ブラウザ描画の目視比較後にデザイン採否を判断してください。
+          README
+          git add docs/review/screenshots/m4-webkit
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'docs(app004): WebKit mobile screenshot gallery and interaction measurements'
+            git push origin HEAD:refs/heads/preview/app004-mobile-webkit-m4
+          fi
