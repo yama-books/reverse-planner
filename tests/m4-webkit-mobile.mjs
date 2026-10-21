@@ -30,6 +30,14 @@ const checks=[],screens=[],issues=[],measurements=[];
 const check=(condition,label,details)=>{assert.ok(condition,label+(details?" "+JSON.stringify(details):""));checks.push(label);};
 const collect=async(page,stage,width)=>{
   await page.setViewportSize({width,height:844});
+  // WebKit may retain CSS screen-in translation for a frame after a route
+  // becomes visible. Check layout only once its actual onscreen position settles.
+  await page.waitForFunction(()=>{
+    const visible=[...document.querySelectorAll(".screen")].find(s=>!s.hidden);
+    if(!visible)return false;
+    const rect=visible.getBoundingClientRect();
+    return Math.abs(rect.left-(innerWidth-rect.width)/2)<1.5;
+  },null,{timeout:6000});
   const data=await page.evaluate(()=>{
     const v=document.documentElement;
     const loc=[...document.querySelectorAll('.screen')].find(s=>!s.hidden);
