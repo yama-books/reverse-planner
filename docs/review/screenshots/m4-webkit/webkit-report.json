@@ -7,6 +7,7 @@
     "setup-320.png",
     "setup-390.png",
     "setup-added-390.png",
+    "setup-added-320.png",
     "plan-320.png",
     "plan-390.png",
     "run-320.png",
@@ -15,7 +16,7 @@
     "done-390.png",
     "home-large-text-320.png"
   ],
-  "checksCount": 50,
+  "checksCount": 60,
   "checks": [
     "WebKit home choices present",
     "home no page horizontal clipping at 320",
@@ -30,15 +31,24 @@
     "setup no page horizontal clipping at 320",
     "setup correct decorative cat displayed at 320",
     "setup loaded icons fit original controls at 320",
+    "setup template and duration choices are at least 44px tall",
     "setup no page horizontal clipping at 390",
     "setup correct decorative cat displayed at 390",
     "setup loaded icons fit original controls at 390",
+    "setup template and duration choices are at least 44px tall",
     "WebKit details summary touch opens",
     "WebKit details summary touch closes",
     "WebKit touch adds task",
     "setup-added no page horizontal clipping at 390",
     "setup-added correct decorative cat displayed at 390",
     "setup-added loaded icons fit original controls at 390",
+    "setup-added template and duration choices are at least 44px tall",
+    "Mobile reorder and delete actions have usable 44px touch targets",
+    "setup-added no page horizontal clipping at 320",
+    "setup-added correct decorative cat displayed at 320",
+    "setup-added loaded icons fit original controls at 320",
+    "setup-added template and duration choices are at least 44px tall",
+    "Mobile reorder and delete actions have usable 44px touch targets",
     "WebKit feasible plan enables start",
     "plan no page horizontal clipping at 320",
     "plan correct decorative cat displayed at 320",
@@ -53,6 +63,7 @@
     "run correct decorative cat displayed at 390",
     "run loaded icons fit original controls at 390",
     "WebKit touch starts timer",
+    "WebKit completion heading matches the DONE state",
     "WebKit hides running cat on completion",
     "done no page horizontal clipping at 320",
     "done correct decorative cat displayed at 320",
@@ -480,6 +491,113 @@
         {
           "name": "make-plan",
           "width": 362,
+          "height": 58
+        }
+      ],
+      "overflowElements": [],
+      "textScale": "16px"
+    },
+    {
+      "stage": "screen-setup",
+      "width": 320,
+      "viewport": 320,
+      "scroll": 320,
+      "cats": [
+        {
+          "slot": "setup",
+          "valid": true,
+          "width": 82,
+          "height": 82
+        }
+      ],
+      "icons": [
+        {
+          "src": "RP-TASK-S03-I01.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        },
+        {
+          "src": "RP-UI-S01-I05.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        }
+      ],
+      "buttons": [
+        {
+          "name": "☕ 家事・支度",
+          "width": 102,
+          "height": 44
+        },
+        {
+          "name": "✿ おでかけ",
+          "width": 87,
+          "height": 44
+        },
+        {
+          "name": "✎ 宿題",
+          "width": 61,
+          "height": 44
+        },
+        {
+          "name": "▦ テスト勉強",
+          "width": 99,
+          "height": 44
+        },
+        {
+          "name": "↑",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "↓",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "×",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "name": "＋追加",
+          "width": 258,
+          "height": 51
+        },
+        {
+          "name": "5分",
+          "width": 42,
+          "height": 44
+        },
+        {
+          "name": "10分",
+          "width": 48,
+          "height": 44
+        },
+        {
+          "name": "15分",
+          "width": 48,
+          "height": 44
+        },
+        {
+          "name": "30分",
+          "width": 48,
+          "height": 44
+        },
+        {
+          "name": "60分",
+          "width": 48,
+          "height": 44
+        },
+        {
+          "name": "⚙ くわしく設定 ⌄",
+          "width": 258,
+          "height": 64
+        },
+        {
+          "name": "make-plan",
+          "width": 292,
           "height": 58
         }
       ],
