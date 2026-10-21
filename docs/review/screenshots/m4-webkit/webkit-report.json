@@ -226,22 +226,22 @@
         {
           "name": "☕ 家事・支度",
           "width": 102,
-          "height": 41
+          "height": 44
         },
         {
           "name": "✿ おでかけ",
           "width": 87,
-          "height": 41
+          "height": 44
         },
         {
           "name": "✎ 宿題",
           "width": 61,
-          "height": 41
+          "height": 44
         },
         {
           "name": "▦ テスト勉強",
           "width": 99,
-          "height": 41
+          "height": 44
         },
         {
           "name": "＋追加",
@@ -251,27 +251,27 @@
         {
           "name": "5分",
           "width": 42,
-          "height": 34
+          "height": 44
         },
         {
           "name": "10分",
           "width": 48,
-          "height": 34
+          "height": 44
         },
         {
           "name": "15分",
           "width": 48,
-          "height": 34
+          "height": 44
         },
         {
           "name": "30分",
           "width": 48,
-          "height": 34
+          "height": 44
         },
         {
           "name": "60分",
           "width": 48,
-          "height": 34
+          "height": 44
         },
         {
           "name": "⚙ くわしく設定 ⌄",
@@ -318,22 +318,22 @@
         {
           "name": "☕ 家事・支度",
           "width": 102,
-          "height": 41
+          "height": 44
         },
         {
           "name": "✿ おでかけ",
           "width": 87,
-          "height": 41
+          "height": 44
         },
         {
           "name": "✎ 宿題",
           "width": 61,
-          "height": 41
+          "height": 44
         },
         {
           "name": "▦ テスト勉強",
           "width": 99,
-          "height": 41
+          "height": 44
         },
         {
           "name": "＋追加",
@@ -343,27 +343,27 @@
         {
           "name": "5分",
           "width": 42,
-          "height": 34
+          "height": 44
         },
         {
           "name": "10分",
           "width": 48,
-          "height": 34
+          "height": 44
         },
         {
           "name": "15分",
           "width": 48,
-          "height": 34
+          "height": 44
         },
         {
           "name": "30分",
           "width": 48,
-          "height": 34
+          "height": 44
         },
         {
           "name": "60分",
           "width": 48,
-          "height": 34
+          "height": 44
         },
         {
           "name": "⚙ くわしく設定 ⌄",
@@ -410,37 +410,37 @@
         {
           "name": "☕ 家事・支度",
           "width": 102,
-          "height": 41
+          "height": 44
         },
         {
           "name": "✿ おでかけ",
           "width": 87,
-          "height": 41
+          "height": 44
         },
         {
           "name": "✎ 宿題",
           "width": 61,
-          "height": 41
+          "height": 44
         },
         {
           "name": "▦ テスト勉強",
           "width": 99,
-          "height": 41
+          "height": 44
         },
         {
           "name": "↑",
-          "width": 27,
-          "height": 33
+          "width": 44,
+          "height": 44
         },
         {
           "name": "↓",
-          "width": 27,
-          "height": 33
+          "width": 44,
+          "height": 44
         },
         {
           "name": "×",
-          "width": 27,
-          "height": 33
+          "width": 44,
+          "height": 44
         },
         {
           "name": "＋追加",
@@ -450,27 +450,27 @@
         {
           "name": "5分",
           "width": 42,
-          "height": 34
+          "height": 44
         },
         {
           "name": "10分",
           "width": 48,
-          "height": 34
+          "height": 44
         },
         {
           "name": "15分",
           "width": 48,
-          "height": 34
+          "height": 44
         },
         {
           "name": "30分",
           "width": 48,
-          "height": 34
+          "height": 44
         },
         {
           "name": "60分",
           "width": 48,
-          "height": 34
+          "height": 44
         },
         {
           "name": "⚙ くわしく設定 ⌄",
@@ -495,8 +495,8 @@
         {
           "slot": "plan",
           "valid": true,
-          "width": 82,
-          "height": 82
+          "width": 72,
+          "height": 72
         }
       ],
       "icons": [
