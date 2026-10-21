@@ -1,0 +1,742 @@
+{
+  "environment": "Playwright Linux WebKit, iPhone 13 descriptor; not an iPhone Safari device",
+  "screens": [
+    "home-320.png",
+    "home-390.png",
+    "home-428.png",
+    "setup-320.png",
+    "setup-390.png",
+    "setup-added-390.png",
+    "plan-320.png",
+    "plan-390.png",
+    "run-320.png",
+    "run-390.png",
+    "done-320.png",
+    "done-390.png",
+    "home-large-text-320.png"
+  ],
+  "checksCount": 50,
+  "checks": [
+    "WebKit home choices present",
+    "home no page horizontal clipping at 320",
+    "home correct decorative cat displayed at 320",
+    "home loaded icons fit original controls at 320",
+    "home no page horizontal clipping at 390",
+    "home correct decorative cat displayed at 390",
+    "home loaded icons fit original controls at 390",
+    "home no page horizontal clipping at 428",
+    "home correct decorative cat displayed at 428",
+    "home loaded icons fit original controls at 428",
+    "setup no page horizontal clipping at 320",
+    "setup correct decorative cat displayed at 320",
+    "setup loaded icons fit original controls at 320",
+    "setup no page horizontal clipping at 390",
+    "setup correct decorative cat displayed at 390",
+    "setup loaded icons fit original controls at 390",
+    "WebKit details summary touch opens",
+    "WebKit details summary touch closes",
+    "WebKit touch adds task",
+    "setup-added no page horizontal clipping at 390",
+    "setup-added correct decorative cat displayed at 390",
+    "setup-added loaded icons fit original controls at 390",
+    "WebKit feasible plan enables start",
+    "plan no page horizontal clipping at 320",
+    "plan correct decorative cat displayed at 320",
+    "plan loaded icons fit original controls at 320",
+    "plan no page horizontal clipping at 390",
+    "plan correct decorative cat displayed at 390",
+    "plan loaded icons fit original controls at 390",
+    "run no page horizontal clipping at 320",
+    "run correct decorative cat displayed at 320",
+    "run loaded icons fit original controls at 320",
+    "run no page horizontal clipping at 390",
+    "run correct decorative cat displayed at 390",
+    "run loaded icons fit original controls at 390",
+    "WebKit touch starts timer",
+    "WebKit hides running cat on completion",
+    "done no page horizontal clipping at 320",
+    "done correct decorative cat displayed at 320",
+    "done loaded icons fit original controls at 320",
+    "done no page horizontal clipping at 390",
+    "done correct decorative cat displayed at 390",
+    "done loaded icons fit original controls at 390",
+    "WebKit storage restores DONE after reload",
+    "home-large-text no page horizontal clipping at 320",
+    "home-large-text correct decorative cat displayed at 320",
+    "home-large-text loaded icons fit original controls at 320",
+    "WebKit image failure restores CSS clock",
+    "WebKit missing plus icon retains label",
+    "No uncaught JavaScript errors in WebKit"
+  ],
+  "measurements": [
+    {
+      "stage": "screen-home",
+      "width": 320,
+      "viewport": 320,
+      "scroll": 320,
+      "cats": [
+        {
+          "slot": "home",
+          "valid": true,
+          "width": 90,
+          "height": 90
+        }
+      ],
+      "icons": [
+        {
+          "src": "RP-PLAN-S02-I04.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        },
+        {
+          "src": "RP-PLAN-S02-I01.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        }
+      ],
+      "buttons": [
+        {
+          "name": "clock",
+          "width": 288,
+          "height": 135
+        },
+        {
+          "name": "days",
+          "width": 288,
+          "height": 135
+        }
+      ],
+      "overflowElements": [],
+      "textScale": "16px"
+    },
+    {
+      "stage": "screen-home",
+      "width": 390,
+      "viewport": 390,
+      "scroll": 390,
+      "cats": [
+        {
+          "slot": "home",
+          "valid": true,
+          "width": 90,
+          "height": 90
+        }
+      ],
+      "icons": [
+        {
+          "src": "RP-PLAN-S02-I04.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        },
+        {
+          "src": "RP-PLAN-S02-I01.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        }
+      ],
+      "buttons": [
+        {
+          "name": "clock",
+          "width": 358,
+          "height": 135
+        },
+        {
+          "name": "days",
+          "width": 358,
+          "height": 135
+        }
+      ],
+      "overflowElements": [],
+      "textScale": "16px"
+    },
+    {
+      "stage": "screen-home",
+      "width": 428,
+      "viewport": 428,
+      "scroll": 428,
+      "cats": [
+        {
+          "slot": "home",
+          "valid": true,
+          "width": 100,
+          "height": 100
+        }
+      ],
+      "icons": [
+        {
+          "src": "RP-PLAN-S02-I04.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        },
+        {
+          "src": "RP-PLAN-S02-I01.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        }
+      ],
+      "buttons": [
+        {
+          "name": "clock",
+          "width": 396,
+          "height": 135
+        },
+        {
+          "name": "days",
+          "width": 396,
+          "height": 135
+        }
+      ],
+      "overflowElements": [],
+      "textScale": "16px"
+    },
+    {
+      "stage": "screen-setup",
+      "width": 320,
+      "viewport": 320,
+      "scroll": 320,
+      "cats": [
+        {
+          "slot": "setup",
+          "valid": true,
+          "width": 72,
+          "height": 72
+        }
+      ],
+      "icons": [
+        {
+          "src": "RP-TASK-S03-I01.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        },
+        {
+          "src": "RP-UI-S01-I05.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        }
+      ],
+      "buttons": [
+        {
+          "name": "☕ 家事・支度",
+          "width": 102,
+          "height": 41
+        },
+        {
+          "name": "✿ おでかけ",
+          "width": 87,
+          "height": 41
+        },
+        {
+          "name": "✎ 宿題",
+          "width": 61,
+          "height": 41
+        },
+        {
+          "name": "▦ テスト勉強",
+          "width": 99,
+          "height": 41
+        },
+        {
+          "name": "＋追加",
+          "width": 258,
+          "height": 51
+        },
+        {
+          "name": "5分",
+          "width": 42,
+          "height": 34
+        },
+        {
+          "name": "10分",
+          "width": 48,
+          "height": 34
+        },
+        {
+          "name": "15分",
+          "width": 48,
+          "height": 34
+        },
+        {
+          "name": "30分",
+          "width": 48,
+          "height": 34
+        },
+        {
+          "name": "60分",
+          "width": 48,
+          "height": 34
+        },
+        {
+          "name": "⚙ くわしく設定 ⌄",
+          "width": 258,
+          "height": 64
+        },
+        {
+          "name": "make-plan",
+          "width": 292,
+          "height": 58
+        }
+      ],
+      "overflowElements": [],
+      "textScale": "16px"
+    },
+    {
+      "stage": "screen-setup",
+      "width": 390,
+      "viewport": 390,
+      "scroll": 390,
+      "cats": [
+        {
+          "slot": "setup",
+          "valid": true,
+          "width": 72,
+          "height": 72
+        }
+      ],
+      "icons": [
+        {
+          "src": "RP-TASK-S03-I01.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        },
+        {
+          "src": "RP-UI-S01-I05.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        }
+      ],
+      "buttons": [
+        {
+          "name": "☕ 家事・支度",
+          "width": 102,
+          "height": 41
+        },
+        {
+          "name": "✿ おでかけ",
+          "width": 87,
+          "height": 41
+        },
+        {
+          "name": "✎ 宿題",
+          "width": 61,
+          "height": 41
+        },
+        {
+          "name": "▦ テスト勉強",
+          "width": 99,
+          "height": 41
+        },
+        {
+          "name": "＋追加",
+          "width": 328,
+          "height": 51
+        },
+        {
+          "name": "5分",
+          "width": 42,
+          "height": 34
+        },
+        {
+          "name": "10分",
+          "width": 48,
+          "height": 34
+        },
+        {
+          "name": "15分",
+          "width": 48,
+          "height": 34
+        },
+        {
+          "name": "30分",
+          "width": 48,
+          "height": 34
+        },
+        {
+          "name": "60分",
+          "width": 48,
+          "height": 34
+        },
+        {
+          "name": "⚙ くわしく設定 ⌄",
+          "width": 328,
+          "height": 64
+        },
+        {
+          "name": "make-plan",
+          "width": 362,
+          "height": 58
+        }
+      ],
+      "overflowElements": [],
+      "textScale": "16px"
+    },
+    {
+      "stage": "screen-setup",
+      "width": 390,
+      "viewport": 390,
+      "scroll": 390,
+      "cats": [
+        {
+          "slot": "setup",
+          "valid": true,
+          "width": 82,
+          "height": 82
+        }
+      ],
+      "icons": [
+        {
+          "src": "RP-TASK-S03-I01.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        },
+        {
+          "src": "RP-UI-S01-I05.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        }
+      ],
+      "buttons": [
+        {
+          "name": "☕ 家事・支度",
+          "width": 102,
+          "height": 41
+        },
+        {
+          "name": "✿ おでかけ",
+          "width": 87,
+          "height": 41
+        },
+        {
+          "name": "✎ 宿題",
+          "width": 61,
+          "height": 41
+        },
+        {
+          "name": "▦ テスト勉強",
+          "width": 99,
+          "height": 41
+        },
+        {
+          "name": "↑",
+          "width": 27,
+          "height": 33
+        },
+        {
+          "name": "↓",
+          "width": 27,
+          "height": 33
+        },
+        {
+          "name": "×",
+          "width": 27,
+          "height": 33
+        },
+        {
+          "name": "＋追加",
+          "width": 328,
+          "height": 51
+        },
+        {
+          "name": "5分",
+          "width": 42,
+          "height": 34
+        },
+        {
+          "name": "10分",
+          "width": 48,
+          "height": 34
+        },
+        {
+          "name": "15分",
+          "width": 48,
+          "height": 34
+        },
+        {
+          "name": "30分",
+          "width": 48,
+          "height": 34
+        },
+        {
+          "name": "60分",
+          "width": 48,
+          "height": 34
+        },
+        {
+          "name": "⚙ くわしく設定 ⌄",
+          "width": 328,
+          "height": 64
+        },
+        {
+          "name": "make-plan",
+          "width": 362,
+          "height": 58
+        }
+      ],
+      "overflowElements": [],
+      "textScale": "16px"
+    },
+    {
+      "stage": "screen-plan",
+      "width": 320,
+      "viewport": 320,
+      "scroll": 320,
+      "cats": [
+        {
+          "slot": "plan",
+          "valid": true,
+          "width": 82,
+          "height": 82
+        }
+      ],
+      "icons": [
+        {
+          "src": "RP-TIMER-S04-I01.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        }
+      ],
+      "buttons": [
+        {
+          "name": "start-plan",
+          "width": 292,
+          "height": 58
+        },
+        {
+          "name": "edit-plan",
+          "width": 141,
+          "height": 46
+        },
+        {
+          "name": "export-button",
+          "width": 126,
+          "height": 46
+        }
+      ],
+      "overflowElements": [],
+      "textScale": "16px"
+    },
+    {
+      "stage": "screen-plan",
+      "width": 390,
+      "viewport": 390,
+      "scroll": 390,
+      "cats": [
+        {
+          "slot": "plan",
+          "valid": true,
+          "width": 72,
+          "height": 72
+        }
+      ],
+      "icons": [
+        {
+          "src": "RP-TIMER-S04-I01.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        }
+      ],
+      "buttons": [
+        {
+          "name": "start-plan",
+          "width": 362,
+          "height": 58
+        },
+        {
+          "name": "edit-plan",
+          "width": 141,
+          "height": 46
+        },
+        {
+          "name": "export-button",
+          "width": 126,
+          "height": 46
+        }
+      ],
+      "overflowElements": [],
+      "textScale": "16px"
+    },
+    {
+      "stage": "screen-run",
+      "width": 320,
+      "viewport": 320,
+      "scroll": 320,
+      "cats": [
+        {
+          "slot": "run",
+          "valid": true,
+          "width": 72,
+          "height": 72
+        }
+      ],
+      "icons": [],
+      "buttons": [
+        {
+          "name": "▶ タイマーを始める",
+          "width": 258,
+          "height": 58
+        },
+        {
+          "name": "✓ できた！",
+          "width": 258,
+          "height": 46
+        },
+        {
+          "name": "back-plan",
+          "width": 156,
+          "height": 46
+        }
+      ],
+      "overflowElements": [],
+      "textScale": "16px"
+    },
+    {
+      "stage": "screen-run",
+      "width": 390,
+      "viewport": 390,
+      "scroll": 390,
+      "cats": [
+        {
+          "slot": "run",
+          "valid": true,
+          "width": 72,
+          "height": 72
+        }
+      ],
+      "icons": [],
+      "buttons": [
+        {
+          "name": "▶ タイマーを始める",
+          "width": 328,
+          "height": 58
+        },
+        {
+          "name": "✓ できた！",
+          "width": 328,
+          "height": 46
+        },
+        {
+          "name": "back-plan",
+          "width": 156,
+          "height": 46
+        }
+      ],
+      "overflowElements": [],
+      "textScale": "16px"
+    },
+    {
+      "stage": "screen-run",
+      "width": 320,
+      "viewport": 320,
+      "scroll": 320,
+      "cats": [
+        {
+          "slot": "done",
+          "valid": true,
+          "width": 116,
+          "height": 116
+        }
+      ],
+      "icons": [],
+      "buttons": [
+        {
+          "name": "別の計画をつくる",
+          "width": 258,
+          "height": 58
+        },
+        {
+          "name": "back-plan",
+          "width": 156,
+          "height": 46
+        }
+      ],
+      "overflowElements": [],
+      "textScale": "16px"
+    },
+    {
+      "stage": "screen-run",
+      "width": 390,
+      "viewport": 390,
+      "scroll": 390,
+      "cats": [
+        {
+          "slot": "done",
+          "valid": true,
+          "width": 104,
+          "height": 104
+        }
+      ],
+      "icons": [],
+      "buttons": [
+        {
+          "name": "別の計画をつくる",
+          "width": 328,
+          "height": 58
+        },
+        {
+          "name": "back-plan",
+          "width": 156,
+          "height": 46
+        }
+      ],
+      "overflowElements": [],
+      "textScale": "16px"
+    },
+    {
+      "stage": "screen-home",
+      "width": 320,
+      "viewport": 320,
+      "scroll": 320,
+      "cats": [
+        {
+          "slot": "home",
+          "valid": true,
+          "width": 90,
+          "height": 90
+        }
+      ],
+      "icons": [
+        {
+          "src": "RP-PLAN-S02-I04.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        },
+        {
+          "src": "RP-PLAN-S02-I01.png",
+          "loaded": true,
+          "fits": true,
+          "transparent": true
+        }
+      ],
+      "buttons": [
+        {
+          "name": "clock",
+          "width": 288,
+          "height": 135
+        },
+        {
+          "name": "days",
+          "width": 288,
+          "height": 135
+        }
+      ],
+      "overflowElements": [],
+      "textScale": "16px"
+    }
+  ],
+  "issues": [],
+  "review_status": "automated QA only, visual approval and real-device check outstanding"
+}
