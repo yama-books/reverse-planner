@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "catalog_id": "APP004-CAT-REUSE-M3",
+  "updated_jst": "2026-10-21",
+  "status": "review_only",
+  "license": "not_determined",
+  "scope": "public_preview_assets_not_production",
+  "notes_ja": "他アプリの試作から参照するためのコミット固定URL。正式採用・再配布ライセンスを意味しません。恒久CDNではないため本番利用時は権利確認後にアプリ自身のassetsに複製してください。",
+  "assets": [
+    {
+      "id": "RP-CATWORK-S09-I01",
+      "label_ja": "PCで計画するネコ",
+      "scene": "HOME",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "transparent": true,
+      "review_status": "unapproved",
+      "original_hqv5_png": "https://raw.githubusercontent.com/yama-books/reverse-planner/68d0791c8dab7ed0bd64f5773aa9e1b78e2dac86/assets/icons/cats/RP-CATWORK-S09-I01.png",
+      "m3_candidate_png": "https://raw.githubusercontent.com/yama-books/reverse-planner/61607b8d87331cafb8ced9497fd17eb910ee7e56/assets/icons/cats/review-v2/RP-CATWORK-S09-I01.png"
+    },
+    {
+      "id": "RP-CATWORK-S09-I03",
+      "label_ja": "メモをするネコ",
+      "scene": "SETUP",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "transparent": true,
+      "review_status": "unapproved",
+      "original_hqv5_png": "https://raw.githubusercontent.com/yama-books/reverse-planner/68d0791c8dab7ed0bd64f5773aa9e1b78e2dac86/assets/icons/cats/RP-CATWORK-S09-I03.png",
+      "m3_candidate_png": "https://raw.githubusercontent.com/yama-books/reverse-planner/61607b8d87331cafb8ced9497fd17eb910ee7e56/assets/icons/cats/review-v2/RP-CATWORK-S09-I03.png"
+    },
+    {
+      "id": "RP-CATEMO-S10-I07",
+      "label_ja": "旗を持つネコ",
+      "scene": "PLAN",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "transparent": true,
+      "review_status": "unapproved",
+      "original_hqv5_png": "https://raw.githubusercontent.com/yama-books/reverse-planner/68d0791c8dab7ed0bd64f5773aa9e1b78e2dac86/assets/icons/cats/RP-CATEMO-S10-I07.png",
+      "m3_candidate_png": "https://raw.githubusercontent.com/yama-books/reverse-planner/61607b8d87331cafb8ced9497fd17eb910ee7e56/assets/icons/cats/review-v2/RP-CATEMO-S10-I07.png"
+    },
+    {
+      "id": "RP-CATVAR-S11-I28",
+      "label_ja": "タイマーとネコ",
+      "scene": "RUN",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "transparent": true,
+      "review_status": "unapproved",
+      "original_hqv5_png": "https://raw.githubusercontent.com/yama-books/reverse-planner/68d0791c8dab7ed0bd64f5773aa9e1b78e2dac86/assets/icons/cats/RP-CATVAR-S11-I28.png",
+      "m3_candidate_png": "https://raw.githubusercontent.com/yama-books/reverse-planner/61607b8d87331cafb8ced9497fd17eb910ee7e56/assets/icons/cats/review-v2/RP-CATVAR-S11-I28.png"
+    },
+    {
+      "id": "RP-CATEMO-S10-I01",
+      "label_ja": "よろこぶネコ",
+      "scene": "DONE",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "transparent": true,
+      "review_status": "unapproved",
+      "original_hqv5_png": "https://raw.githubusercontent.com/yama-books/reverse-planner/68d0791c8dab7ed0bd64f5773aa9e1b78e2dac86/assets/icons/cats/RP-CATEMO-S10-I01.png",
+      "m3_candidate_png": "https://raw.githubusercontent.com/yama-books/reverse-planner/61607b8d87331cafb8ced9497fd17eb910ee7e56/assets/icons/cats/review-v2/RP-CATEMO-S10-I01.png"
+    }
+  ]
+}

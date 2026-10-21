@@ -353,3 +353,15 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible {
   .add-submit {gap:2px;padding-inline:7px;flex-basis:100px;}
   #advanced-settings summary {gap:8px;padding-inline:14px;}
 }
+
+/* APP-004 M3 candidate-only visual refinements: avoid opaque cream image
+   plates inside colored UI buttons. Full labels and native controls remain. */
+.m2-icon {background:transparent;border:0;border-radius:0;box-shadow:none;padding:0;}
+.m2-icon-choice {border:0;box-shadow:none;border-radius:0;image-rendering:auto;}
+.m2-icon-button {border:0;border-radius:0;background:transparent;image-rendering:auto;}
+.choice-art {overflow:visible;}
+.choice-card .choice-art .m2-icon-choice {width:64px;height:64px;}
+.add-submit .m2-icon-button {width:27px;height:27px;}
+#advanced-settings summary .m2-icon-button {width:26px;height:26px;}
+#start-plan .m2-icon-button {width:32px;height:32px;}
+@media (prefers-reduced-motion:reduce) {.m2-icon{transition:none;}}

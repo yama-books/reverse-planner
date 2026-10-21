@@ -46,16 +46,36 @@ try {
   };
 
   await page.goto(host+"/");
+  // M3: the art should be part of the existing button, not a separate
+  // opaque tile or a clipped image, even at 320px and large text sizes.
+  const assertM3IconPresentation=async(id,label)=>{
+    const state=await page.locator('img[data-m2-icon][src$="'+id+'.png"]').evaluate(img=>{
+      const outer=img.closest("button,summary");
+      if(!outer)return {error:"No parent control"};
+      const a=img.getBoundingClientRect(),b=outer.getBoundingClientRect(),css=getComputedStyle(img);
+      return {
+        imageVisible:!img.hidden && a.width>0 && a.height>0,
+        fits:a.left>=b.left+1 && a.right<=b.right-1 && a.top>=b.top+1 && a.bottom<=b.bottom-1,
+        pointer:css.pointerEvents,background:css.backgroundColor,border:css.borderTopWidth,
+        shadow:css.boxShadow,iconSize:a.width,buttonHeight:b.height
+      };
+    });
+    checks(state.imageVisible&&state.fits,label+" icon fits existing tap target: "+JSON.stringify(state));
+    checks(state.pointer==="none"&&state.background==="rgba(0, 0, 0, 0)"&&state.border==="0px"&&state.shadow==="none",
+      label+" keeps button background visible and leaves pointer to original control: "+JSON.stringify(state));
+  };
   const assertM2Icon=async(id,label)=>{
     const img=page.locator('img[data-m2-icon][src$="'+id+'.png"]');
     await img.evaluate(el=>el.decode());
-    checks(await img.isVisible(),label+" 64px source icon displayed");
-    checks(await img.evaluate(el=>el.naturalWidth===64&&el.naturalHeight===64),label+" source dimensions 64px");
+    checks(await img.isVisible(),label+" transparent source icon displayed");
+    checks(await img.evaluate(el=>el.naturalWidth===128&&el.naturalHeight===128),label+" source dimensions 128px");
     const fallback=img.locator("xpath=../*[@data-m2-fallback]");
     checks(await fallback.isHidden(),label+" original glyph hidden only after loaded");
   };
   await assertM2Icon("RP-PLAN-S02-I04","HOME clock");
   await assertM2Icon("RP-PLAN-S02-I01","HOME calendar");
+  await assertM3IconPresentation("RP-PLAN-S02-I04","HOME clock");
+  await assertM3IconPresentation("RP-PLAN-S02-I01","HOME calendar");
   await page.locator('[data-cat-slot="home"] img').evaluate(img=>img.decode());
   checks(await page.locator('[data-cat-slot="home"]').isVisible(),"Restored home cat is visible");
   checks(await page.locator("#screen-home").isVisible(),"Initial home visible");
@@ -86,6 +106,8 @@ try {
   checks(await page.locator('[data-cat-slot="setup"]').isVisible(),"Restored setup cat is visible");
   await assertM2Icon("RP-TASK-S03-I01","SETUP add");
   await assertM2Icon("RP-UI-S01-I05","SETUP advanced settings");
+  await assertM3IconPresentation("RP-TASK-S03-I01","SETUP add");
+  await assertM3IconPresentation("RP-UI-S01-I05","SETUP advanced settings");
   checks(await page.locator(".add-submit").innerText()==="追加","SETUP add label remains understandable");
   await page.screenshot({path:"test-screenshots/setup-mobile.png",fullPage:true});
   const deadline=new Date(Date.now()+5*3600000);
@@ -104,6 +126,7 @@ try {
   await page.locator('[data-cat-slot="plan"] img').evaluate(img=>img.decode());
   checks(await page.locator('[data-cat-slot="plan"]').isVisible(),"Restored plan cat is visible");
   await assertM2Icon("RP-TIMER-S04-I01","PLAN start");
+  await assertM3IconPresentation("RP-TIMER-S04-I01","PLAN start");
   checks((await page.locator("#start-plan").innerText()).includes("この計画ではじめる"),"PLAN keeps meaningful button text");
   checks(await page.locator('#screen-plan').getAttribute('data-cat-plan-ready')==='true',"Feasible plan explicitly permits flag cat");
   await page.screenshot({path:"test-screenshots/clock-plan-mobile.png",fullPage:true});
@@ -186,7 +209,7 @@ try {
   // Optional art cannot be allowed to break navigation or save private data.
   const missingCatCtx=await browser.newContext({viewport:{width:390,height:844}});
   const missingCatPage=await missingCatCtx.newPage();
-  await missingCatPage.route("**/assets/icons/cats/*.png",route=>route.abort());
+  await missingCatPage.route("**/assets/icons/cats/**/*.png",route=>route.abort());
   await missingCatPage.goto(host+"/");
   await missingCatPage.locator('[data-cat-slot="home"]').evaluate(slot=>new Promise(resolve=>{
     const img=slot.querySelector("img");
@@ -202,7 +225,7 @@ try {
   const missingIconPage=await missingIconCtx.newPage();
   const m2Errors=[];
   missingIconPage.on("pageerror",e=>m2Errors.push(e.message));
-  await missingIconPage.route("**/assets/icons/ui/*.png",route=>route.abort());
+  await missingIconPage.route("**/assets/icons/ui/**/*.png",route=>route.abort());
   await missingIconPage.goto(host+"/");
   await missingIconPage.locator('img[data-m2-icon][src$="RP-PLAN-S02-I04.png"]').evaluate(img=>
     new Promise(resolve=>img.complete?resolve():img.addEventListener("error",resolve,{once:true})));

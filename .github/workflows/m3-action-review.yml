@@ -1,0 +1,170 @@
+name: APP-004 M3 repaired image review
+'on':
+  push:
+    branches: ['feature/m3-image-fit-audit-20261021']
+    paths:
+      - '.github/workflows/m3-action-review.yml'
+      - 'index.html'
+      - 'assets/app.js'
+      - 'assets/app.css'
+      - 'assets/icons/ui/*.mjs'
+      - 'tests/**'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: app004-icon-m3-review
+  cancel-in-progress: false
+jobs:
+  restore-and-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+      - name: Restore five small RGB candidates from independently verified source ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin feature/asset-archive-20261019
+          test "$(git rev-parse FETCH_HEAD)" = "2aa23d2dc24005002bd2b441073bfff9a03ed9b3"
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from io import BytesIO
+          import hashlib,subprocess,struct,csv
+          prefix="assets/source-archive/icons/qc-v4/icons-qc-v4-196.zip.part"
+          blob=b"".join(subprocess.check_output(["git","show",f"FETCH_HEAD:{prefix}{n:03d}"]) for n in range(1,18))
+          digest=hashlib.sha256(blob).hexdigest()
+          expected="f1b6c92264914de53b5755a0b356b1a4840b4c7492cd41869e3cb15cc37b24a2"
+          assert len(blob)==35306466 and digest==expected,(len(blob),digest)
+          selections=[
+            ("RP-PLAN-S02-I04","時計","HOME/時刻選択","2692160b5d173f7bd6ce31ece3164671f04c7ca80a2ee341b018d0fafe36029d"),
+            ("RP-PLAN-S02-I01","カレンダー","HOME/日付選択","5fa46aff82a36320d3751b8602c017a4c86df42f24e2636799249a05c5472e53"),
+            ("RP-TASK-S03-I01","追加","SETUP/タスク追加","f67953c4e3f946228842b4e5dba90ee3aa8a9c1b0efb681924de1f62c8519dd0"),
+            ("RP-UI-S01-I05","設定","SETUP/詳細設定","6fedee5bec0ff7c0034a5380adec34146325e51943da257e244762cc06b97f3f"),
+            ("RP-TIMER-S04-I01","再生","PLAN/実行へ","7aa6ca0b4510626af8221aebf6aee420dbb311ed858ed11b44f069ff2f8b9eed")]
+          dst=Path("assets/icons/ui"); original=Path("test-screenshots/m3-ui-originals")
+          dst.mkdir(parents=True,exist_ok=True);original.mkdir(parents=True,exist_ok=True)
+          Path("docs/icons").mkdir(parents=True,exist_ok=True)
+          manifest=[]
+          with ZipFile(BytesIO(blob)) as archive:
+            assert archive.testzip() is None
+            for icon_id,jp,usage,known in selections:
+              samples={}
+              for folder,wh in [("thumb_64",64),("crops_256",256)]:
+                matches=[n for n in archive.namelist() if n.startswith("artifacts/"+folder+"/"+icon_id+"_") and n.endswith(".png")]
+                assert len(matches)==1,(icon_id,folder,matches)
+                data=archive.read(matches[0])
+                assert data[:8]==b"\x89PNG\r\n\x1a\n"
+                assert struct.unpack(">II",data[16:24])==(wh,wh),(icon_id,folder)
+                assert data[25]==2,("opaque RGB required",icon_id,folder)
+                samples[wh]=(data,hashlib.sha256(data).hexdigest(),matches[0])
+              assert samples[64][1]==known,(icon_id,samples[64][1])
+              for location,source in [(dst/f"{icon_id}.png",samples[64][0]),(original/f"{icon_id}.png",samples[256][0])]:
+                assert not location.exists() or location.read_bytes()==source,("existing icon changed",location)
+                location.write_bytes(source)
+              manifest.append([icon_id,jp,usage,samples[64][2],samples[64][1],samples[256][2],samples[256][1],"RGB/背景あり","レビュー候補・本採用前"])
+              print("M3_SOURCE_VERIFIED",icon_id,"64px",samples[64][1],"256px",samples[256][1])
+          with Path("docs/icons/M2_CANDIDATES.csv").open("w",encoding="utf-8",newline="") as file:
+            w=csv.writer(file);w.writerow(["icon_id","japanese_label","review_usage","source64","sha256_64","source256","sha256_256","format","status"]);w.writerows(manifest)
+          print("M3_ARCHIVE_VALIDATED",len(blob),digest,"five RGB icons")
+          PY
+      - name: Restore manifest and rebuild improved M3 icon candidates from verified source sheets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin feature/icon-qc-v03-20261017
+          git show FETCH_HEAD:docs/icons/ICON_REGISTRY.csv > test-screenshots/m3-ICON_REGISTRY.csv
+          git show FETCH_HEAD:docs/icons/CROP_COORDINATES.csv > test-screenshots/m3-CROP_COORDINATES.csv
+          git fetch --no-tags --depth=1 origin feature/asset-archive-20261019
+          test "$(git rev-parse FETCH_HEAD)" = "2aa23d2dc24005002bd2b441073bfff9a03ed9b3"
+          python -m pip install --user Pillow==11.3.0
+          python tests/m3-image-repair.py
+      - name: Inspect alpha edges and image visibility against five background colors
+        run: python tests/m3-alpha-audit.py
+      - name: Commit only reviewed derivative PNGs to M3 Draft branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add assets/icons/cats/review-v2/*.png assets/icons/ui/review-v2/*.png docs/icons/M2_CANDIDATES.csv
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'assets(app004): five source-reconstructed M3 transparent candidates for review'
+            git push origin HEAD:refs/heads/feature/m3-image-fit-audit-20261021
+          fi
+      - name: Node regression and syntax
+        run: |
+          node --check assets/app.js
+          node --check assets/icons/ui/icon-mount.mjs
+          node --test tests/*.test.mjs
+      - name: Install Playwright
+        run: npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+      - name: Install Japanese fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends fonts-noto-cjk
+      - name: Check controls, storage, and source icon quality
+        run: |
+          node tests/browser-smoke.mjs
+          node tests/m3-contact-sheet.mjs
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: app004-m3-mobile-qa
+          path: test-screenshots/
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Save review PNGs to isolated preview branch (never Pages/main)
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Preserve Draft-branch icons in the untracked screenshots area
+          # before changing branches (the preview branch has no app icons).
+          mkdir -p test-screenshots/m3-ui
+          cp assets/icons/ui/review-v2/*.png test-screenshots/m3-ui/
+          mkdir -p test-screenshots/m3-cats
+          cp assets/icons/cats/review-v2/*.png test-screenshots/m3-cats/
+          git fetch --no-tags origin preview/app004-mobile-icons-m3
+          git switch -C preview/app004-mobile-icons-m3 FETCH_HEAD
+          mkdir -p docs/review/screenshots/m3/originals docs/review/screenshots/m3/ui
+          for name in home-390 setup-mobile task-added-mobile clock-plan-mobile timer-mobile done-mobile home-320 setup-320 clock-plan-320 done-320 home-text200-390 setup-text200-320 plan-text200-320 run-text200-320 m3-icon-quality-390 m3-icon-quality-1000 m3-before-after m3-quality-cats-five-backgrounds m3-quality-ui-five-backgrounds; do
+            test -s "test-screenshots/$name.png"
+            cp "test-screenshots/$name.png" "docs/review/screenshots/m3/$name.png"
+          done
+          cp test-screenshots/m3-ui-originals/*.png docs/review/screenshots/m3/originals/
+          cp test-screenshots/m3-ui/*.png docs/review/screenshots/m3/ui/
+          mkdir -p docs/review/screenshots/m3/cats
+          cp test-screenshots/m3-cats/*.png docs/review/screenshots/m3/cats/
+          cat > docs/review/screenshots/m3/README.md <<'REVIEW'
+          # APP-004 M3｜候補5点レビュー画像
+          
+          QC-v4元ZIPからSHA-256一致で復元し、元画像に遡って余白を再調整した透明RGBAアイコンとネコの試作。
+          文言と操作を維持したDraft実装。正式採用ではありません。
+          390px幅Chromiumの架空データで撮影。iPhone Safari実機ではありません。
+          
+          ## アイコンの品質比較
+          - [390px幅、背景3色×24/32/64px](./m3-icon-quality-390.png)
+          - [1000px幅、拡大比較](./m3-icon-quality-1000.png)
+          - [5種類のネコ×5背景](./m3-quality-cats-five-backgrounds.png)
+          - [5種類の操作アイコン×5背景](./m3-quality-ui-five-backgrounds.png)
+          - 256px元候補はoriginals、128px透過小アイコン候補はui、256pxネコ修正候補はcatsに保存。
+          
+          ## 実画面の5状態
+          - [HOME](./home-390.png)
+          - [SETUP](./setup-mobile.png)
+          - [SETUP追加後](./task-added-mobile.png)
+          - [PLAN](./clock-plan-mobile.png)
+          - [RUN](./timer-mobile.png)
+          - [DONE](./done-mobile.png)
+          - 320px幅と文字約200%の画像も同じフォルダ内に保存。
+          
+          このブランチは画像レビュー専用。Pages公開もmainマージも未実施。
+          REVIEW
+          git add docs/review/screenshots/m3
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'docs(app004): M3 mobile screenshots and transparent icon and cat candidates'
+            git push origin HEAD:refs/heads/preview/app004-mobile-icons-m3
+          fi

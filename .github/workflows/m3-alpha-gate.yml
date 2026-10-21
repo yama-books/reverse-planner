@@ -1,0 +1,56 @@
+name: APP-004 M3.1 alpha and control gate
+'on':
+  push:
+    branches: ['feature/m3-image-fit-audit-20261021']
+    paths:
+      - '.github/workflows/m3-alpha-gate.yml'
+      - 'tests/m3-alpha-audit.py'
+      - 'tests/browser-smoke.mjs'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install image inspection library
+        run: python -m pip install --user Pillow==11.3.0
+      - name: Image cut/alpha/color gate across 10 assets
+        run: python tests/m3-alpha-audit.py
+      - name: Node logic and preservation tests
+        run: node --test tests/*.test.mjs
+      - name: Install browser smoke prerequisites
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends fonts-noto-cjk
+      - name: Browser tap target and fallback regression
+        run: node tests/browser-smoke.mjs
+      - name: Upload quality evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: app004-m31-alpha-layout-review
+          path: |
+            test-screenshots/m3-quality-*.png
+            test-screenshots/m3-alpha-audit.json
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Save 5-color artwork QA PNGs to preview-only branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s test-screenshots/m3-quality-cats-five-backgrounds.png
+          test -s test-screenshots/m3-quality-ui-five-backgrounds.png
+          git fetch --no-tags origin preview/app004-mobile-icons-m3
+          git switch -C preview/app004-mobile-icons-m3 FETCH_HEAD
+          mkdir -p docs/review/screenshots/m3
+          cp test-screenshots/m3-quality-*.png docs/review/screenshots/m3/
+          cp test-screenshots/m3-alpha-audit.json docs/review/screenshots/m3/
+          git add docs/review/screenshots/m3/m3-quality-*.png docs/review/screenshots/m3/m3-alpha-audit.json
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'docs(app004): verify ten transparent assets on five background colors'
+            git push origin HEAD:refs/heads/preview/app004-mobile-icons-m3
+          fi

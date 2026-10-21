@@ -1,0 +1,44 @@
+name: APP-004 M3 visual crop and background audit
+'on':
+  push:
+    branches: ['feature/m3-image-fit-audit-20261021']
+    paths:
+      - '.github/workflows/m3-visual-audit.yml'
+      - 'tests/m3-visual-audit.py'
+      - 'tests/m3-sheets.py'
+      - 'tests/m3-image-repair.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore original review assets from recorded preview branch
+        run: |
+          set -euo pipefail
+          git fetch --depth=1 origin preview/app004-mobile-icons-m3
+          mkdir -p test-screenshots/m3-before test-screenshots/m3-ui-originals
+          for file in home-390 setup-mobile clock-plan-mobile timer-mobile done-mobile; do
+            git show FETCH_HEAD:docs/review/screenshots/m3/${file}.png > test-screenshots/m3-before/${file}.png
+          done
+          for id in RP-PLAN-S02-I04 RP-PLAN-S02-I01 RP-TASK-S03-I01 RP-UI-S01-I05 RP-TIMER-S04-I01; do
+            git show FETCH_HEAD:docs/review/screenshots/m3/originals/${id}.png > test-screenshots/m3-ui-originals/${id}.png
+          done
+      - name: Install pixel audit library
+        run: python -m pip install --user Pillow==11.3.0
+      - name: Output diagnostics and source preview
+        run: python tests/m3-visual-audit.py
+      - name: Audit M1 cat crop rectangles against original artwork
+        run: |
+          set -euo pipefail
+          git fetch --depth=1 origin feature/icon-qc-v03-20261017
+          git show FETCH_HEAD:docs/icons/ICON_REGISTRY.csv > test-screenshots/m3-ICON_REGISTRY.csv
+          git show FETCH_HEAD:docs/icons/CROP_COORDINATES.csv > test-screenshots/m3-CROP_COORDINATES.csv
+          git fetch --depth=1 origin feature/asset-archive-20261019
+          test "$(git rev-parse FETCH_HEAD)" = "2aa23d2dc24005002bd2b441073bfff9a03ed9b3"
+          python tests/m3-sheets.py
+      - name: Generate transparent derivative candidate images (no originals changed)
+        run: python tests/m3-image-repair.py
