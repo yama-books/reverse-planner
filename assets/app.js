@@ -195,6 +195,7 @@ function timerHtml(t){
     (t.running?"Ⅱ 一時停止":remain?"▶ 再開":"＋5分")+'</button></div>';
 }
 function renderRun() {
+  $("run-title").innerHTML="いまは、<br><span>これに集中。</span>";
   $("screen-run").dataset.catComplete="false";
   const s=sheet(data),plan=getPlan();
   if(plan.error){$("focus-task").textContent=plan.error;$("focus-controls").innerHTML='<button type="button" class="button button-secondary" data-run="edit">入力に戻る</button>';return;}
@@ -225,6 +226,7 @@ function renderRun() {
   }
 }
 function renderAllDone(){
+  $("run-title").innerHTML="おつかれさま。<br><span>全部できた！</span>";
   $("screen-run").dataset.catComplete="true";
   $("focus-task").textContent="全部できた！ ★";
   $("focus-sub").textContent="おつかれさま。また次の計画でね。";
