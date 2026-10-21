@@ -108,5 +108,6 @@ def main():
     (P("test-screenshots")/"m3-candidate-metrics.json").write_text(json.dumps(metrics,ensure_ascii=False,indent=2),encoding="utf8")
     buf=BytesIO();preview.save(buf,"PNG",optimize=True)
     print("M3_IMAGE_REPAIRS",base64.b64encode(buf.getvalue()).decode())
+    preview.save(P("test-screenshots")/"m3-before-after.png",optimize=True)
     print("M3_IMAGE_REPAIRS_BYTES",len(buf.getvalue()))
 if __name__=="__main__":main()
