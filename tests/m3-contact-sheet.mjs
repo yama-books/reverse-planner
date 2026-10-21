@@ -22,14 +22,14 @@ h1{font-size:24px;margin:0 0 8px}p{font-size:13px;line-height:1.6;margin:0 0 16p
 .strip{display:flex;gap:3px;flex-wrap:wrap}
 .cell{flex:1;min-width:72px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:9px 4px;border-radius:7px;}
 .cell small{font-size:10px}.cell img{object-fit:contain}.cream{background:#F6F2E8}.mint{background:#BFE5D4}.charcoal{background:#36463E;color:#fff}
-</style></head><body><h1>M3 操作アイコン候補 5点</h1><p>QC-v4 元画像。128pxは背景付きRGBで透過なし。絵柄・縁・視認性は未承認。24/32/128pxを背景3色で比較。</p><div class="grid">`+
+</style></head><body><h1>M3 操作アイコン候補 5点</h1><p>QC-v4 元画像。128px派生版は透明RGBA。元の256px候補は背景付きRGB。絵柄・縁・視認性は未承認。24/32/64pxを背景3色で比較。</p><div class="grid">`+
 icons.map(([id,label])=>`<section class="card"><h2>${id}<br>${label}</h2><div class="original"><img src="./m3-ui-originals/${id}.png" alt=""><span>左：原画像256px候補<br>右：128pxを各表示寸法に縮小</span></div><div class="strip">`+
-  ["cream","mint","charcoal"].map(bg=>`<div class="cell ${bg}">`+[24,32,64].map(size=>`<img src="../assets/icons/ui/review-v2/review-v2/${id}.png" style="width:${size}px;height:${size}px" alt=""><small>${size}px</small>`).join("")+`</div>`).join("")+
+  ["cream","mint","charcoal"].map(bg=>`<div class="cell ${bg}">`+[24,32,64].map(size=>`<img src="../assets/icons/ui/review-v2/${id}.png" style="width:${size}px;height:${size}px" alt=""><small>${size}px</small>`).join("")+`</div>`).join("")+
 `</div></section>`).join("")+`</div></body></html>`;
 await mkdir("test-screenshots",{recursive:true});
 await writeFile("test-screenshots/m3-quality.html",pageMarkup,"utf8");
 // Place under repository root so relative asset paths resolve for file:/// previews.
-await writeFile("m3-icon-quality.local.html",pageMarkup.replaceAll('./m3-ui-originals/','./test-screenshots/m3-ui-originals/').replaceAll('../assets/icons/ui/review-v2/review-v2/','./assets/icons/ui/review-v2/'),"utf8");
+await writeFile("m3-icon-quality.local.html",pageMarkup.replaceAll('./m3-ui-originals/','./test-screenshots/m3-ui-originals/').replaceAll('../assets/icons/ui/review-v2/','./assets/icons/ui/review-v2/'),"utf8");
 let browser;
 try {
   browser=await chromium.launch({channel:"chrome",headless:true,args:["--no-sandbox"]});
