@@ -1,0 +1,202 @@
+[
+  {
+    "id": "RP-CATWORK-S09-I01",
+    "width": 256,
+    "bbox": [
+      23,
+      52,
+      233,
+      203
+    ],
+    "margins": [
+      23,
+      52,
+      23,
+      53
+    ],
+    "transparent_pct": 65.1,
+    "opaque_pct": 33.0,
+    "dark_outline_pixels": 10874,
+    "sha256": "affbfb374eae3fea6d0dc1534d51f38da8e923e60f8f80c8861b87c6b52a93b5"
+  },
+  {
+    "id": "RP-CATWORK-S09-I03",
+    "width": 256,
+    "bbox": [
+      23,
+      43,
+      233,
+      213
+    ],
+    "margins": [
+      23,
+      43,
+      23,
+      43
+    ],
+    "transparent_pct": 64.0,
+    "opaque_pct": 33.6,
+    "dark_outline_pixels": 7933,
+    "sha256": "c4ed3fbc7eb3803981195d18bbd3aa09161382b19770029df47893e6ce3bcb0a"
+  },
+  {
+    "id": "RP-CATEMO-S10-I07",
+    "width": 256,
+    "bbox": [
+      23,
+      32,
+      233,
+      223
+    ],
+    "margins": [
+      23,
+      32,
+      23,
+      33
+    ],
+    "transparent_pct": 64.5,
+    "opaque_pct": 31.7,
+    "dark_outline_pixels": 7900,
+    "sha256": "fa79090677732c4d451b34700f94f72a2d58413b2d310393267dbbf4ddda3e66"
+  },
+  {
+    "id": "RP-CATVAR-S11-I28",
+    "width": 256,
+    "bbox": [
+      23,
+      50,
+      233,
+      205
+    ],
+    "margins": [
+      23,
+      50,
+      23,
+      51
+    ],
+    "transparent_pct": 63.4,
+    "opaque_pct": 33.5,
+    "dark_outline_pixels": 8034,
+    "sha256": "395d25efd29323b2c1f5e22699075078bc4cf0a9b0d20eb4f20c02be97de46b5"
+  },
+  {
+    "id": "RP-CATEMO-S10-I01",
+    "width": 256,
+    "bbox": [
+      23,
+      27,
+      233,
+      229
+    ],
+    "margins": [
+      23,
+      27,
+      23,
+      27
+    ],
+    "transparent_pct": 62.7,
+    "opaque_pct": 33.1,
+    "dark_outline_pixels": 7002,
+    "sha256": "83f9d7aa6f0204b5fa08bfd6a3854b3b90509a5b4ce37124a287b8fbaafda1e7"
+  },
+  {
+    "id": "RP-PLAN-S02-I04",
+    "width": 128,
+    "bbox": [
+      12,
+      12,
+      115,
+      116
+    ],
+    "margins": [
+      12,
+      12,
+      13,
+      12
+    ],
+    "transparent_pct": 44.7,
+    "opaque_pct": 52.5,
+    "dark_outline_pixels": 2353,
+    "sha256": "4319df830299b7fbd1d22a9286891807aec01555ba5c45fa6cf902292ec1c09b"
+  },
+  {
+    "id": "RP-PLAN-S02-I01",
+    "width": 128,
+    "bbox": [
+      12,
+      15,
+      116,
+      113
+    ],
+    "margins": [
+      12,
+      15,
+      12,
+      15
+    ],
+    "transparent_pct": 42.5,
+    "opaque_pct": 55.8,
+    "dark_outline_pixels": 2350,
+    "sha256": "306f6d8d407a19688cfd788f3c94f8f5f5cdbe83f865a5fd7017938404f08f92"
+  },
+  {
+    "id": "RP-TASK-S03-I01",
+    "width": 128,
+    "bbox": [
+      12,
+      13,
+      116,
+      115
+    ],
+    "margins": [
+      12,
+      13,
+      12,
+      13
+    ],
+    "transparent_pct": 46.0,
+    "opaque_pct": 51.2,
+    "dark_outline_pixels": 3035,
+    "sha256": "828bad8ead3e32779b6dd3b0d5da6f2900ca5a72ef49a8b51c7a5b3e2891bf82"
+  },
+  {
+    "id": "RP-UI-S01-I05",
+    "width": 128,
+    "bbox": [
+      12,
+      12,
+      116,
+      116
+    ],
+    "margins": [
+      12,
+      12,
+      12,
+      12
+    ],
+    "transparent_pct": 50.1,
+    "opaque_pct": 45.7,
+    "dark_outline_pixels": 3324,
+    "sha256": "e3d8a974da51c56cd820489ae6d7cf255501471574ebf42bdf71e99839bd0b3d"
+  },
+  {
+    "id": "RP-TIMER-S04-I01",
+    "width": 128,
+    "bbox": [
+      12,
+      16,
+      116,
+      112
+    ],
+    "margins": [
+      12,
+      16,
+      12,
+      16
+    ],
+    "transparent_pct": 47.1,
+    "opaque_pct": 50.3,
+    "dark_outline_pixels": 7291,
+    "sha256": "45bfc593e97733dbfd916068af4b97ce3b24a2db7721befdbf7628e4a578cffc"
+  }
+]
