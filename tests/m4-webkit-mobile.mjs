@@ -86,7 +86,8 @@ try{
   check(await page.locator("#advanced-settings").evaluate(x=>x.open),"WebKit details summary touch opens");
   await page.locator("#advanced-settings summary").tap();
   check(!await page.locator("#advanced-settings").evaluate(x=>x.open),"WebKit details summary touch closes");
-  await page.locator("#clock-deadline").fill(datestring(new Date(Date.now()+5*3600_000)));
+  const deadline=await page.evaluate(()=>{const d=new Date(Date.now()+5*3600_000);const p=n=>String(n).padStart(2,"0");return [d.getFullYear(),p(d.getMonth()+1),p(d.getDate())].join("-")+"T"+p(d.getHours())+":"+p(d.getMinutes())});
+  await page.locator("#clock-deadline").fill(deadline);
   await page.locator("#new-task-name").fill("WebKitの確認");
   await page.locator("#new-task-minutes").fill("30");
   await page.locator(".add-submit").tap();
