@@ -51,9 +51,18 @@ const collect=async(page,stage,width)=>{
         fits:!!p&&a.top>=p.top-1&&a.bottom<=p.bottom+1&&a.left>=p.left-1&&a.right<=p.right+1,
         transparent:getComputedStyle(i).backgroundColor==="rgba(0, 0, 0, 0)"}
     });
-    return {viewport:innerWidth,scroll:v.scrollWidth,stage:loc?.id,cats,icons,buttons,
+    const overflowElements=[...document.querySelectorAll("body *")].filter(el=>{
+      const r=el.getBoundingClientRect(),css=getComputedStyle(el);
+      return css.display!=="none"&&r.width>0&&r.height>0&&(r.right>innerWidth+2||r.left< -2)
+    }).slice(0,14).map(el=>{
+      let r=el.getBoundingClientRect();
+      return {tag:el.tagName,cls:typeof el.className==="string"?el.className.slice(0,70):"",id:el.id,
+        right:Math.round(r.right),left:Math.round(r.left),width:Math.round(r.width)};
+    });
+    return {viewport:innerWidth,scroll:v.scrollWidth,stage:loc?.id,cats,icons,buttons,overflowElements,
       textScale:getComputedStyle(document.documentElement).fontSize};
   });
+  if(data.scroll>data.viewport+2)console.warn("M4_OVERFLOW_DIAGNOSTIC "+JSON.stringify({stage,width,...data}));
   check(data.scroll<=data.viewport+2,stage+" no page horizontal clipping at "+width,data);
   check(data.cats.length===1&&data.cats.every(x=>x.valid&&x.width>0),
     stage+" correct decorative cat displayed at "+width,data.cats);
