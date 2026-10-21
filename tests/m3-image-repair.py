@@ -67,7 +67,7 @@ def source_cat(archive,files,coord,id):
     x0,y0,x1,y1=map(int,coord[id]["アイコン領域XYXY"].split())
     # Expand bottom margin where sheets have actual pixels beyond older crop.
     # S11 next label starts immediately after old rectangle, hence no expansion.
-    extra=0 if id=="RP-CATVAR-S11-I28" else 18
+    extra=0 if id=="RP-CATVAR-S11-I28" else (5 if id=="RP-CATEMO-S10-I07" else 18)
     area=original.crop((x0,y0,x1,min(y1+extra,original.height)))
     return area
 def main():
