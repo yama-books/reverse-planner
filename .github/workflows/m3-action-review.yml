@@ -83,6 +83,8 @@ jobs:
           test "$(git rev-parse FETCH_HEAD)" = "2aa23d2dc24005002bd2b441073bfff9a03ed9b3"
           python -m pip install --user Pillow==11.3.0
           python tests/m3-image-repair.py
+      - name: Inspect alpha edges and image visibility against five background colors
+        run: python tests/m3-alpha-audit.py
       - name: Commit only reviewed derivative PNGs to M3 Draft branch
         shell: bash
         run: |
@@ -128,7 +130,7 @@ jobs:
           git fetch --no-tags origin preview/app004-mobile-icons-m3
           git switch -C preview/app004-mobile-icons-m3 FETCH_HEAD
           mkdir -p docs/review/screenshots/m3/originals docs/review/screenshots/m3/ui
-          for name in home-390 setup-mobile task-added-mobile clock-plan-mobile timer-mobile done-mobile home-320 setup-320 clock-plan-320 done-320 home-text200-390 setup-text200-320 plan-text200-320 run-text200-320 m3-icon-quality-390 m3-icon-quality-1000 m3-before-after; do
+          for name in home-390 setup-mobile task-added-mobile clock-plan-mobile timer-mobile done-mobile home-320 setup-320 clock-plan-320 done-320 home-text200-390 setup-text200-320 plan-text200-320 run-text200-320 m3-icon-quality-390 m3-icon-quality-1000 m3-before-after m3-quality-cats-five-backgrounds m3-quality-ui-five-backgrounds; do
             test -s "test-screenshots/$name.png"
             cp "test-screenshots/$name.png" "docs/review/screenshots/m3/$name.png"
           done
@@ -146,6 +148,8 @@ jobs:
           ## アイコンの品質比較
           - [390px幅、背景3色×24/32/64px](./m3-icon-quality-390.png)
           - [1000px幅、拡大比較](./m3-icon-quality-1000.png)
+          - [5種類のネコ×5背景](./m3-quality-cats-five-backgrounds.png)
+          - [5種類の操作アイコン×5背景](./m3-quality-ui-five-backgrounds.png)
           - 256px元候補はoriginals、128px透過小アイコン候補はui、256pxネコ修正候補はcatsに保存。
           
           ## 実画面の5状態
