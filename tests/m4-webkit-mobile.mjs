@@ -76,6 +76,15 @@ const collect=async(page,stage,width)=>{
     stage+" correct decorative cat displayed at "+width,data.cats);
   check(data.icons.every(x=>x.loaded&&x.fits&&x.transparent),
     stage+" loaded icons fit original controls at "+width,data.icons);
+  if(["setup","setup-added"].includes(stage)){
+    const chips=data.buttons.filter(x=>/^(5分|10分|15分|30分|60分|☕|✿|✎|▦)/.test(x.name));
+    check(chips.every(x=>x.height>=44),stage+" template and duration choices are at least 44px tall",chips);
+  }
+  if(stage==="setup-added"){
+    const rowActions=data.buttons.filter(x=>["↑","↓","×"].includes(x.name));
+    check(rowActions.length===3&&rowActions.every(x=>x.width>=44&&x.height>=44),
+      "Mobile reorder and delete actions have usable 44px touch targets",rowActions);
+  }
   measurements.push({stage,width,...data});
   await page.screenshot({path:resolve(screenshots,stage+"-"+width+".png"),fullPage:true,animations:"disabled"});
   screens.push(stage+"-"+width+".png");
@@ -110,6 +119,8 @@ try{
   await page.locator(".add-submit").tap();
   check(await page.locator("#task-list .task-row").count()===1,"WebKit touch adds task");
   await collect(page,"setup-added",390);
+  await collect(page,"setup-added",320);
+  await page.setViewportSize({width:390,height:844});
   await page.locator("#make-plan").tap();
   await page.locator("#screen-plan").waitFor({state:"visible"});
   await page.locator('[data-cat-slot="plan"]').waitFor({state:"visible"});
@@ -125,6 +136,7 @@ try{
   check(await page.locator("#timer-clock").isVisible(),"WebKit touch starts timer");
   await page.locator('[data-run="done"]').tap();
   await page.locator('[data-cat-slot="done"]').waitFor({state:"visible"});
+  check((await page.locator("#run-title").textContent()).includes("全部できた"),"WebKit completion heading matches the DONE state");
   check(await page.locator('[data-cat-slot="run"]').isHidden(),"WebKit hides running cat on completion");
   for(const w of [320,390])await collect(page,"done",w);
   await page.reload();
