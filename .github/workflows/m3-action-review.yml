@@ -46,7 +46,7 @@ jobs:
             ("RP-TASK-S03-I01","追加","SETUP/タスク追加","f67953c4e3f946228842b4e5dba90ee3aa8a9c1b0efb681924de1f62c8519dd0"),
             ("RP-UI-S01-I05","設定","SETUP/詳細設定","6fedee5bec0ff7c0034a5380adec34146325e51943da257e244762cc06b97f3f"),
             ("RP-TIMER-S04-I01","再生","PLAN/実行へ","7aa6ca0b4510626af8221aebf6aee420dbb311ed858ed11b44f069ff2f8b9eed")]
-          dst=Path("assets/icons/ui"); original=Path("test-screenshots/m3-originals")
+          dst=Path("assets/icons/ui"); original=Path("test-screenshots/m3-ui-originals")
           dst.mkdir(parents=True,exist_ok=True);original.mkdir(parents=True,exist_ok=True)
           Path("docs/icons").mkdir(parents=True,exist_ok=True)
           manifest=[]
@@ -132,7 +132,7 @@ jobs:
             test -s "test-screenshots/$name.png"
             cp "test-screenshots/$name.png" "docs/review/screenshots/m3/$name.png"
           done
-          cp test-screenshots/m3-originals/*.png docs/review/screenshots/m3/originals/
+          cp test-screenshots/m3-ui-originals/*.png docs/review/screenshots/m3/originals/
           cp test-screenshots/m3-ui/*.png docs/review/screenshots/m3/ui/
           mkdir -p docs/review/screenshots/m3/cats
           cp test-screenshots/m3-cats/*.png docs/review/screenshots/m3/cats/
@@ -161,6 +161,6 @@ jobs:
           REVIEW
           git add docs/review/screenshots/m3
           if ! git diff --cached --quiet; then
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'docs(app004): M3 mobile screenshots and five-icon RGB gallery'
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'docs(app004): M3 mobile screenshots and transparent icon and cat candidates'
             git push origin HEAD:refs/heads/preview/app004-mobile-icons-m3
           fi
