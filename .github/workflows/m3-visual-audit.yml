@@ -5,6 +5,7 @@ name: APP-004 M3 visual crop and background audit
     paths:
       - '.github/workflows/m3-visual-audit.yml'
       - 'tests/m3-visual-audit.py'
+      - 'tests/m3-sheets.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -29,3 +30,12 @@ jobs:
         run: python -m pip install --user Pillow==11.3.0
       - name: Output diagnostics and source preview
         run: python tests/m3-visual-audit.py
+      - name: Audit M1 cat crop rectangles against original artwork
+        run: |
+          set -euo pipefail
+          git fetch --depth=1 origin feature/icon-qc-v03-20261017
+          git show FETCH_HEAD:docs/icons/ICON_REGISTRY.csv > test-screenshots/m3-ICON_REGISTRY.csv
+          git show FETCH_HEAD:docs/icons/CROP_COORDINATES.csv > test-screenshots/m3-CROP_COORDINATES.csv
+          git fetch --depth=1 origin feature/asset-archive-20261019
+          test "$(git rev-parse FETCH_HEAD)" = "2aa23d2dc24005002bd2b441073bfff9a03ed9b3"
+          python tests/m3-sheets.py
