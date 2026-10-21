@@ -6,6 +6,7 @@ name: APP-004 M3 visual crop and background audit
       - '.github/workflows/m3-visual-audit.yml'
       - 'tests/m3-visual-audit.py'
       - 'tests/m3-sheets.py'
+      - 'tests/m3-image-repair.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -39,3 +40,5 @@ jobs:
           git fetch --depth=1 origin feature/asset-archive-20261019
           test "$(git rev-parse FETCH_HEAD)" = "2aa23d2dc24005002bd2b441073bfff9a03ed9b3"
           python tests/m3-sheets.py
+      - name: Generate transparent derivative candidate images (no originals changed)
+        run: python tests/m3-image-repair.py
