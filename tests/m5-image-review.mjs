@@ -68,6 +68,10 @@ try{
  for(const w of [320,390,428])await inspect(page,'home',w);
  await page.locator('[data-choose-scale="clock"]').tap();
  for(const w of [320,390,428])await inspect(page,'setup',w);
+ const examImage=await page.locator('[data-preset="exam"] .m5-icon').getAttribute('src');
+ check(examImage.endsWith('/review-v2/exam.png'),'exam preset uses normalized review-v2 artwork');
+ const sparkleImage=await page.locator('.privacy-note .m5-icon').getAttribute('src');
+ check(sparkleImage.endsWith('/review-v2/sparkle.png'),'static sparkle uses centered review-v2 artwork');
  // Every preset still activates the original full button, including after rerender/cache hits.
  for(const [id,label] of [['daily','家事・支度'],['trip','おでかけ'],['homework','宿題'],['exam','テスト勉強']]){
  await page.getByRole('button',{name:label,exact:true}).tap();await settle(page);
@@ -131,8 +135,8 @@ try{
  await gallery.setContent('<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0;padding:16px;background:#f6f2e8;color:#173e43;font:16px sans-serif}img{max-width:100%}h1{font-size:20px}</style><h1>M5 プリセット比較</h1><p>変更前 / M4</p><img src="'+await png('preset-before')+'"><p>変更後 / M5 レビュー候補</p><img src="'+await png('preset-after')+'"></html>');
  await shot(gallery,'preset-before-after');
  const names=['home-prep','outing','homework','exam'];
- const srcs=await Promise.all(names.map(async name=>'data:image/png;base64,'+(await readFile(resolve(ROOT,'assets/icons/presets/review-v1',name+'.png'))).toString('base64')));
- srcs.push('data:image/png;base64,'+(await readFile(resolve(ROOT,'assets/icons/decor/review-v1/sparkle.png'))).toString('base64'));
+ const srcs=await Promise.all(names.map(async name=>'data:image/png;base64,'+(await readFile(resolve(ROOT,'assets/icons/presets',name==='exam'?'review-v2':'review-v1',name+'.png'))).toString('base64')));
+ srcs.push('data:image/png;base64,'+(await readFile(resolve(ROOT,'assets/icons/decor/review-v2/sparkle.png'))).toString('base64'));
  await gallery.setContent('<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box}body{margin:0;padding:12px;color:#173e43;font:14px sans-serif;background:#f6f2e8}h1{font-size:18px}.strip{display:flex;align-items:center;gap:20px;padding:14px;margin:5px 0}img{image-rendering:pixelated}section{margin-bottom:18px}</style><h1>M5 透過・背景・サイズ比較</h1><p>レビュー候補 / 左から16・24・32px</p>'+srcs.map((src,i)=>'<section><b>'+([...names,'sparkle'][i])+'</b>'+['#f6f2e8','#eef8f0','#bfe5d4','#36463e'].map(bg=>'<div class="strip" style="background:'+bg+'">'+[16,24,32].map(n=>'<img alt="" width="'+n+'" height="'+n+'" src="'+src+'">').join('')+'</div>').join('')+'</section>').join('')+'</html>');
  await shot(gallery,'background-size-comparison');await gallery.close();
  check(errors.length===0,'no uncaught browser errors: '+errors.join(';'));
