@@ -15,17 +15,28 @@ let browser,context;
 const passed=[];
 const errors=[];
 const requests=[];
+const badResponses=[];
 const check=(x,name)=>{assert.ok(x,name);passed.push(name);};
 try{
  browser=await ({chromium,webkit})[ENGINE].launch({headless:true});
  context=await browser.newContext({...devices["iPhone 13"],viewport:{width:390,height:844},locale:"ja-JP",timezoneId:"Asia/Tokyo",reducedMotion:"reduce"});
  const page=await context.newPage();
  page.on("pageerror",err=>errors.push(err.message));
+ page.on("response",r=>{if(r.status()>=400)badResponses.push({status:r.status(),url:r.url(),mime:r.headers()["content-type"]});});
+ page.on("console",m=>{if(m.type()==="error")errors.push("CONSOLE "+m.text());});
  page.on("requestfailed",req=>requests.push({path:new URL(req.url()).pathname,reason:req.failure()?.errorText}));
  const response=await page.goto(BASE+"index.html",{waitUntil:"domcontentloaded",timeout:35000});
  check(response?.status()===200,"external HTML returns HTTP 200");
  check((response?.headers()["content-type"]||"").toLowerCase().includes("text/html"),"external HTML has executable text/html content type");
- await page.waitForFunction(()=>!!document.querySelector("#screen-home:not([hidden])")&&!!document.querySelector("#screen-home .decorative-cat img")?.complete,{timeout:12000});
+ try {
+ await page.waitForFunction(()=>!!document.querySelector("#screen-home:not([hidden])")&&!!document.querySelector("#screen-home .decorative-cat img")?.complete,null,{timeout:12000});
+}catch(err){
+ const diagnostic=await page.evaluate(()=>({title:document.title,head:document.head.innerHTML.slice(0,1300),body:document.body.innerText.slice(0,900),homeExists:!!document.querySelector("#screen-home"),homeHidden:document.querySelector("#screen-home")?.hidden,imgExists:!!document.querySelector("#screen-home .decorative-cat img"),img:([...document.querySelectorAll("img")].slice(0,12).map(i=>({src:i.src,complete:i.complete,natural:i.naturalWidth}))),html:document.documentElement.outerHTML.slice(0,850)}));
+ console.error("M6_STARTUP_DIAGNOSTIC",JSON.stringify({diagnostic,errors,requests,badResponses},null,2));
+ await page.screenshot({path:path.join(OUTPUT,ENGINE+"-diagnostic.png"),fullPage:true});
+ await writeFile(path.join(OUTPUT,ENGINE+"-diagnostic.json"),JSON.stringify({diagnostic,errors,requests,badResponses},null,2)+"\n");
+ throw err;
+}
  check(await page.locator("#screen-home").isVisible(),"HOME screen renders");
  const modules=await page.evaluate(async()=>{
   const paths=["assets/app.js","assets/app.css","assets/state.mjs","assets/core.mjs","assets/icons/presets/review-v2/exam.png","assets/icons/decor/review-v2/sparkle.png","assets/icons/cats/review-v2/RP-CATWORK-S09-I01.png"];
