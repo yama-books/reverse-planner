@@ -1,0 +1,2137 @@
+{
+  "engine": "chromium",
+  "checksCount": 72,
+  "checks": [
+    "home 320 no horizontal scroll",
+    "home 320 images loaded, contained, decorative and noninteractive",
+    "home 390 no horizontal scroll",
+    "home 390 images loaded, contained, decorative and noninteractive",
+    "home 428 no horizontal scroll",
+    "home 428 images loaded, contained, decorative and noninteractive",
+    "setup 320 no horizontal scroll",
+    "setup 320 images loaded, contained, decorative and noninteractive",
+    "setup 320 all four preset touch targets >=44px",
+    "setup 390 no horizontal scroll",
+    "setup 390 images loaded, contained, decorative and noninteractive",
+    "setup 390 all four preset touch targets >=44px",
+    "setup 428 no horizontal scroll",
+    "setup 428 images loaded, contained, decorative and noninteractive",
+    "setup 428 all four preset touch targets >=44px",
+    "daily applies clock preset and rerenders loaded icons",
+    "trip applies clock preset and rerenders loaded icons",
+    "homework applies clock preset and rerenders loaded icons",
+    "exam applies clock preset and rerenders loaded icons",
+    "setup-added 320 no horizontal scroll",
+    "setup-added 320 images loaded, contained, decorative and noninteractive",
+    "setup-added 320 all four preset touch targets >=44px",
+    "setup-added 390 no horizontal scroll",
+    "setup-added 390 images loaded, contained, decorative and noninteractive",
+    "setup-added 390 all four preset touch targets >=44px",
+    "setup-added 428 no horizontal scroll",
+    "setup-added 428 images loaded, contained, decorative and noninteractive",
+    "setup-added 428 all four preset touch targets >=44px",
+    "plan 320 no horizontal scroll",
+    "plan 320 images loaded, contained, decorative and noninteractive",
+    "plan 390 no horizontal scroll",
+    "plan 390 images loaded, contained, decorative and noninteractive",
+    "plan 428 no horizontal scroll",
+    "plan 428 images loaded, contained, decorative and noninteractive",
+    "run 320 no horizontal scroll",
+    "run 320 images loaded, contained, decorative and noninteractive",
+    "run 390 no horizontal scroll",
+    "run 390 images loaded, contained, decorative and noninteractive",
+    "run 428 no horizontal scroll",
+    "run 428 images loaded, contained, decorative and noninteractive",
+    "done 320 no horizontal scroll",
+    "done 320 images loaded, contained, decorative and noninteractive",
+    "done 390 no horizontal scroll",
+    "done 390 images loaded, contained, decorative and noninteractive",
+    "done 428 no horizontal scroll",
+    "done 428 images loaded, contained, decorative and noninteractive",
+    "DONE restored after reload",
+    "completed PLAN sparkle is loaded",
+    "post-load image error restores fallback",
+    "image recovery hides fallback",
+    "daily applies days preset",
+    "trip applies days preset",
+    "homework applies days preset",
+    "exam applies days preset",
+    "setup-days 320 no horizontal scroll",
+    "setup-days 320 images loaded, contained, decorative and noninteractive",
+    "setup-days 320 all four preset touch targets >=44px",
+    "setup-normal-motion 320 no horizontal scroll",
+    "setup-normal-motion 320 images loaded, contained, decorative and noninteractive",
+    "setup-normal-motion 320 all four preset touch targets >=44px",
+    "setup-large-text 320 no horizontal scroll",
+    "setup-large-text 320 images loaded, contained, decorative and noninteractive",
+    "setup-large-text 320 all four preset touch targets >=44px",
+    "missing images retain accessible label 家事・支度",
+    "missing images retain accessible label おでかけ",
+    "missing images retain accessible label 宿題",
+    "missing images retain accessible label テスト勉強",
+    "all four missing preset images show original symbols",
+    "broken images stay hidden",
+    "DONE image failure keeps star and completion text",
+    "fallback DONE no horizontal scroll",
+    "no uncaught browser errors: "
+  ],
+  "measurements": [
+    {
+      "stage": "home",
+      "width": 320,
+      "scroll": 320,
+      "icons": [
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 56.96875,
+            "y": 135.078125,
+            "width": 18,
+            "height": 18,
+            "right": 74.96875,
+            "bottom": 153.078125
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 269.64837646484375,
+            "y": 115.47623443603516,
+            "width": 36.767852783203125,
+            "height": 36.767845153808594,
+            "right": 306.4162292480469,
+            "bottom": 152.24407958984375
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14.171875,
+            "y": 764.15625,
+            "width": 10,
+            "height": 10,
+            "right": 24.171875,
+            "bottom": 774.15625
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 834.15625,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 844.15625
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": []
+    },
+    {
+      "stage": "home",
+      "width": 390,
+      "scroll": 390,
+      "icons": [
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 91.96875,
+            "y": 135.078125,
+            "width": 18,
+            "height": 18,
+            "right": 109.96875,
+            "bottom": 153.078125
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 338.9452819824219,
+            "y": 115.47623443603516,
+            "width": 36.767822265625,
+            "height": 36.767845153808594,
+            "right": 375.7131042480469,
+            "bottom": 152.24407958984375
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 49.171875,
+            "y": 764.15625,
+            "width": 10,
+            "height": 10,
+            "right": 59.171875,
+            "bottom": 774.15625
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 834.15625,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 844.15625
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": []
+    },
+    {
+      "stage": "home",
+      "width": 428,
+      "scroll": 428,
+      "icons": [
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 110.96875,
+            "y": 135.078125,
+            "width": 18,
+            "height": 18,
+            "right": 128.96875,
+            "bottom": 153.078125
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 376.5546569824219,
+            "y": 115.47623443603516,
+            "width": 36.767822265625,
+            "height": 36.767845153808594,
+            "right": 413.3224792480469,
+            "bottom": 152.24407958984375
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 68.171875,
+            "y": 774.75,
+            "width": 10,
+            "height": 10,
+            "right": 78.171875,
+            "bottom": 784.75
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 844.75,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 854.75
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": []
+    },
+    {
+      "stage": "setup",
+      "width": 320,
+      "scroll": 320,
+      "icons": [
+        {
+          "src": "./assets/icons/presets/review-v1/home-prep.png",
+          "r": {
+            "x": 43,
+            "y": 749.671875,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 773.671875
+          },
+          "button": {
+            "x": 31,
+            "y": 739.671875,
+            "width": 114,
+            "height": 44,
+            "right": 145,
+            "bottom": 783.671875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/outing.png",
+          "r": {
+            "x": 165,
+            "y": 749.671875,
+            "width": 24,
+            "height": 24,
+            "right": 189,
+            "bottom": 773.671875
+          },
+          "button": {
+            "x": 153,
+            "y": 739.671875,
+            "width": 102,
+            "height": 44,
+            "right": 255,
+            "bottom": 783.671875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/homework.png",
+          "r": {
+            "x": 43,
+            "y": 801.671875,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 825.671875
+          },
+          "button": {
+            "x": 31,
+            "y": 791.671875,
+            "width": 78,
+            "height": 44,
+            "right": 109,
+            "bottom": 835.671875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/exam.png",
+          "r": {
+            "x": 129,
+            "y": 801.671875,
+            "width": 24,
+            "height": 24,
+            "right": 153,
+            "bottom": 825.671875
+          },
+          "button": {
+            "x": 117,
+            "y": 791.671875,
+            "width": 114,
+            "height": 44,
+            "right": 231,
+            "bottom": 835.671875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 1489.453125,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 1499.453125
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": [
+        {
+          "label": "家事・支度",
+          "x": 31,
+          "y": 739.671875,
+          "width": 114,
+          "height": 44,
+          "right": 145,
+          "bottom": 783.671875
+        },
+        {
+          "label": "おでかけ",
+          "x": 153,
+          "y": 739.671875,
+          "width": 102,
+          "height": 44,
+          "right": 255,
+          "bottom": 783.671875
+        },
+        {
+          "label": "宿題",
+          "x": 31,
+          "y": 791.671875,
+          "width": 78,
+          "height": 44,
+          "right": 109,
+          "bottom": 835.671875
+        },
+        {
+          "label": "テスト勉強",
+          "x": 117,
+          "y": 791.671875,
+          "width": 114,
+          "height": 44,
+          "right": 231,
+          "bottom": 835.671875
+        }
+      ]
+    },
+    {
+      "stage": "setup",
+      "width": 390,
+      "scroll": 390,
+      "icons": [
+        {
+          "src": "./assets/icons/presets/review-v1/home-prep.png",
+          "r": {
+            "x": 43,
+            "y": 726.875,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 750.875
+          },
+          "button": {
+            "x": 31,
+            "y": 716.875,
+            "width": 114,
+            "height": 44,
+            "right": 145,
+            "bottom": 760.875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/outing.png",
+          "r": {
+            "x": 165,
+            "y": 726.875,
+            "width": 24,
+            "height": 24,
+            "right": 189,
+            "bottom": 750.875
+          },
+          "button": {
+            "x": 153,
+            "y": 716.875,
+            "width": 102,
+            "height": 44,
+            "right": 255,
+            "bottom": 760.875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/homework.png",
+          "r": {
+            "x": 275,
+            "y": 726.875,
+            "width": 24,
+            "height": 24,
+            "right": 299,
+            "bottom": 750.875
+          },
+          "button": {
+            "x": 263,
+            "y": 716.875,
+            "width": 78,
+            "height": 44,
+            "right": 341,
+            "bottom": 760.875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/exam.png",
+          "r": {
+            "x": 43,
+            "y": 778.875,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 802.875
+          },
+          "button": {
+            "x": 31,
+            "y": 768.875,
+            "width": 114,
+            "height": 44,
+            "right": 145,
+            "bottom": 812.875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 1466.65625,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 1476.65625
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": [
+        {
+          "label": "家事・支度",
+          "x": 31,
+          "y": 716.875,
+          "width": 114,
+          "height": 44,
+          "right": 145,
+          "bottom": 760.875
+        },
+        {
+          "label": "おでかけ",
+          "x": 153,
+          "y": 716.875,
+          "width": 102,
+          "height": 44,
+          "right": 255,
+          "bottom": 760.875
+        },
+        {
+          "label": "宿題",
+          "x": 263,
+          "y": 716.875,
+          "width": 78,
+          "height": 44,
+          "right": 341,
+          "bottom": 760.875
+        },
+        {
+          "label": "テスト勉強",
+          "x": 31,
+          "y": 768.875,
+          "width": 114,
+          "height": 44,
+          "right": 145,
+          "bottom": 812.875
+        }
+      ]
+    },
+    {
+      "stage": "setup",
+      "width": 428,
+      "scroll": 428,
+      "icons": [
+        {
+          "src": "./assets/icons/presets/review-v1/home-prep.png",
+          "r": {
+            "x": 43,
+            "y": 743.25,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 767.25
+          },
+          "button": {
+            "x": 31,
+            "y": 733.25,
+            "width": 114,
+            "height": 44,
+            "right": 145,
+            "bottom": 777.25
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/outing.png",
+          "r": {
+            "x": 165,
+            "y": 743.25,
+            "width": 24,
+            "height": 24,
+            "right": 189,
+            "bottom": 767.25
+          },
+          "button": {
+            "x": 153,
+            "y": 733.25,
+            "width": 102,
+            "height": 44,
+            "right": 255,
+            "bottom": 777.25
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/homework.png",
+          "r": {
+            "x": 275,
+            "y": 743.25,
+            "width": 24,
+            "height": 24,
+            "right": 299,
+            "bottom": 767.25
+          },
+          "button": {
+            "x": 263,
+            "y": 733.25,
+            "width": 78,
+            "height": 44,
+            "right": 341,
+            "bottom": 777.25
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/exam.png",
+          "r": {
+            "x": 43,
+            "y": 795.25,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 819.25
+          },
+          "button": {
+            "x": 31,
+            "y": 785.25,
+            "width": 114,
+            "height": 44,
+            "right": 145,
+            "bottom": 829.25
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 1432.03125,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 1442.03125
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": [
+        {
+          "label": "家事・支度",
+          "x": 31,
+          "y": 733.25,
+          "width": 114,
+          "height": 44,
+          "right": 145,
+          "bottom": 777.25
+        },
+        {
+          "label": "おでかけ",
+          "x": 153,
+          "y": 733.25,
+          "width": 102,
+          "height": 44,
+          "right": 255,
+          "bottom": 777.25
+        },
+        {
+          "label": "宿題",
+          "x": 263,
+          "y": 733.25,
+          "width": 78,
+          "height": 44,
+          "right": 341,
+          "bottom": 777.25
+        },
+        {
+          "label": "テスト勉強",
+          "x": 31,
+          "y": 785.25,
+          "width": 114,
+          "height": 44,
+          "right": 145,
+          "bottom": 829.25
+        }
+      ]
+    },
+    {
+      "stage": "setup-added",
+      "width": 320,
+      "scroll": 320,
+      "icons": [
+        {
+          "src": "./assets/icons/presets/review-v1/home-prep.png",
+          "r": {
+            "x": 43,
+            "y": 110.828125,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 134.828125
+          },
+          "button": {
+            "x": 31,
+            "y": 100.828125,
+            "width": 114,
+            "height": 44,
+            "right": 145,
+            "bottom": 144.828125
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/outing.png",
+          "r": {
+            "x": 165,
+            "y": 110.828125,
+            "width": 24,
+            "height": 24,
+            "right": 189,
+            "bottom": 134.828125
+          },
+          "button": {
+            "x": 153,
+            "y": 100.828125,
+            "width": 102,
+            "height": 44,
+            "right": 255,
+            "bottom": 144.828125
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/homework.png",
+          "r": {
+            "x": 43,
+            "y": 162.828125,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 186.828125
+          },
+          "button": {
+            "x": 31,
+            "y": 152.828125,
+            "width": 78,
+            "height": 44,
+            "right": 109,
+            "bottom": 196.828125
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/exam.png",
+          "r": {
+            "x": 129,
+            "y": 162.828125,
+            "width": 24,
+            "height": 24,
+            "right": 153,
+            "bottom": 186.828125
+          },
+          "button": {
+            "x": 117,
+            "y": 152.828125,
+            "width": 114,
+            "height": 44,
+            "right": 231,
+            "bottom": 196.828125
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 873.015625,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 883.015625
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": [
+        {
+          "label": "家事・支度",
+          "x": 31,
+          "y": 100.828125,
+          "width": 114,
+          "height": 44,
+          "right": 145,
+          "bottom": 144.828125
+        },
+        {
+          "label": "おでかけ",
+          "x": 153,
+          "y": 100.828125,
+          "width": 102,
+          "height": 44,
+          "right": 255,
+          "bottom": 144.828125
+        },
+        {
+          "label": "宿題",
+          "x": 31,
+          "y": 152.828125,
+          "width": 78,
+          "height": 44,
+          "right": 109,
+          "bottom": 196.828125
+        },
+        {
+          "label": "テスト勉強",
+          "x": 117,
+          "y": 152.828125,
+          "width": 114,
+          "height": 44,
+          "right": 231,
+          "bottom": 196.828125
+        }
+      ]
+    },
+    {
+      "stage": "setup-added",
+      "width": 390,
+      "scroll": 390,
+      "icons": [
+        {
+          "src": "./assets/icons/presets/review-v1/home-prep.png",
+          "r": {
+            "x": 43,
+            "y": 224.875,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 248.875
+          },
+          "button": {
+            "x": 31,
+            "y": 214.875,
+            "width": 114,
+            "height": 44,
+            "right": 145,
+            "bottom": 258.875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/outing.png",
+          "r": {
+            "x": 165,
+            "y": 224.875,
+            "width": 24,
+            "height": 24,
+            "right": 189,
+            "bottom": 248.875
+          },
+          "button": {
+            "x": 153,
+            "y": 214.875,
+            "width": 102,
+            "height": 44,
+            "right": 255,
+            "bottom": 258.875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/homework.png",
+          "r": {
+            "x": 275,
+            "y": 224.875,
+            "width": 24,
+            "height": 24,
+            "right": 299,
+            "bottom": 248.875
+          },
+          "button": {
+            "x": 263,
+            "y": 214.875,
+            "width": 78,
+            "height": 44,
+            "right": 341,
+            "bottom": 258.875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/exam.png",
+          "r": {
+            "x": 43,
+            "y": 276.875,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 300.875
+          },
+          "button": {
+            "x": 31,
+            "y": 266.875,
+            "width": 114,
+            "height": 44,
+            "right": 145,
+            "bottom": 310.875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 987.0625,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 997.0625
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": [
+        {
+          "label": "家事・支度",
+          "x": 31,
+          "y": 214.875,
+          "width": 114,
+          "height": 44,
+          "right": 145,
+          "bottom": 258.875
+        },
+        {
+          "label": "おでかけ",
+          "x": 153,
+          "y": 214.875,
+          "width": 102,
+          "height": 44,
+          "right": 255,
+          "bottom": 258.875
+        },
+        {
+          "label": "宿題",
+          "x": 263,
+          "y": 214.875,
+          "width": 78,
+          "height": 44,
+          "right": 341,
+          "bottom": 258.875
+        },
+        {
+          "label": "テスト勉強",
+          "x": 31,
+          "y": 266.875,
+          "width": 114,
+          "height": 44,
+          "right": 145,
+          "bottom": 310.875
+        }
+      ]
+    },
+    {
+      "stage": "setup-added",
+      "width": 428,
+      "scroll": 428,
+      "icons": [
+        {
+          "src": "./assets/icons/presets/review-v1/home-prep.png",
+          "r": {
+            "x": 43,
+            "y": 225.25,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 249.25
+          },
+          "button": {
+            "x": 31,
+            "y": 215.25,
+            "width": 114,
+            "height": 44,
+            "right": 145,
+            "bottom": 259.25
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/outing.png",
+          "r": {
+            "x": 165,
+            "y": 225.25,
+            "width": 24,
+            "height": 24,
+            "right": 189,
+            "bottom": 249.25
+          },
+          "button": {
+            "x": 153,
+            "y": 215.25,
+            "width": 102,
+            "height": 44,
+            "right": 255,
+            "bottom": 259.25
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/homework.png",
+          "r": {
+            "x": 275,
+            "y": 225.25,
+            "width": 24,
+            "height": 24,
+            "right": 299,
+            "bottom": 249.25
+          },
+          "button": {
+            "x": 263,
+            "y": 215.25,
+            "width": 78,
+            "height": 44,
+            "right": 341,
+            "bottom": 259.25
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/exam.png",
+          "r": {
+            "x": 43,
+            "y": 277.25,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 301.25
+          },
+          "button": {
+            "x": 31,
+            "y": 267.25,
+            "width": 114,
+            "height": 44,
+            "right": 145,
+            "bottom": 311.25
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 936.4375,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 946.4375
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": [
+        {
+          "label": "家事・支度",
+          "x": 31,
+          "y": 215.25,
+          "width": 114,
+          "height": 44,
+          "right": 145,
+          "bottom": 259.25
+        },
+        {
+          "label": "おでかけ",
+          "x": 153,
+          "y": 215.25,
+          "width": 102,
+          "height": 44,
+          "right": 255,
+          "bottom": 259.25
+        },
+        {
+          "label": "宿題",
+          "x": 263,
+          "y": 215.25,
+          "width": 78,
+          "height": 44,
+          "right": 341,
+          "bottom": 259.25
+        },
+        {
+          "label": "テスト勉強",
+          "x": 31,
+          "y": 267.25,
+          "width": 114,
+          "height": 44,
+          "right": 145,
+          "bottom": 311.25
+        }
+      ]
+    },
+    {
+      "stage": "plan",
+      "width": 320,
+      "scroll": 320,
+      "icons": [
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 1158.8125,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 1168.8125
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": []
+    },
+    {
+      "stage": "plan",
+      "width": 390,
+      "scroll": 390,
+      "icons": [
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 1122.359375,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 1132.359375
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": []
+    },
+    {
+      "stage": "plan",
+      "width": 428,
+      "scroll": 428,
+      "icons": [
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 1144.53125,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 1154.53125
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": []
+    },
+    {
+      "stage": "run",
+      "width": 320,
+      "scroll": 320,
+      "icons": [
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 204.421875,
+            "y": 449.84375,
+            "width": 11,
+            "height": 11,
+            "right": 215.421875,
+            "bottom": 460.84375
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 1036,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 1046
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": []
+    },
+    {
+      "stage": "run",
+      "width": 390,
+      "scroll": 390,
+      "icons": [
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 239.421875,
+            "y": 424.6875,
+            "width": 11,
+            "height": 11,
+            "right": 250.421875,
+            "bottom": 435.6875
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 1010.84375,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 1020.84375
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": []
+    },
+    {
+      "stage": "run",
+      "width": 428,
+      "scroll": 428,
+      "icons": [
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 258.421875,
+            "y": 441.0625,
+            "width": 11,
+            "height": 11,
+            "right": 269.421875,
+            "bottom": 452.0625
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 1027.21875,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 1037.21875
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": []
+    },
+    {
+      "stage": "done",
+      "width": 320,
+      "scroll": 320,
+      "icons": [
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 204.421875,
+            "y": 359.84375,
+            "width": 11,
+            "height": 11,
+            "right": 215.421875,
+            "bottom": 370.84375
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 220.0625,
+            "y": 393.875,
+            "width": 24,
+            "height": 24,
+            "right": 244.0625,
+            "bottom": 417.875
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 993.203125,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 1003.203125
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": []
+    },
+    {
+      "stage": "done",
+      "width": 390,
+      "scroll": 390,
+      "icons": [
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 239.421875,
+            "y": 344.6875,
+            "width": 11,
+            "height": 11,
+            "right": 250.421875,
+            "bottom": 355.6875
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 255.0625,
+            "y": 378.71875,
+            "width": 24,
+            "height": 24,
+            "right": 279.0625,
+            "bottom": 402.71875
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 966.046875,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 976.046875
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": []
+    },
+    {
+      "stage": "done",
+      "width": 428,
+      "scroll": 428,
+      "icons": [
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 258.421875,
+            "y": 351.0625,
+            "width": 11,
+            "height": 11,
+            "right": 269.421875,
+            "bottom": 362.0625
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 274.0625,
+            "y": 385.09375,
+            "width": 24,
+            "height": 24,
+            "right": 298.0625,
+            "bottom": 409.09375
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 984.421875,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 994.421875
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": []
+    },
+    {
+      "stage": "setup-days",
+      "width": 320,
+      "scroll": 320,
+      "icons": [
+        {
+          "src": "./assets/icons/presets/review-v1/home-prep.png",
+          "r": {
+            "x": 43,
+            "y": 766.046875,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 790.046875
+          },
+          "button": {
+            "x": 31,
+            "y": 756.046875,
+            "width": 114,
+            "height": 44,
+            "right": 145,
+            "bottom": 800.046875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/outing.png",
+          "r": {
+            "x": 165,
+            "y": 766.046875,
+            "width": 24,
+            "height": 24,
+            "right": 189,
+            "bottom": 790.046875
+          },
+          "button": {
+            "x": 153,
+            "y": 756.046875,
+            "width": 102,
+            "height": 44,
+            "right": 255,
+            "bottom": 800.046875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/homework.png",
+          "r": {
+            "x": 43,
+            "y": 818.046875,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 842.046875
+          },
+          "button": {
+            "x": 31,
+            "y": 808.046875,
+            "width": 78,
+            "height": 44,
+            "right": 109,
+            "bottom": 852.046875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/exam.png",
+          "r": {
+            "x": 129,
+            "y": 818.046875,
+            "width": 24,
+            "height": 24,
+            "right": 153,
+            "bottom": 842.046875
+          },
+          "button": {
+            "x": 117,
+            "y": 808.046875,
+            "width": 114,
+            "height": 44,
+            "right": 231,
+            "bottom": 852.046875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 1891.234375,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 1901.234375
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": [
+        {
+          "label": "家事・支度",
+          "x": 31,
+          "y": 756.046875,
+          "width": 114,
+          "height": 44,
+          "right": 145,
+          "bottom": 800.046875
+        },
+        {
+          "label": "おでかけ",
+          "x": 153,
+          "y": 756.046875,
+          "width": 102,
+          "height": 44,
+          "right": 255,
+          "bottom": 800.046875
+        },
+        {
+          "label": "宿題",
+          "x": 31,
+          "y": 808.046875,
+          "width": 78,
+          "height": 44,
+          "right": 109,
+          "bottom": 852.046875
+        },
+        {
+          "label": "テスト勉強",
+          "x": 117,
+          "y": 808.046875,
+          "width": 114,
+          "height": 44,
+          "right": 231,
+          "bottom": 852.046875
+        }
+      ]
+    },
+    {
+      "stage": "setup-normal-motion",
+      "width": 320,
+      "scroll": 320,
+      "icons": [
+        {
+          "src": "./assets/icons/presets/review-v1/home-prep.png",
+          "r": {
+            "x": 44.06646728515625,
+            "y": 743.671875,
+            "width": 24,
+            "height": 24,
+            "right": 68.06646728515625,
+            "bottom": 767.671875
+          },
+          "button": {
+            "x": 32.06646728515625,
+            "y": 733.671875,
+            "width": 114,
+            "height": 44,
+            "right": 146.06646728515625,
+            "bottom": 777.671875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/outing.png",
+          "r": {
+            "x": 166.06646728515625,
+            "y": 743.671875,
+            "width": 24,
+            "height": 24,
+            "right": 190.06646728515625,
+            "bottom": 767.671875
+          },
+          "button": {
+            "x": 154.06646728515625,
+            "y": 733.671875,
+            "width": 102,
+            "height": 44,
+            "right": 256.06646728515625,
+            "bottom": 777.671875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/homework.png",
+          "r": {
+            "x": 44.06646728515625,
+            "y": 795.671875,
+            "width": 24,
+            "height": 24,
+            "right": 68.06646728515625,
+            "bottom": 819.671875
+          },
+          "button": {
+            "x": 32.06646728515625,
+            "y": 785.671875,
+            "width": 78,
+            "height": 44,
+            "right": 110.06646728515625,
+            "bottom": 829.671875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/exam.png",
+          "r": {
+            "x": 130.06646728515625,
+            "y": 795.671875,
+            "width": 24,
+            "height": 24,
+            "right": 154.06646728515625,
+            "bottom": 819.671875
+          },
+          "button": {
+            "x": 118.06646728515625,
+            "y": 785.671875,
+            "width": 114,
+            "height": 44,
+            "right": 232.06646728515625,
+            "bottom": 829.671875
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 1483.453125,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 1493.453125
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": [
+        {
+          "label": "家事・支度",
+          "x": 32.06646728515625,
+          "y": 733.671875,
+          "width": 114,
+          "height": 44,
+          "right": 146.06646728515625,
+          "bottom": 777.671875
+        },
+        {
+          "label": "おでかけ",
+          "x": 154.06646728515625,
+          "y": 733.671875,
+          "width": 102,
+          "height": 44,
+          "right": 256.06646728515625,
+          "bottom": 777.671875
+        },
+        {
+          "label": "宿題",
+          "x": 32.06646728515625,
+          "y": 785.671875,
+          "width": 78,
+          "height": 44,
+          "right": 110.06646728515625,
+          "bottom": 829.671875
+        },
+        {
+          "label": "テスト勉強",
+          "x": 118.06646728515625,
+          "y": 785.671875,
+          "width": 114,
+          "height": 44,
+          "right": 232.06646728515625,
+          "bottom": 829.671875
+        }
+      ]
+    },
+    {
+      "stage": "setup-large-text",
+      "width": 320,
+      "scroll": 320,
+      "icons": [
+        {
+          "src": "./assets/icons/presets/review-v1/home-prep.png",
+          "r": {
+            "x": 43,
+            "y": 755.859375,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 779.859375
+          },
+          "button": {
+            "x": 31,
+            "y": 739.671875,
+            "width": 174,
+            "height": 56.390625,
+            "right": 205,
+            "bottom": 796.0625
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/outing.png",
+          "r": {
+            "x": 43,
+            "y": 820.25,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 844.25
+          },
+          "button": {
+            "x": 31,
+            "y": 804.0625,
+            "width": 150,
+            "height": 56.390625,
+            "right": 181,
+            "bottom": 860.453125
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/homework.png",
+          "r": {
+            "x": 43,
+            "y": 884.640625,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 908.640625
+          },
+          "button": {
+            "x": 31,
+            "y": 868.453125,
+            "width": 102,
+            "height": 56.390625,
+            "right": 133,
+            "bottom": 924.84375
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/presets/review-v1/exam.png",
+          "r": {
+            "x": 43,
+            "y": 949.03125,
+            "width": 24,
+            "height": 24,
+            "right": 67,
+            "bottom": 973.03125
+          },
+          "button": {
+            "x": 31,
+            "y": 932.84375,
+            "width": 174,
+            "height": 56.390625,
+            "right": 205,
+            "bottom": 989.234375
+          },
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        },
+        {
+          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "r": {
+            "x": 14,
+            "y": 1643.015625,
+            "width": 10,
+            "height": 10,
+            "right": 24,
+            "bottom": 1653.015625
+          },
+          "button": null,
+          "loaded": true,
+          "fit": true,
+          "decorative": true,
+          "fallbackHidden": true,
+          "pointer": "none"
+        }
+      ],
+      "presets": [
+        {
+          "label": "家事・支度",
+          "x": 31,
+          "y": 739.671875,
+          "width": 174,
+          "height": 56.390625,
+          "right": 205,
+          "bottom": 796.0625
+        },
+        {
+          "label": "おでかけ",
+          "x": 31,
+          "y": 804.0625,
+          "width": 150,
+          "height": 56.390625,
+          "right": 181,
+          "bottom": 860.453125
+        },
+        {
+          "label": "宿題",
+          "x": 31,
+          "y": 868.453125,
+          "width": 102,
+          "height": 56.390625,
+          "right": 133,
+          "bottom": 924.84375
+        },
+        {
+          "label": "テスト勉強",
+          "x": 31,
+          "y": 932.84375,
+          "width": 174,
+          "height": 56.390625,
+          "right": 205,
+          "bottom": 989.234375
+        }
+      ]
+    }
+  ],
+  "screens": [
+    "home-320.png",
+    "home-390.png",
+    "home-428.png",
+    "setup-320.png",
+    "setup-390.png",
+    "setup-428.png",
+    "setup-added-320.png",
+    "setup-added-390.png",
+    "setup-added-428.png",
+    "plan-320.png",
+    "plan-390.png",
+    "plan-428.png",
+    "run-320.png",
+    "run-390.png",
+    "run-428.png",
+    "done-320.png",
+    "done-390.png",
+    "done-428.png",
+    "setup-days-320.png",
+    "setup-normal-motion-320.png",
+    "setup-large-text-320.png",
+    "fallback-setup-320.png",
+    "fallback-done-320.png",
+    "preset-before-after.png",
+    "background-size-comparison.png"
+  ],
+  "errors": [],
+  "physicalIPhoneTested": false
+}

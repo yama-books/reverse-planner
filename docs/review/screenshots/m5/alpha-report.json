@@ -1,0 +1,92 @@
+[
+  {
+    "path": "assets/icons/presets/review-v1/exam.png",
+    "size": [
+      128,
+      128
+    ],
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bounds": [
+      37,
+      25,
+      87,
+      95
+    ],
+    "corners_transparent": true
+  },
+  {
+    "path": "assets/icons/presets/review-v1/home-prep.png",
+    "size": [
+      128,
+      128
+    ],
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bounds": [
+      28,
+      12,
+      107,
+      92
+    ],
+    "corners_transparent": true
+  },
+  {
+    "path": "assets/icons/presets/review-v1/homework.png",
+    "size": [
+      128,
+      128
+    ],
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bounds": [
+      15,
+      13,
+      93,
+      104
+    ],
+    "corners_transparent": true
+  },
+  {
+    "path": "assets/icons/presets/review-v1/outing.png",
+    "size": [
+      128,
+      128
+    ],
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bounds": [
+      26,
+      12,
+      99,
+      111
+    ],
+    "corners_transparent": true
+  },
+  {
+    "path": "assets/icons/decor/review-v1/sparkle.png",
+    "size": [
+      128,
+      128
+    ],
+    "alpha_range": [
+      0,
+      255
+    ],
+    "alpha_bounds": [
+      60,
+      32,
+      102,
+      77
+    ],
+    "corners_transparent": true
+  }
+]
