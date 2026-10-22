@@ -53,7 +53,7 @@ const collect=async(page,stage,width)=>{
       return {slot:el.dataset.catSlot,valid:!!i?.complete&&i.naturalWidth===256,
         width:Math.round(r?.width||0),height:Math.round(r?.height||0)}
     });
-    const icons=[...loc.querySelectorAll("img[data-m2-icon]")].filter(i=>!i.hidden).map(i=>{
+    const icons=[...loc.querySelectorAll("img.m2-icon[data-m2-icon]")].filter(i=>!i.hidden).map(i=>{
       let b=i.closest("button,summary"),a=i.getBoundingClientRect(),p=b?.getBoundingClientRect();
       return {src:i.src.split("/").at(-1),loaded:i.complete&&i.naturalWidth===128,
         fits:!!p&&a.top>=p.top-1&&a.bottom<=p.bottom+1&&a.left>=p.left-1&&a.right<=p.right+1,

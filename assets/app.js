@@ -1,5 +1,11 @@
 import {clockPlan,daysPlan,dateKey,datetimeLocal} from "./core.mjs";
 import {STORE_KEY,loadState,screenFromHash,hasAnyTasks,activeCount,validateSetup,PRESETS,applyPreset,task,sheet,scope} from "./state.mjs";
+import {mountOptionalActionIcons} from "./icons/ui/icon-mount.mjs";
+
+// Draft M5 assets: labels and original symbols remain available without images.
+const presetImages={daily:"home-prep",trip:"outing",homework:"homework",exam:"exam"};
+const optionalIcon=(src,symbol,kind="decor")=>'<span class="m5-art m5-art-'+kind+'" aria-hidden="true"><span data-m2-fallback>'+symbol+'</span><img data-m2-icon class="m5-icon" src="./assets/icons/'+src+'.png" alt="" width="128" height="128" decoding="async" hidden></span>';
+const sparkle=symbol=>optionalIcon("decor/review-v1/sparkle",symbol);
 
 const $=id=>document.getElementById(id);
 const esc=text=>String(text??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -112,7 +118,8 @@ function renderSetup(){
   $("daily-limit").value=data.sheets[data.mode].days.dailyLimit??60;
   $("reserve-days").value=data.sheets[data.mode].days.reserveDays??1;
   document.querySelectorAll("[data-off-day]").forEach(input=>input.checked=(data.sheets[data.mode].days.offDays||[]).includes(Number(input.value)));
-  $("preset-list").innerHTML=PRESETS.map(p=>'<button type="button" data-preset="'+p.id+'">'+esc(p.icon)+" "+esc(p.label)+"</button>").join("");
+  $("preset-list").innerHTML=PRESETS.map(p=>'<button type="button" data-preset="'+p.id+'">'+optionalIcon("presets/review-v1/"+presetImages[p.id],esc(p.icon),"preset")+'<span>'+esc(p.label)+"</span></button>").join("");
+  mountOptionalActionIcons($("preset-list"));
   $("task-count").textContent=s.tasks.filter(t=>!t.done).length+"こ";
   $("setup-error").hidden=true;
   renderTasks();
@@ -146,7 +153,8 @@ function renderPlan(){
   if(plan.error){errorSetupOnPlan(plan.error);return;}
   const clock=data.scale==="clock",done=plan.remainingCount===0;
   $("screen-plan").dataset.catPlanReady=String(done||(clock?plan.deficit<=0:plan.missing<=0));
-  $("result-label").textContent=done?"ALL CLEAR ✳":clock?"START TIME":"TODAY'S MISSION";
+  $("result-label").innerHTML=done?"ALL CLEAR "+sparkle("✳"):clock?"START TIME":"TODAY'S MISSION";
+  mountOptionalActionIcons($("result-label"));
   $("result-main").textContent=done?"おつかれさま！":clock?hm(plan.start):plan.target?fmtMinutes(plan.target):"おやすみ";
   $("result-sub").textContent=done?"すべてのタスクが完了しました！":clock?
     "開始 "+stamp(plan.start)+" → ゴール "+stamp(plan.due):
@@ -228,7 +236,8 @@ function renderRun() {
 function renderAllDone(){
   $("run-title").innerHTML="おつかれさま。<br><span>全部できた！</span>";
   $("screen-run").dataset.catComplete="true";
-  $("focus-task").textContent="全部できた！ ★";
+  $("focus-task").innerHTML="全部できた！ "+sparkle("★");
+  mountOptionalActionIcons($("focus-task"));
   $("focus-sub").textContent="おつかれさま。また次の計画でね。";
   $("focus-controls").innerHTML='<button type="button" class="button button-primary pixel-press button-large" data-run="home">別の計画をつくる</button>';
   $("timer-area").hidden=true;$("timer-area").innerHTML="";

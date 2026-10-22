@@ -1,0 +1,62 @@
+name: APP-004 M5 draft image QA
+'on':
+  push:
+    branches: ['feature/m5-preset-image-review-20261022']
+    paths: ['assets/**', 'index.html', 'tests/**', '.github/workflows/m5-image-review.yml']
+permissions:
+  contents: write
+concurrency:
+  group: app004-m5-image-review
+  cancel-in-progress: false
+jobs:
+  image-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Existing Node tests and syntax
+        run: |
+          node --check assets/app.js
+          node --test tests/*.test.mjs
+      - name: Install pinned browsers and image inspection
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+          python -m pip install pillow
+          sudo apt-get install -y -qq --no-install-recommends fonts-noto-cjk
+      - name: Verify transparent M5 PNG pixels
+        run: python tests/m5-alpha.py
+      - name: Existing Chromium regression
+        run: node tests/browser-smoke.mjs
+      - name: Existing M4 WebKit regression
+        run: node tests/m4-webkit-mobile.mjs
+      - name: M5 Chromium mobile image and fallback tests
+        run: node tests/m5-image-review.mjs
+      - name: M5 WebKit mobile image and fallback tests
+        run: M5_BROWSER=webkit node tests/m5-image-review.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: app004-m5-image-review
+          path: test-screenshots/
+          retention-days: 14
+      - name: Save evidence only to M5 preview branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s test-screenshots/m5/chromium/report.json
+          test -s test-screenshots/m5/webkit/report.json
+          cp docs/review/APP004_M5_REVIEW.md test-screenshots/m5/README.md
+          if git ls-remote --exit-code --heads origin preview/app004-m5-images >/dev/null; then
+            git fetch --no-tags origin preview/app004-m5-images
+            git switch -C preview/app004-m5-images FETCH_HEAD
+          else
+            git switch -c preview/app004-m5-images
+          fi
+          mkdir -p docs/review/screenshots/m5
+          cp -R test-screenshots/m5/. docs/review/screenshots/m5/
+          git add docs/review/screenshots/m5
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'docs(app004): M5 isolated mobile PNG and measurement evidence'
+          git push origin HEAD:refs/heads/preview/app004-m5-images
