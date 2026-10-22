@@ -21,6 +21,20 @@ try{
  await page.waitForTimeout(3000);
  result.initial=await page.evaluate(()=>({title:document.title,home:!!document.querySelector("#screen-home"),hidden:document.querySelector("#screen-home")?.hidden,homeVisible:!!document.querySelector("#screen-home")&&getComputedStyle(document.querySelector("#screen-home")).display!=="none",bodyText:document.body.innerText.slice(0,350),scripts:[...document.scripts].map(s=>s.src).filter(Boolean),imgs:[...document.querySelectorAll("img")].slice(0,6).map(i=>({src:i.src,natural:i.naturalWidth,complete:i.complete})),scroll:document.documentElement.scrollWidth,viewport:innerWidth}));
  result.initial.errors=errors;result.initial.failed=failed;result.initial.bad=bad;
+ if(result.initial.title.includes("External Content Notice")){
+  result.noticeLinks=await page.locator("a").evaluateAll(links=>links.map(a=>({text:a.textContent.trim(),href:a.href})).slice(0,20));
+  result.noticeButtons=await page.locator("button").evaluateAll(btns=>btns.map(b=>({text:b.textContent.trim(),type:b.type})).slice(0,20));
+  console.log("M6_NOTICE_LINKS",JSON.stringify({links:result.noticeLinks,buttons:result.noticeButtons}));
+  const open=page.getByText("Open the page",{exact:true}).first();
+  if(await open.count()){
+   await open.click({timeout:5000});
+   await page.waitForTimeout(3000);
+   result.afterNotice=await page.evaluate(()=>({url:location.href,title:document.title,home:!!document.querySelector("#screen-home"),screen:!!document.querySelector("#screen-home:not([hidden])"),excerpt:document.body.innerText.slice(0,260)}));
+   console.log("M6_AFTER_NOTICE",JSON.stringify(result.afterNotice));
+   if(result.afterNotice.home){result.initial.homeVisible=true;}
+  }
+ }
+
  await page.screenshot({path:path.join(dir,"live-page.png"),fullPage:true,animations:"disabled"});
  if(result.initial.homeVisible){
   await page.locator('[data-choose-scale="clock"]').click({timeout:4000});
