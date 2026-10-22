@@ -1,0 +1,32 @@
+name: APP-004 M6 external preview HTTP diagnostic only
+'on':
+  push:
+    branches: ['feature/m6-iphone-live-preview-20261022']
+    paths: ['.github/workflows/m6-http-preview.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Verify third-party proxy serves correct HTML, module and image types
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://raw.githack.com/yama-books/reverse-planner/df0e33a9eaf447b4b96c3a253e7604eade6149ca"
+          for spec in "index.html:text/html" "assets/app.js:javascript" "assets/core.mjs:javascript" "assets/state.mjs:javascript" "assets/app.css:text/css" "assets/icons/presets/review-v2/exam.png:image/png" "assets/icons/cats/review-v2/RP-CATWORK-S09-I01.png:image/png"; do
+            path="${spec%%:*}"
+            expected="${spec#*:}"
+            header=$(mktemp); target=$(mktemp)
+            curl --retry 2 --retry-delay 1 -fLsS --max-time 20 -D "$header" -o "$target" "$base/$path"
+            mime=$(grep -i '^content-type:' "$header" | tail -1 | tr -d '\r' | cut -d: -f2- | xargs)
+            bytes=$(wc -c < "$target")
+            echo "M6_HTTP $path mime=$mime bytes=$bytes"
+            test "$bytes" -gt 100
+            echo "$mime" | grep -Fq "$expected"
+            if [ "$path" = "index.html" ]; then grep -Fq 'id="screen-home"' "$target"; fi
+            rm -f "$header" "$target"
+          done
+          echo "M6_REMOTE_HTTP_ALL_OK"
