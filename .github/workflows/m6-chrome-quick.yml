@@ -1,0 +1,26 @@
+name: APP-004 M6 quick Chrome external preview
+'on':
+  push:
+    branches: ['feature/m6-iphone-live-preview-20261022']
+    paths: ['tests/m6-external-chrome-quick.mjs', '.github/workflows/m6-chrome-quick.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use installed Google Chrome for external app smoke
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+          node tests/m6-external-chrome-quick.mjs
+      - name: Retain diagnostics even when remote preview fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: app004-m6-external-live-chrome
+          path: test-screenshots/m6/quick
+          if-no-files-found: ignore
+          retention-days: 7
