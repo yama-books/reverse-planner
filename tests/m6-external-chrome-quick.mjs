@@ -52,10 +52,19 @@ try{
     const r=await fetch(u);return {url:u.href,status:r.status,mime:r.headers.get("content-type")};
    });
    await page.screenshot({path:path.join(dir,"live-setup.png"),fullPage:true,animations:"disabled"});
+   await page.locator('[data-preset="exam"]').tap();
+   result.demoTasks=await page.locator("#task-list .task-row").count();
+   await page.locator("#make-plan").tap();
+   result.planVisible=await page.locator("#screen-plan").isVisible();
+   await page.screenshot({path:path.join(dir,"live-plan.png"),fullPage:true,animations:"disabled"});
   }
  }
- passed=result.htmlStatus===200&&result.initial.homeVisible&&result.setupVisible&&result.exam?.natural===128&&errors.length===0&&failed.length===0;
- result.verified=passed;
+ const genuineErrors=errors.filter(e=>!e.startsWith("Failed to load resource:"));
+ const severeFailures=failed.filter(x=>!new URL(x[0]).pathname.endsWith("/favicon.ico"));
+ const severeStatus=bad.filter(x=>!new URL(x[1]).pathname.endsWith("/favicon.ico"));
+ result.clientErrors=genuineErrors;result.otherNetworkFailures=severeFailures;result.assetErrors=severeStatus;
+ result.verified=result.htmlStatus===200&&result.initial.homeVisible&&result.setupVisible&&result.exam?.natural===128&&result.demoTasks===3&&result.planVisible&&genuineErrors.length===0&&severeFailures.length===0&&severeStatus.length===0;
+ passed=result.verified;
  console.log("M6_FAST_RESULT",JSON.stringify(result).slice(0,7000));
 }catch(e){result.exception=String(e);console.error("M6_FAST_EXCEPTION",e);}
 finally {await context.close();await browser.close();await writeFile(path.join(dir,"diagnostic.json"),JSON.stringify(result,null,2)+"\n");}
