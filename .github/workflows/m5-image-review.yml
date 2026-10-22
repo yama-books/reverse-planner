@@ -7,7 +7,7 @@ permissions:
   contents: write
 concurrency:
   group: app004-m5-image-review
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   image-review:
     runs-on: ubuntu-latest
