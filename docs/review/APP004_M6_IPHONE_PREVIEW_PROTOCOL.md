@@ -32,3 +32,14 @@
 - **M6外部URLがCIで失敗**: ユーザーに未検証リンクを「動作可能」と案内しない。原因を明示し、非公式プロキシを採用せず公式Pagesと別のプレビュー配信方法を検討する。
 - **M6外部URLがCIで成功**: 公開ページを変更せず実機テストを開始できる。ただし実機Safariで動いたとはまだ言えない。
 - 素材の正式採用と、iPhone Safari操作成功は別の判断。mainマージ・Pages公開・既存プレビューの正式版への統合・リポジトリ作成はこのM6段階で実施しない。
+
+## M6動作確認結果（2026-10-22 JST）
+
+- [HTTP/MIME gate #39772841553](https://github.com/yama-books/reverse-planner/actions/runs/39772841553)：**SUCCESS**。HTML、JavaScript Modules、CSS、PNGの7ファイルをHTTP 200 / 意図したContent-Typeで取得。
+- [外部Chromeスモーク #39773898685](https://github.com/yama-books/reverse-planner/actions/runs/39773898685)：**SUCCESS**。第三者サービスの最初の警告画面 `External Content Notice` で `Open the page` を押すとM5をロードできた。HOME、時刻選択→SETUP、修正版exam画像128px描画、テスト勉強プリセット（架空3タスク）→PLAN画面を実ネットワークから確認。JSアプリ例外・重大リソースHTTPエラー0。
+- このURLは外部サービスの確認画面を経由する。初期のHTMLがHTTP200でも実アプリHTMLでないことを検出して、現在は確認画面を通過する流れも含めて検査済み。
+- GitHub公式PagesやM5のソースは公開し直していない。CIは `contents:read` 権限で外部GETのみ。今後のiPhone Safari実機検収は別途。
+
+**iPhoneでの試験手順**: Safariプライベートタブで [M5固定版](https://raw.githack.com/yama-books/reverse-planner/df0e33a9eaf447b4b96c3a253e7604eade6149ca/index.html) →「Open the page」→仮データのみでHOME/SETUP/PLAN/RUN/DONEを操作→タブを閉じる。
+
+共有ドメインのため、他サービスのコンテンツによる同一オリジンlocalStorageアクセスに注意。学生情報・実住所・実際の予定を使用しない。確認画面の運営元や第三者スクリプトの安全性はアプリのテスト成否によって保証されない。
