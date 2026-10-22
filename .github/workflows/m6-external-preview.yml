@@ -1,0 +1,32 @@
+name: APP-004 M6 external iPhone preview smoke (no deploy)
+'on':
+  push:
+    branches: ['feature/m6-iphone-live-preview-20261022']
+    paths:
+      - 'tests/m6-external-live-smoke.mjs'
+      - '.github/workflows/m6-external-preview.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  external-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install browser test dependencies
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Chromium touch and remote-source MIME checks
+        run: node tests/m6-external-live-smoke.mjs
+      - name: WebKit touch and remote-source MIME checks
+        run: M6_BROWSER=webkit node tests/m6-external-live-smoke.mjs
+      - name: Upload synthetic no-user-data review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: app004-m6-external-preview
+          path: test-screenshots/m6/
+          if-no-files-found: ignore
+          retention-days: 7
