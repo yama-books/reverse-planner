@@ -5,7 +5,8 @@ import {mountOptionalActionIcons} from "./icons/ui/icon-mount.mjs";
 // Draft M5 assets: labels and original symbols remain available without images.
 const presetImages={daily:"home-prep",trip:"outing",homework:"homework",exam:"exam"};
 const optionalIcon=(src,symbol,kind="decor")=>'<span class="m5-art m5-art-'+kind+'" aria-hidden="true"><span data-m2-fallback>'+symbol+'</span><img data-m2-icon class="m5-icon" src="./assets/icons/'+src+'.png" alt="" width="128" height="128" decoding="async" hidden></span>';
-const sparkle=symbol=>optionalIcon("decor/review-v1/sparkle",symbol);
+const sparkle=symbol=>optionalIcon("decor/review-v2/sparkle",symbol);
+const presetArt=id=>id==="exam"?"presets/review-v2/exam":"presets/review-v1/"+presetImages[id];
 
 const $=id=>document.getElementById(id);
 const esc=text=>String(text??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -118,7 +119,7 @@ function renderSetup(){
   $("daily-limit").value=data.sheets[data.mode].days.dailyLimit??60;
   $("reserve-days").value=data.sheets[data.mode].days.reserveDays??1;
   document.querySelectorAll("[data-off-day]").forEach(input=>input.checked=(data.sheets[data.mode].days.offDays||[]).includes(Number(input.value)));
-  $("preset-list").innerHTML=PRESETS.map(p=>'<button type="button" data-preset="'+p.id+'">'+optionalIcon("presets/review-v1/"+presetImages[p.id],esc(p.icon),"preset")+'<span>'+esc(p.label)+"</span></button>").join("");
+  $("preset-list").innerHTML=PRESETS.map(p=>'<button type="button" data-preset="'+p.id+'">'+optionalIcon(presetArt(p.id),esc(p.icon),"preset")+'<span>'+esc(p.label)+"</span></button>").join("");
   mountOptionalActionIcons($("preset-list"));
   $("task-count").textContent=s.tasks.filter(t=>!t.done).length+"こ";
   $("setup-error").hidden=true;
