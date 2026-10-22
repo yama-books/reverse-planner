@@ -55,6 +55,7 @@ try{
    await page.locator('[data-preset="exam"]').tap();
    result.demoTasks=await page.locator("#task-list .task-row").count();
    await page.locator("#make-plan").tap();
+   try{await page.locator("#screen-plan").waitFor({state:"visible",timeout:8000});}catch(e){console.warn("M6_PLAN_TIMEOUT",String(e));}
    result.planVisible=await page.locator("#screen-plan").isVisible();
    await page.screenshot({path:path.join(dir,"live-plan.png"),fullPage:true,animations:"disabled"});
   }
