@@ -1,0 +1,106 @@
+{
+  "run": "https://github.com/yama-books/reverse-planner/actions/runs/39750721243",
+  "job": 119730324412,
+  "sourceCommit": "ef4872f1d31ccbb060c8629d2c24a5cb7f35c4a7",
+  "tool": "jev_verify",
+  "model": "jev-1.14.0",
+  "provider": "typesafe",
+  "auto_accept": 0.8,
+  "subject_at": 0.5,
+  "summary": {
+    "verified": 6,
+    "contradicted": 0,
+    "unsupported": 0,
+    "needs_review": 0
+  },
+  "results": [
+    {
+      "id": "claim0",
+      "claim": "The GitHub Actions CI logs show 23 Node tests passed with zero failures.",
+      "verdict": "verified",
+      "probabilities": {
+        "supports": 1,
+        "contradicts": 0,
+        "says_nothing": 0
+      },
+      "confidence": 1,
+      "action": "auto",
+      "supporting_evidence": null,
+      "same_subject": 0.99
+    },
+    {
+      "id": "claim1",
+      "claim": "The CI logs show the existing browser smoke test passed 104 checks.",
+      "verdict": "verified",
+      "probabilities": {
+        "supports": 1,
+        "contradicts": 0,
+        "says_nothing": 0
+      },
+      "confidence": 1,
+      "action": "auto",
+      "supporting_evidence": null,
+      "same_subject": 0.99
+    },
+    {
+      "id": "claim2",
+      "claim": "The CI logs show M4 WebKit passed 60 assertions.",
+      "verdict": "verified",
+      "probabilities": {
+        "supports": 1,
+        "contradicts": 0,
+        "says_nothing": 0
+      },
+      "confidence": 1,
+      "action": "auto",
+      "supporting_evidence": null,
+      "same_subject": 0.99
+    },
+    {
+      "id": "claim3",
+      "claim": "The CI logs show M5 Chromium and WebKit each passed 72 assertions with zero JavaScript errors.",
+      "verdict": "verified",
+      "probabilities": {
+        "supports": 1,
+        "contradicts": 0,
+        "says_nothing": 0
+      },
+      "confidence": 1,
+      "action": "auto",
+      "supporting_evidence": null,
+      "same_subject": 0.99
+    },
+    {
+      "id": "claim4",
+      "claim": "The CI logs show five M5 PNG assets passed the transparency checks.",
+      "verdict": "verified",
+      "probabilities": {
+        "supports": 0.95,
+        "contradicts": 0.04,
+        "says_nothing": 0.01
+      },
+      "confidence": 0.92,
+      "action": "auto",
+      "supporting_evidence": null,
+      "same_subject": 0.97
+    },
+    {
+      "id": "claim5",
+      "claim": "The CI logs show preview/app004-m5-images was updated to c35cc90 with the M5 PNG and measurement evidence.",
+      "verdict": "verified",
+      "probabilities": {
+        "supports": 1,
+        "contradicts": 0,
+        "says_nothing": 0
+      },
+      "confidence": 1,
+      "action": "auto",
+      "supporting_evidence": null,
+      "same_subject": 0.98
+    }
+  ],
+  "usage": {
+    "input_tokens": 2626,
+    "output_tokens": 370
+  }
+}

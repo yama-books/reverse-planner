@@ -1,0 +1,32 @@
+name: APP-004 M5 normalized review PNG candidates
+'on':
+  push:
+    branches: ['feature/m5-preset-image-review-20261022']
+    paths:
+      - 'tools/m5-normalize-candidates.py'
+      - '.github/workflows/m5-normalize-candidates.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  preserve-and-normalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pillow setup
+        run: python -m pip install --user Pillow==11.3.0
+      - name: Derive M5 review-v2 PNGs without overwriting originals
+        run: |
+          set -euo pipefail
+          python tools/m5-normalize-candidates.py
+          test -s assets/icons/presets/review-v2/exam.png
+          test -s assets/icons/decor/review-v2/sparkle.png
+      - name: Commit only the two generated PNGs to the M5 draft branch
+        run: |
+          set -euo pipefail
+          git add assets/icons/presets/review-v2/exam.png assets/icons/decor/review-v2/sparkle.png
+          if ! git diff --cached --quiet; then
+            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'assets(app004): size-normalized exam and optically centered sparkle candidates'
+            git push origin HEAD:refs/heads/feature/m5-preset-image-review-20261022
+          fi

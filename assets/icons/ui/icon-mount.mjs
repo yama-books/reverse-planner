@@ -1,6 +1,6 @@
 /** APP-004 M2 draft-only icon candidates, isolated from planning and storage. */
-function mountOptionalActionIcons() {
-  for (const image of document.querySelectorAll("img[data-m2-icon]")) {
+export function mountOptionalActionIcons(root=document) {
+  for (const image of root.querySelectorAll("img[data-m2-icon]")) {
     const fallback=image.parentElement.querySelector("[data-m2-fallback]");
     const sync=()=>{
       const ok=image.complete && image.naturalWidth>0;
@@ -15,6 +15,6 @@ function mountOptionalActionIcons() {
 }
 if (typeof document!=="undefined") {
   if(document.readyState==="loading")
-    document.addEventListener("DOMContentLoaded",mountOptionalActionIcons,{once:true});
+    document.addEventListener("DOMContentLoaded",()=>mountOptionalActionIcons(),{once:true});
   else mountOptionalActionIcons();
 }

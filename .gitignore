@@ -26,3 +26,6 @@ local-data/
 tmp/
 temp/
 *.tmp
+
+# Generated browser QA evidence (published only on isolated preview branch)
+test-screenshots/
