@@ -1,6 +1,6 @@
 {
   "engine": "chromium",
-  "checksCount": 72,
+  "checksCount": 74,
   "checks": [
     "home 320 no horizontal scroll",
     "home 320 images loaded, contained, decorative and noninteractive",
@@ -17,6 +17,8 @@
     "setup 428 no horizontal scroll",
     "setup 428 images loaded, contained, decorative and noninteractive",
     "setup 428 all four preset touch targets >=44px",
+    "exam preset uses normalized review-v2 artwork",
+    "static sparkle uses centered review-v2 artwork",
     "daily applies clock preset and rerenders loaded icons",
     "trip applies clock preset and rerenders loaded icons",
     "homework applies clock preset and rerenders loaded icons",
@@ -82,7 +84,7 @@
       "scroll": 320,
       "icons": [
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 61.125,
             "y": 133.65625,
@@ -99,7 +101,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 270.20391845703125,
             "y": 118.0897216796875,
@@ -116,7 +118,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14.375,
             "y": 765.53125,
@@ -133,7 +135,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 835.53125,
@@ -158,7 +160,7 @@
       "scroll": 390,
       "icons": [
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 96.359375,
             "y": 132.9375,
@@ -175,7 +177,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 339.50079345703125,
             "y": 118.0897216796875,
@@ -192,7 +194,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 49.375,
             "y": 765.640625,
@@ -209,7 +211,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 835.640625,
@@ -234,7 +236,7 @@
       "scroll": 428,
       "icons": [
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 115.359375,
             "y": 132.9375,
@@ -251,7 +253,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 377.11016845703125,
             "y": 118.0897216796875,
@@ -268,7 +270,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 68.375,
             "y": 776.234375,
@@ -285,7 +287,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 846.234375,
@@ -382,7 +384,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/presets/review-v1/exam.png",
+          "src": "./assets/icons/presets/review-v2/exam.png",
           "r": {
             "x": 129.015625,
             "y": 804.671875,
@@ -406,7 +408,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 1493.34375,
@@ -540,7 +542,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/presets/review-v1/exam.png",
+          "src": "./assets/icons/presets/review-v2/exam.png",
           "r": {
             "x": 43,
             "y": 781.875,
@@ -564,7 +566,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 1470.546875,
@@ -698,7 +700,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/presets/review-v1/exam.png",
+          "src": "./assets/icons/presets/review-v2/exam.png",
           "r": {
             "x": 43,
             "y": 798.25,
@@ -722,7 +724,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 1435.921875,
@@ -856,7 +858,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/presets/review-v1/exam.png",
+          "src": "./assets/icons/presets/review-v2/exam.png",
           "r": {
             "x": 129.015625,
             "y": 162.828125,
@@ -880,7 +882,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 873.90625,
@@ -1014,7 +1016,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/presets/review-v1/exam.png",
+          "src": "./assets/icons/presets/review-v2/exam.png",
           "r": {
             "x": 43,
             "y": 274.875,
@@ -1038,7 +1040,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 985.953125,
@@ -1172,7 +1174,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/presets/review-v1/exam.png",
+          "src": "./assets/icons/presets/review-v2/exam.png",
           "r": {
             "x": 43,
             "y": 275.25,
@@ -1196,7 +1198,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 935.328125,
@@ -1258,7 +1260,7 @@
       "scroll": 320,
       "icons": [
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 1162.703125,
@@ -1283,7 +1285,7 @@
       "scroll": 390,
       "icons": [
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 1126.25,
@@ -1308,7 +1310,7 @@
       "scroll": 428,
       "icons": [
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 1148.421875,
@@ -1333,7 +1335,7 @@
       "scroll": 320,
       "icons": [
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 202.03125,
             "y": 453.4375,
@@ -1350,7 +1352,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 1040.890625,
@@ -1375,7 +1377,7 @@
       "scroll": 390,
       "icons": [
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 237.03125,
             "y": 428.28125,
@@ -1392,7 +1394,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 1015.734375,
@@ -1417,7 +1419,7 @@
       "scroll": 428,
       "icons": [
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 256.03125,
             "y": 444.65625,
@@ -1434,7 +1436,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 1032.109375,
@@ -1459,7 +1461,7 @@
       "scroll": 320,
       "icons": [
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 202.03125,
             "y": 363.4375,
@@ -1476,7 +1478,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 219.359375,
             "y": 399.921875,
@@ -1493,7 +1495,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 998.09375,
@@ -1518,7 +1520,7 @@
       "scroll": 390,
       "icons": [
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 237.03125,
             "y": 348.28125,
@@ -1535,7 +1537,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 254.359375,
             "y": 384.765625,
@@ -1552,7 +1554,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 970.9375,
@@ -1577,7 +1579,7 @@
       "scroll": 428,
       "icons": [
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 256.03125,
             "y": 354.65625,
@@ -1594,7 +1596,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 273.359375,
             "y": 391.140625,
@@ -1611,7 +1613,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 989.3125,
@@ -1708,7 +1710,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/presets/review-v1/exam.png",
+          "src": "./assets/icons/presets/review-v2/exam.png",
           "r": {
             "x": 129.015625,
             "y": 819.046875,
@@ -1732,7 +1734,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 1893.125,
@@ -1796,19 +1798,19 @@
         {
           "src": "./assets/icons/presets/review-v1/home-prep.png",
           "r": {
-            "x": 44.06444549560547,
+            "x": 44.06637954711914,
             "y": 744.671875,
-            "width": 24,
+            "width": 23.999996185302734,
             "height": 24,
-            "right": 68.06444549560547,
+            "right": 68.06637573242188,
             "bottom": 768.671875
           },
           "button": {
-            "x": 32.06444549560547,
+            "x": 32.06637954711914,
             "y": 734.671875,
-            "width": 114.01563262939453,
+            "width": 114.015625,
             "height": 44,
-            "right": 146.080078125,
+            "right": 146.08200454711914,
             "bottom": 778.671875
           },
           "loaded": true,
@@ -1820,19 +1822,19 @@
         {
           "src": "./assets/icons/presets/review-v1/outing.png",
           "r": {
-            "x": 166.080078125,
+            "x": 166.08200073242188,
             "y": 744.671875,
             "width": 24,
             "height": 24,
-            "right": 190.080078125,
+            "right": 190.08200073242188,
             "bottom": 768.671875
           },
           "button": {
-            "x": 154.080078125,
+            "x": 154.08200073242188,
             "y": 734.671875,
             "width": 102.015625,
             "height": 44,
-            "right": 256.095703125,
+            "right": 256.0976257324219,
             "bottom": 778.671875
           },
           "loaded": true,
@@ -1844,19 +1846,19 @@
         {
           "src": "./assets/icons/presets/review-v1/homework.png",
           "r": {
-            "x": 44.06444549560547,
+            "x": 44.06637954711914,
             "y": 796.671875,
-            "width": 24,
+            "width": 23.999996185302734,
             "height": 24,
-            "right": 68.06444549560547,
+            "right": 68.06637573242188,
             "bottom": 820.671875
           },
           "button": {
-            "x": 32.06444549560547,
+            "x": 32.06637954711914,
             "y": 786.671875,
             "width": 78.015625,
             "height": 44,
-            "right": 110.08007049560547,
+            "right": 110.08200454711914,
             "bottom": 830.671875
           },
           "loaded": true,
@@ -1866,21 +1868,21 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/presets/review-v1/exam.png",
+          "src": "./assets/icons/presets/review-v2/exam.png",
           "r": {
-            "x": 130.080078125,
+            "x": 130.08200073242188,
             "y": 796.671875,
             "width": 24,
             "height": 24,
-            "right": 154.080078125,
+            "right": 154.08200073242188,
             "bottom": 820.671875
           },
           "button": {
-            "x": 118.08007049560547,
+            "x": 118.08200073242188,
             "y": 786.671875,
-            "width": 114.01563262939453,
+            "width": 114.015625,
             "height": 44,
-            "right": 232.095703125,
+            "right": 232.09762573242188,
             "bottom": 830.671875
           },
           "loaded": true,
@@ -1890,7 +1892,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 1485.34375,
@@ -1910,38 +1912,38 @@
       "presets": [
         {
           "label": "家事・支度",
-          "x": 32.06444549560547,
+          "x": 32.06637954711914,
           "y": 734.671875,
-          "width": 114.01563262939453,
+          "width": 114.015625,
           "height": 44,
-          "right": 146.080078125,
+          "right": 146.08200454711914,
           "bottom": 778.671875
         },
         {
           "label": "おでかけ",
-          "x": 154.080078125,
+          "x": 154.08200073242188,
           "y": 734.671875,
           "width": 102.015625,
           "height": 44,
-          "right": 256.095703125,
+          "right": 256.0976257324219,
           "bottom": 778.671875
         },
         {
           "label": "宿題",
-          "x": 32.06444549560547,
+          "x": 32.06637954711914,
           "y": 786.671875,
           "width": 78.015625,
           "height": 44,
-          "right": 110.08007049560547,
+          "right": 110.08200454711914,
           "bottom": 830.671875
         },
         {
           "label": "テスト勉強",
-          "x": 118.08007049560547,
+          "x": 118.08200073242188,
           "y": 786.671875,
-          "width": 114.01563262939453,
+          "width": 114.015625,
           "height": 44,
-          "right": 232.095703125,
+          "right": 232.09762573242188,
           "bottom": 830.671875
         }
       ]
@@ -2024,7 +2026,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/presets/review-v1/exam.png",
+          "src": "./assets/icons/presets/review-v2/exam.png",
           "r": {
             "x": 43,
             "y": 950.03125,
@@ -2048,7 +2050,7 @@
           "pointer": "none"
         },
         {
-          "src": "./assets/icons/decor/review-v1/sparkle.png",
+          "src": "./assets/icons/decor/review-v2/sparkle.png",
           "r": {
             "x": 14,
             "y": 1644.90625,

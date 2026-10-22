@@ -1,0 +1,44 @@
+[
+  {
+    "id": "exam",
+    "before_bounds": [
+      37,
+      25,
+      87,
+      95
+    ],
+    "after_bounds": [
+      30,
+      17,
+      97,
+      111
+    ],
+    "before_width": 50,
+    "after_width": 67,
+    "center": [
+      63.5,
+      64.0
+    ]
+  },
+  {
+    "id": "sparkle",
+    "before_bounds": [
+      60,
+      32,
+      102,
+      77
+    ],
+    "after_bounds": [
+      43,
+      41,
+      85,
+      86
+    ],
+    "before_width": 42,
+    "after_width": 42,
+    "center": [
+      64.0,
+      63.5
+    ]
+  }
+]

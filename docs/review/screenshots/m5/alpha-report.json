@@ -88,5 +88,35 @@
       77
     ],
     "corners_transparent": true
+  },
+  {
+    "path": "assets/icons/presets/review-v2/exam.png",
+    "size": [
+      128,
+      128
+    ],
+    "alpha_bounds": [
+      30,
+      17,
+      97,
+      111
+    ],
+    "source": "assets/icons/presets/review-v1/exam.png",
+    "normalized": true
+  },
+  {
+    "path": "assets/icons/decor/review-v2/sparkle.png",
+    "size": [
+      128,
+      128
+    ],
+    "alpha_bounds": [
+      43,
+      41,
+      85,
+      86
+    ],
+    "source": "assets/icons/decor/review-v1/sparkle.png",
+    "normalized": true
   }
 ]
