@@ -28,7 +28,9 @@ try{
   const open=page.getByText("Open the page",{exact:true}).first();
   if(await open.count()){
    await open.click({timeout:5000});
-   await page.waitForTimeout(3000);
+   // Ignore failures from the external host's interstitial advertising.
+   errors.length=0;failed.length=0;bad.length=0;
+   await page.waitForTimeout(1000);
    result.afterNotice=await page.evaluate(()=>({url:location.href,title:document.title,home:!!document.querySelector("#screen-home"),screen:!!document.querySelector("#screen-home:not([hidden])"),excerpt:document.body.innerText.slice(0,260)}));
    console.log("M6_AFTER_NOTICE",JSON.stringify(result.afterNotice));
    if(result.afterNotice.home){result.initial.homeVisible=true;}
@@ -40,7 +42,15 @@ try{
   await page.locator('[data-choose-scale="clock"]').click({timeout:4000});
   result.setupVisible=await page.locator("#screen-setup").isVisible();
   if(result.setupVisible){
-   result.exam=await page.locator('[data-preset="exam"] .m5-icon').evaluate(i=>({src:i.getAttribute("src"),natural:i.naturalWidth,hidden:i.hidden}));
+   try{await page.waitForFunction(()=>{
+     const i=document.querySelector('[data-preset="exam"] .m5-icon');
+     return i?.complete && i.naturalWidth===128 && i.dataset.m2Ready==="true";
+    },null,{timeout:15000});}catch(e){console.warn("M6_ICON_TIMEOUT",String(e));}
+   result.exam=await page.locator('[data-preset="exam"] .m5-icon').evaluate(i=>({src:i.getAttribute("src"),natural:i.naturalWidth,hidden:i.hidden,ready:i.dataset.m2Ready,complete:i.complete}));
+   result.assetStatus=await page.evaluate(async()=>{
+    const u=new URL("./assets/icons/presets/review-v2/exam.png",document.baseURI);
+    const r=await fetch(u);return {url:u.href,status:r.status,mime:r.headers.get("content-type")};
+   });
    await page.screenshot({path:path.join(dir,"live-setup.png"),fullPage:true,animations:"disabled"});
   }
  }
