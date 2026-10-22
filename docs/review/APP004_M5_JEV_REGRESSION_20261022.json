@@ -1,0 +1,48 @@
+{
+  "scope": "Supplemental actual local Windows-compatible copies of existing browser smoke/M4 regression; unchanged test expectations",
+  "tool": "jev_verify",
+  "model": "jev-1.14.0",
+  "provider": "typesafe",
+  "auto_accept": 0.8,
+  "subject_at": 0.5,
+  "summary": {
+    "verified": 2,
+    "contradicted": 0,
+    "unsupported": 0,
+    "needs_review": 0
+  },
+  "results": [
+    {
+      "id": "claim0",
+      "claim": "The temporary Windows-compatible copy of the existing browser smoke test passed 104 checks.",
+      "verdict": "verified",
+      "probabilities": {
+        "supports": 1,
+        "contradicts": 0,
+        "says_nothing": 0
+      },
+      "confidence": 1,
+      "action": "auto",
+      "supporting_evidence": null,
+      "same_subject": 0.98
+    },
+    {
+      "id": "claim1",
+      "claim": "The temporary Windows-compatible copy of the M4 WebKit regression passed 60 assertions with no unhandled exceptions.",
+      "verdict": "verified",
+      "probabilities": {
+        "supports": 0.99,
+        "contradicts": 0.01,
+        "says_nothing": 0
+      },
+      "confidence": 0.98,
+      "action": "auto",
+      "supporting_evidence": null,
+      "same_subject": 0.97
+    }
+  ],
+  "usage": {
+    "input_tokens": 1029,
+    "output_tokens": 126
+  }
+}

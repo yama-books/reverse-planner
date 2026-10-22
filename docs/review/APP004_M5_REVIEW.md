@@ -72,3 +72,13 @@
 - 320/390/428pxのHOME・SETUP・追加後SETUP・PLAN・RUN・DONE、4プリセットの時刻/日付の適用、再描画、保存からDONE復帰、完了PLAN、画像成功後のエラーと再読込回復、初回画像遮断、ラベルと代替記号、プリセット文字2倍を検証。
 - 実行結果と監査結果はM5 CHECKPOINTに記録。実行前の計画を成功証拠として扱わない。
 - 未確認：物理iPhone Safari、VoiceOverによる実際の読み上げ、iOS Dynamic Type、OS日時入力、safe-area/URLバー変化、ブランド正式採用とライセンス最終決定。CSS文字拡大とWebKitはこれらの実機検査の代用とはしない。
+
+## 最終結果（2026-10-22 JST）
+
+**M5レビュー可能**。M4の先に積む [Draft PR #9](https://github.com/yama-books/reverse-planner/pull/9) を維持。
+
+[CI #39750721243](https://github.com/yama-books/reverse-planner/actions/runs/39750721243) が成功：Node23/23、透過5点、既存Chromium104項目、M4 WebKit60項目、M5 Chromium/WebKit各72項目、JS例外0。M5画像54枚と測定JSONを `preview/app004-m5-images` に保存済み。必須7種類の直接PNGリンクはHTTP200 / image/pngで確認済み。
+
+最新PNGはLinux CI撮影。先に保存したWindows版の実行履歴は `local-environment.json` に残る。いずれも実機iPhone Safariではない。
+
+Jev完了監査は実測ログ・必要な差分で計14件verified、矛盾・根拠不足・要レビュー0、provider=typesafe。mainとM4の先端、M3画像、保存データと計算、Pages workflowは維持。未確認事項と正式承認の保留は上記のとおり。

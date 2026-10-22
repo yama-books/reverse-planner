@@ -1,0 +1,114 @@
+{
+  "app": "APP-004",
+  "milestone": "M5",
+  "dateJST": "2026-10-22",
+  "sourceCommit": "ef4872f1d31ccbb060c8629d2c24a5cb7f35c4a7",
+  "approval": "Explicit user approval in this chat for task diff and actual test output; standing allowlist unchanged; audit-pack used an ignored task-scoped approval record.",
+  "auditPack": {
+    "send_allowed": true,
+    "credentialHits": 0,
+    "testExitCode": 0,
+    "diffTruncated": false
+  },
+  "tool": "jev_verify",
+  "model": "jev-1.14.0",
+  "provider": "typesafe",
+  "auto_accept": 0.8,
+  "subject_at": 0.5,
+  "summary": {
+    "verified": 6,
+    "contradicted": 0,
+    "unsupported": 0,
+    "needs_review": 0
+  },
+  "results": [
+    {
+      "id": "claim0",
+      "claim": "The existing Node test suite passed all 23 tests with zero failures.",
+      "verdict": "verified",
+      "probabilities": {
+        "supports": 1,
+        "contradicts": 0,
+        "says_nothing": 0
+      },
+      "confidence": 1,
+      "action": "auto",
+      "supporting_evidence": "tests",
+      "same_subject": 0.98
+    },
+    {
+      "id": "claim1",
+      "claim": "Both M5 Chromium and WebKit checks passed 72 assertions with zero uncaught JavaScript errors.",
+      "verdict": "verified",
+      "probabilities": {
+        "supports": 1,
+        "contradicts": 0,
+        "says_nothing": 0
+      },
+      "confidence": 1,
+      "action": "auto",
+      "supporting_evidence": "tests",
+      "same_subject": 0.98
+    },
+    {
+      "id": "claim2",
+      "claim": "All five M5 PNG assets passed the 128x128 RGBA, transparent corners, and alpha-range checks.",
+      "verdict": "verified",
+      "probabilities": {
+        "supports": 0.92,
+        "contradicts": 0.07,
+        "says_nothing": 0.01
+      },
+      "confidence": 0.88,
+      "action": "auto",
+      "supporting_evidence": "tests",
+      "same_subject": 0.83
+    },
+    {
+      "id": "claim3",
+      "claim": "The four preset buttons keep their Japanese labels and original-symbol fallback when images fail.",
+      "verdict": "verified",
+      "probabilities": {
+        "supports": 0.97,
+        "contradicts": 0.02,
+        "says_nothing": 0.01
+      },
+      "confidence": 0.95,
+      "action": "auto",
+      "supporting_evidence": "diff",
+      "same_subject": 0.95
+    },
+    {
+      "id": "claim4",
+      "claim": "The M5 browser checks verify no horizontal scroll at requested widths 320, 390, and 428 for HOME, SETUP, added SETUP, PLAN, RUN, and DONE.",
+      "verdict": "verified",
+      "probabilities": {
+        "supports": 1,
+        "contradicts": 0,
+        "says_nothing": 0
+      },
+      "confidence": 1,
+      "action": "auto",
+      "supporting_evidence": "diff",
+      "same_subject": 0.92
+    },
+    {
+      "id": "claim5",
+      "claim": "The four preset buttons retain touch targets at least 44px high and wide in the M5 mobile checks.",
+      "verdict": "verified",
+      "probabilities": {
+        "supports": 0.99,
+        "contradicts": 0.01,
+        "says_nothing": 0
+      },
+      "confidence": 0.98,
+      "action": "auto",
+      "supporting_evidence": "tests",
+      "same_subject": 0.9
+    }
+  ],
+  "usage": {
+    "input_tokens": 12351,
+    "output_tokens": 591
+  }
+}
