@@ -1,0 +1,70 @@
+{
+  "engine": "webkit",
+  "before": true,
+  "checks": [
+    "no JavaScript exceptions"
+  ],
+  "errors": [],
+  "measurements": [
+    {
+      "name": "home",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "setup",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "plan",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "run",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "home",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "name": "setup",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "name": "plan",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "name": "run",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "name": "home",
+      "width": 428,
+      "scroll": 428
+    },
+    {
+      "name": "setup",
+      "width": 428,
+      "scroll": 428
+    },
+    {
+      "name": "plan",
+      "width": 428,
+      "scroll": 428
+    },
+    {
+      "name": "run",
+      "width": 428,
+      "scroll": 428
+    }
+  ]
+}

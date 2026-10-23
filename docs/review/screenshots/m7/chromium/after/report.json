@@ -1,0 +1,152 @@
+{
+  "engine": "chromium",
+  "before": false,
+  "checks": [
+    "home no horizontal overflow 320",
+    "setup no horizontal overflow 320",
+    "identical preset no confirmation 320",
+    "repeat preserves persisted IDs and state 320",
+    "applied state 320",
+    "same preset after reload no confirmation 320",
+    "edit clears applied state 320",
+    "cancel keeps edits 320",
+    "changed and different preset confirm 320",
+    "collapsed details compact 320 height=52",
+    "settings-open no horizontal overflow 320",
+    "plan no horizontal overflow 320",
+    "remaining work labeled 320",
+    "start-plan image fits CTA 320",
+    "edit-plan image fits CTA 320",
+    "plan-large-text no horizontal overflow 320",
+    "run no horizontal overflow 320",
+    "home no horizontal overflow 390",
+    "setup no horizontal overflow 390",
+    "identical preset no confirmation 390",
+    "repeat preserves persisted IDs and state 390",
+    "applied state 390",
+    "same preset after reload no confirmation 390",
+    "edit clears applied state 390",
+    "cancel keeps edits 390",
+    "changed and different preset confirm 390",
+    "collapsed details compact 390 height=52",
+    "settings-open no horizontal overflow 390",
+    "plan no horizontal overflow 390",
+    "remaining work labeled 390",
+    "start-plan image fits CTA 390",
+    "edit-plan image fits CTA 390",
+    "plan-large-text no horizontal overflow 390",
+    "run no horizontal overflow 390",
+    "home no horizontal overflow 428",
+    "setup no horizontal overflow 428",
+    "identical preset no confirmation 428",
+    "repeat preserves persisted IDs and state 428",
+    "applied state 428",
+    "same preset after reload no confirmation 428",
+    "edit clears applied state 428",
+    "cancel keeps edits 428",
+    "changed and different preset confirm 428",
+    "collapsed details compact 428 height=52",
+    "settings-open no horizontal overflow 428",
+    "plan no horizontal overflow 428",
+    "remaining work labeled 428",
+    "start-plan image fits CTA 428",
+    "edit-plan image fits CTA 428",
+    "plan-large-text no horizontal overflow 428",
+    "run no horizontal overflow 428",
+    "CTA image failure retains symbols",
+    "no JavaScript exceptions"
+  ],
+  "errors": [],
+  "measurements": [
+    {
+      "name": "home",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "setup",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "settings-open",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "plan",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "plan-large-text",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "run",
+      "width": 320,
+      "scroll": 320
+    },
+    {
+      "name": "home",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "name": "setup",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "name": "settings-open",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "name": "plan",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "name": "plan-large-text",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "name": "run",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "name": "home",
+      "width": 428,
+      "scroll": 428
+    },
+    {
+      "name": "setup",
+      "width": 428,
+      "scroll": 428
+    },
+    {
+      "name": "settings-open",
+      "width": 428,
+      "scroll": 428
+    },
+    {
+      "name": "plan",
+      "width": 428,
+      "scroll": 428
+    },
+    {
+      "name": "plan-large-text",
+      "width": 428,
+      "scroll": 428
+    },
+    {
+      "name": "run",
+      "width": 428,
+      "scroll": 428
+    }
+  ]
+}
