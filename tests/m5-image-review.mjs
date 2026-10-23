@@ -44,7 +44,7 @@ const inspect=async(page,stage,width)=>{
  decorative:i.alt===''&&i.parentElement.getAttribute('aria-hidden')==='true',
  fallbackHidden:i.parentElement.querySelector('[data-m2-fallback]').hidden,
  pointer:getComputedStyle(i).pointerEvents};}),
- presets:[...current.querySelectorAll('[data-preset]')].map(b=>({label:b.querySelector('span:last-child').textContent,...rect(b)}))};
+ presets:[...current.querySelectorAll('[data-preset]')].map(b=>({label:b.getAttribute('aria-label')||b.querySelector('span:last-child').textContent,...rect(b)}))};
  });
  check(info.width===width&&info.width===info.scroll,stage+' '+width+' no horizontal scroll');
  check(info.icons.length>0&&info.icons.every(i=>i.loaded&&i.fit&&i.decorative&&i.fallbackHidden&&i.pointer==='none'),stage+' '+width+' images loaded, contained, decorative and noninteractive');

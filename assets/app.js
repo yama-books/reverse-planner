@@ -1,5 +1,5 @@
 import {clockPlan,daysPlan,dateKey,datetimeLocal} from "./core.mjs";
-import {STORE_KEY,loadState,screenFromHash,hasAnyTasks,activeCount,validateSetup,PRESETS,applyPreset,task,sheet,scope} from "./state.mjs";
+import {STORE_KEY,loadState,screenFromHash,hasAnyTasks,activeCount,validateSetup,PRESETS,applyPreset,matchesPreset,task,sheet,scope} from "./state.mjs";
 import {mountOptionalActionIcons} from "./icons/ui/icon-mount.mjs";
 
 // Draft M5 assets: labels and original symbols remain available without images.
@@ -119,7 +119,7 @@ function renderSetup(){
   $("daily-limit").value=data.sheets[data.mode].days.dailyLimit??60;
   $("reserve-days").value=data.sheets[data.mode].days.reserveDays??1;
   document.querySelectorAll("[data-off-day]").forEach(input=>input.checked=(data.sheets[data.mode].days.offDays||[]).includes(Number(input.value)));
-  $("preset-list").innerHTML=PRESETS.map(p=>'<button type="button" data-preset="'+p.id+'">'+optionalIcon(presetArt(p.id),esc(p.icon),"preset")+'<span>'+esc(p.label)+"</span></button>").join("");
+  $("preset-list").innerHTML=PRESETS.map(p=>'<button type="button" data-preset="'+p.id+'" aria-label="'+esc(p.label)+'">'+optionalIcon(presetArt(p.id),esc(p.icon),"preset")+'<span>'+esc(p.label)+'</span><small class="preset-status" aria-hidden="true" hidden>適用中</small></button>').join("");
   mountOptionalActionIcons($("preset-list"));
   $("task-count").textContent=s.tasks.filter(t=>!t.done).length+"こ";
   $("setup-error").hidden=true;
@@ -127,6 +127,12 @@ function renderSetup(){
 }
 function renderTasks(newId=null){
   const ts=sheet(data).tasks;
+  document.querySelectorAll("[data-preset]").forEach(b=>{
+    const p=PRESETS.find(p=>p.id===b.dataset.preset);
+    const applied=data.mode===p.mode && matchesPreset(data,p);
+    b.setAttribute("aria-pressed",String(applied));
+    b.querySelector(".preset-status").hidden=!applied;
+  });
   $("task-count").textContent=ts.filter(t=>!t.done).length+"こ";
   if(!ts.length){$("task-list").innerHTML='<li class="empty-state">まだ何も登録されていません。<br>まずは下から追加してみよう。</li>';return;}
   $("task-list").innerHTML=ts.map((t,i)=>{
@@ -160,9 +166,9 @@ function renderPlan(){
   $("result-sub").textContent=done?"すべてのタスクが完了しました！":clock?
     "開始 "+stamp(plan.start)+" → ゴール "+stamp(plan.due):
     niceDay(sheet(data).dueDate)+" まで、"+plan.workingDays+"日で計画";
-  const metas=clock?["やること "+plan.remainingCount+"件","作業 "+fmtMinutes(plan.work),"余裕 "+plan.buffer+"分"]:
-    ["残り "+fmtMinutes(plan.total),"作業日 "+plan.workingDays+"日","予備日 "+plan.reserveDays+"日"];
-  $("metrics").innerHTML=metas.map(x=>'<span class="metric">'+esc(x)+"</span>").join("");
+  const metas=clock?[["やること",plan.remainingCount+"件"],["作業",fmtMinutes(plan.work)],["余裕",plan.buffer+"分"]]:
+    [["やること","残り"+fmtMinutes(plan.total)],["作業日",plan.workingDays+"日"],["予備日",plan.reserveDays+"日"]];
+  $("metrics").innerHTML=metas.map(([label,value])=>'<span class="metric"><small>'+esc(label)+'</small> <strong>'+esc(value)+"</strong></span>").join("");
   const n=$("notice");
   if(clock&&plan.deficit>0&&!done){
     n.hidden=false;n.innerHTML="<strong>今から始めると約"+plan.deficit+"分足りません。</strong>"+
@@ -318,6 +324,10 @@ document.querySelectorAll("[data-off-day]").forEach(x=>x.addEventListener("chang
 $("preset-list").addEventListener("click",ev=>{
   const b=ev.target.closest("[data-preset]");if(!b)return;
   const p=PRESETS.find(x=>x.id===b.dataset.preset);if(!p)return;
+  if(matchesPreset(data,p)){
+    if(data.mode!==p.mode){data.mode=p.mode;persist();renderSetup();}
+    return;
+  }
   if(data.sheets[p.mode][data.scale].tasks.length&&!confirm("この計画の作業一覧をサンプルに置き換えますか？\nほかの種類の計画には影響しません。"))return;
   const targetScope=p.mode+":"+data.scale;
   if(data.timer?.key===targetScope)data.timer=null;

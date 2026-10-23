@@ -124,7 +124,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible {
 .preset-list button {display:inline-flex;align-items:center;gap:6px;min-height:44px;max-width:100%;}
 .m5-art {display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;
   width:1em;height:1em;flex:0 0 auto;pointer-events:none;user-select:none;}
-.m5-art-preset {width:24px;height:24px;}
+.m5-art-preset {width:32px;height:32px;}
 .m5-icon {display:block;width:100%;height:100%;object-fit:contain;image-rendering:pixelated;pointer-events:none;}
 .m5-art [hidden] {display:none;}
 .counter {margin-left:auto;border-radius:20px;background:#EDF1E8;color:var(--action);font-size:12px;padding:4px 10px;font-weight:800;}
@@ -158,8 +158,8 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible {
 .duration-chips button {border:1.5px solid #C5D5C9;background:#F0F7EF;border-radius:8px;
   font-size:11px;padding:7px 11px;min-height:34px;}
 .duration-chips button:active,.duration-chips button[aria-pressed="true"] {background:var(--mint);border-color:var(--action);}
-.detail-panel {padding:0;overflow:hidden;}
-.detail-panel summary {display:flex;align-items:center;gap:12px;padding:19px 23px;font-size:14px;font-weight:800;cursor:pointer;}
+.detail-panel {padding:0;overflow:hidden;margin-bottom:16px;}
+.detail-panel summary {display:flex;align-items:center;gap:10px;min-height:48px;padding:9px 18px;font-size:14px;font-weight:800;cursor:pointer;}
 .detail-panel summary::marker {content:"";}
 .detail-panel summary::-webkit-details-marker {display:none;}
 .accordion-arrow {margin-left:auto;transition:transform var(--fast);}
@@ -197,6 +197,13 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible {
 .result-sub {font-size:13px;margin:0;color:#426852;}
 .metrics {display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:19px 0 0;}
 .metric {background:#FFFDF7;border:1.5px solid #B2C8B6;color:#426652;border-radius:20px;padding:5px 12px;font-size:12px;}
+.metric small,.metric strong {display:block;overflow-wrap:anywhere;}
+.metric small {font-size:11px;}
+.metric strong {font-size:14px;}
+.metric {min-width:0;max-width:100%;}
+.preset-list button[aria-pressed="true"] {background:var(--mint);border-color:var(--action);}
+.preset-status {font-size:10px;}
+.action-art {display:inline-flex;align-items:center;justify-content:center;flex:0 0 36px;width:36px;min-height:36px;line-height:1;}
 .timeline-heading {margin:34px 0 14px;}
 .timeline-heading small {margin-left:auto;color:var(--muted);font-size:11px;}
 .timeline {display:grid;gap:10px;}
@@ -385,4 +392,20 @@ button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible {
   .task-row .task-minutes {flex:1 1 75px;}
   .task-row .row-buttons {margin-left:auto;gap:4px;}
   .task-row .row-buttons button {min-width:44px;min-height:44px;height:44px;}
+}
+
+/* M7: keep content clear of Safari's home indicator and landscape cutouts.
+   Do not mask overflow: narrow-width regressions must remain detectable. */
+.app-shell {min-height:100svh;padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px);}
+.site-footer {padding-bottom:calc(28px + env(safe-area-inset-bottom,0px));overflow-wrap:anywhere;}
+.page-cta {padding-bottom:6px;}
+.page-cta .button {max-width:100%;min-width:0;white-space:normal;}
+#start-plan {line-height:1.5;overflow:visible;}
+#start-plan-label {min-width:0;overflow-wrap:anywhere;}
+@media(max-width:650px) {
+  #advanced-settings {padding:0;}
+  .advanced-content {padding:16px 14px;}
+  .timeline-heading {flex-wrap:wrap;}
+  .timeline-card {flex-wrap:wrap;}
+  .run-row {flex-wrap:wrap;overflow-wrap:anywhere;}
 }
