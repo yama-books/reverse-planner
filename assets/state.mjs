@@ -87,3 +87,12 @@ export function applyPreset(state,preset,ids) {
   state.sheets[state.mode][state.scale].tasks=entries.map(([name,minutes])=>task(name,minutes,ids?.()));
   return state;
 }
+
+// Compare visible task content, independent of generated IDs and settings.
+export function matchesPreset(state,preset) {
+  const tasks=state.sheets[preset.mode][state.scale].tasks;
+  return tasks.length===preset[state.scale].length && tasks.every((t,i)=>{
+    const [name,minutes]=preset[state.scale][i];
+    return t.name===name && Number(t.minutes)===minutes && !t.done;
+  });
+}
