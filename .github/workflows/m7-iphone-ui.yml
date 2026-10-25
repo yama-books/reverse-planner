@@ -19,6 +19,10 @@ jobs:
   mobile-review:
     needs: fast-state-regression
     runs-on: ubuntu-latest
+    # Official Playwright image bundles the WebKit shared libraries;
+    # GitHub runner's apt download took 20 minutes and timed out.
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
     timeout-minutes: 22
     steps:
       - uses: actions/checkout@v4
@@ -27,10 +31,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install browsers without the slow Ubuntu apt dependency sweep
-        run: |
-          npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
-          npx playwright install chromium webkit
+      - name: Use bundled Chromium/WebKit and OS dependencies
+        run: npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
       - name: Syntax and state regressions
         run: |
           node --check assets/app.js
