@@ -1,0 +1,58 @@
+name: APP-004 M7 mobile UI review
+on:
+  push:
+    branches: ['feature/m7-iphone-ui-20261023']
+    paths: ['assets/**', 'index.html', 'tests/**', '.github/workflows/m7-iphone-ui.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  fast-state-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Node state and syntax
+        run: |
+          node --check assets/app.js
+          node --test tests/*.test.mjs
+  mobile-review:
+    needs: fast-state-regression
+    runs-on: ubuntu-latest
+    # Official Playwright image bundles the WebKit shared libraries;
+    # GitHub runner's apt download took 20 minutes and timed out.
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Trust the checked-out Git worktree for baseline comparison
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Use bundled Chromium/WebKit and OS dependencies
+        run: npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+      - name: Syntax and state regressions
+        run: |
+          node --check assets/app.js
+          node --test tests/*.test.mjs
+      - name: Existing browser regressions
+        run: |
+          node tests/browser-smoke.mjs
+          node tests/m4-webkit-mobile.mjs
+          node tests/m5-image-review.mjs
+          M5_BROWSER=webkit node tests/m5-image-review.mjs
+      - name: M7 before and after screenshots and behavior
+        run: |
+          M7_BEFORE=1 node tests/m7-iphone-ui.mjs
+          node tests/m7-iphone-ui.mjs
+          M7_BROWSER=chromium node tests/m7-iphone-ui.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: app004-m7-mobile-review
+          path: test-screenshots/
+          retention-days: 14

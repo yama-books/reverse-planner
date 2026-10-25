@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import {createServer} from "node:http";
 import {readFile,mkdir} from "node:fs/promises";
-import {resolve, extname} from "node:path";
+import {resolve, extname, sep} from "node:path";
 import {fileURLToPath} from "node:url";
 import {chromium} from "playwright";
 
@@ -13,7 +13,7 @@ const server=createServer(async (req,res)=>{
   const url=new URL(req.url,"http://127.0.0.1");
   const relative=url.pathname==="/"?"/index.html":url.pathname;
   const filepath=resolve(base,"."+relative);
-  if(!filepath.startsWith(base+"/")){res.writeHead(403);res.end();return;}
+  if(!filepath.startsWith(base+sep)){res.writeHead(403);res.end();return;}
   try{
     const bytes=await readFile(filepath);
     res.writeHead(200,{"content-type":contentTypes[extname(filepath)]||"application/octet-stream","cache-control":"no-store"});
@@ -32,7 +32,9 @@ const yyyyDate=d=>{
 const yyyyTime=d=>yyyyDate(d)+"T"+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
 let browser;
 try {
-  browser=await chromium.launch({channel:"chrome",headless:true,args:["--no-sandbox"]});
+  // Official Playwright CI container bundles Chromium but not Google Chrome.
+  // Keep local Chrome coverage while using the identical Chromium assertions in CI.
+  browser=await chromium.launch({...(process.env.CI?{}:{channel:"chrome"}),headless:true,args:["--no-sandbox"]});
   const ctx=await browser.newContext({viewport:{width:390,height:844}});
   const page=await ctx.newPage();
   const errors=[];
@@ -125,8 +127,8 @@ try {
   checks(await page.locator("#screen-plan").isVisible(),"Clock plan appears");
   await page.locator('[data-cat-slot="plan"] img').evaluate(img=>img.decode());
   checks(await page.locator('[data-cat-slot="plan"]').isVisible(),"Restored plan cat is visible");
-  await assertM2Icon("RP-TIMER-S04-I01","PLAN start");
-  await assertM3IconPresentation("RP-TIMER-S04-I01","PLAN start");
+  await assertM2Icon("play","PLAN start");
+  await assertM3IconPresentation("play","PLAN start");
   checks((await page.locator("#start-plan").innerText()).includes("この計画ではじめる"),"PLAN keeps meaningful button text");
   checks(await page.locator('#screen-plan').getAttribute('data-cat-plan-ready')==='true',"Feasible plan explicitly permits flag cat");
   await page.screenshot({path:"test-screenshots/clock-plan-mobile.png",fullPage:true});

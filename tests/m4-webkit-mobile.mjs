@@ -2,7 +2,7 @@
 import {webkit,devices} from "playwright";
 import {createServer} from "node:http";
 import {readFile,mkdir,writeFile} from "node:fs/promises";
-import {resolve,extname} from "node:path";
+import {resolve,extname,sep} from "node:path";
 import {fileURLToPath} from "node:url";
 import assert from "node:assert/strict";
 
@@ -13,7 +13,7 @@ const types={".html":"text/html; charset=utf-8",".css":"text/css; charset=utf-8"
 const server=createServer(async(req,res)=>{
   const url=new URL(req.url,"http://127.0.0.1");
   const file=resolve(ROOT,"."+(url.pathname==="/"?"/index.html":url.pathname));
-  if(!file.startsWith(ROOT+"/")){res.writeHead(403).end();return}
+  if(!file.startsWith(ROOT+sep)){res.writeHead(403).end();return}
   try{
     res.writeHead(200,{"content-type":types[extname(file)]||"application/octet-stream","cache-control":"no-store"});
     res.end(await readFile(file));
