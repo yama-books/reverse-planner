@@ -32,7 +32,9 @@ const yyyyDate=d=>{
 const yyyyTime=d=>yyyyDate(d)+"T"+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
 let browser;
 try {
-  browser=await chromium.launch({channel:"chrome",headless:true,args:["--no-sandbox"]});
+  // Official Playwright CI container bundles Chromium but not Google Chrome.
+  // Keep local Chrome coverage while using the identical Chromium assertions in CI.
+  browser=await chromium.launch({...(process.env.CI?{}:{channel:"chrome"}),headless:true,args:["--no-sandbox"]});
   const ctx=await browser.newContext({viewport:{width:390,height:844}});
   const page=await ctx.newPage();
   const errors=[];
